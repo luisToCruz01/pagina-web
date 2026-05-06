@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Color tokens — semantic */
+  --color-surface: #0a0a0a;
+  --color-surface-raised: #121212;
+  --color-fg: #f5f0e8;
+  --color-fg-muted: #f5f0e8b3;
+  --color-fg-faint: #f5f0e866;
+  --color-fg-faintest: #f5f0e826;
+  --color-accent: #c8973b;
+  --color-accent-soft: #c8973b1f;
+  --color-rule: #f5f0e814;
+
+  /* Type — fonts */
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-dm-sans);
+
+  /* Type — sizes (clamp scaled for hero/headings; fixed for body) */
+  --text-display: clamp(3rem, 7.5vw, 6.5rem);
+  --text-h1: clamp(2.25rem, 4vw, 3.5rem);
+  --text-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.625rem);
+  --text-stat: clamp(3.5rem, 8vw, 7rem);
+
+  /* Spacing — semantic */
+  --spacing-section: clamp(5rem, 10vw, 8rem);
+  --spacing-prose: 4rem;
+
+  /* Motion — durations */
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 700ms;
+
+  /* Motion — easings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Layout */
+  --container-wide: 1280px;
+  --container-prose: 720px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-fg);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
