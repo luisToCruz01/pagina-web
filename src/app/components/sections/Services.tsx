@@ -72,11 +72,27 @@ export function Services() {
             <motion.article
               key={service.n}
               variants={staggerItem}
-              className="group relative bg-surface p-8 sm:p-10 transition-colors duration-300 hover:bg-surface-raised"
+              className="group relative overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-10"
             >
-              <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
-                {service.n}
-              </span>
+              {/* Hover accent line — slides in from left */}
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-y-100"
+              />
+
+              <div className="flex items-start justify-between">
+                <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
+                  {service.n}
+                </span>
+                {/* + symbol that rotates on hover */}
+                <span
+                  aria-hidden
+                  className="font-sans text-base font-light text-fg-faint transition-all duration-500 ease-out group-hover:rotate-90 group-hover:text-accent"
+                >
+                  +
+                </span>
+              </div>
+
               <h3 className="mt-6 font-display text-2xl font-light leading-tight text-fg sm:text-[1.625rem]">
                 {service.title}
               </h3>

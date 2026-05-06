@@ -7,6 +7,18 @@ import { Solutions } from "./components/sections/Solutions";
 import { Trust } from "./components/sections/Trust";
 import { CtaClosing } from "./components/sections/CtaClosing";
 import { Footer } from "./components/sections/Footer";
+import { MarqueeStrip } from "./components/ui/MarqueeStrip";
+
+const MARQUEE_ITEMS = [
+  "Operaciones",
+  "Reportes",
+  "Atención al cliente",
+  "Documentos",
+  "Reactivación",
+  "Seguimiento",
+  "Integraciones",
+  "Agentes IA",
+];
 
 export default function Home() {
   return (
@@ -15,6 +27,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Audience />
+        <MarqueeStrip items={MARQUEE_ITEMS} />
         <Services />
         <Process />
         <Solutions />

@@ -16,14 +16,14 @@
   --font-display: var(--font-cormorant);
   --font-sans: var(--font-dm-sans);
 
-  /* Type — sizes (clamp scaled for hero/headings; fixed for body) */
+  /* Type — sizes */
   --text-display: clamp(3rem, 7.5vw, 6.5rem);
   --text-h1: clamp(2.25rem, 4vw, 3.5rem);
   --text-h2: clamp(1.75rem, 3vw, 2.5rem);
   --text-h3: clamp(1.25rem, 2vw, 1.625rem);
   --text-stat: clamp(3.5rem, 8vw, 7rem);
 
-  /* Spacing — semantic */
+  /* Spacing */
   --spacing-section: clamp(5rem, 10vw, 8rem);
   --spacing-prose: 4rem;
 
@@ -39,6 +39,11 @@
   /* Layout */
   --container-wide: 1280px;
   --container-prose: 720px;
+
+  /* Animations */
+  --animate-marquee: marquee 60s linear infinite;
+  --animate-scroll-pulse: scrollPulse 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-grain: grain 8s steps(8) infinite;
 }
 
 html {
@@ -49,11 +54,65 @@ body {
   background: var(--color-surface);
   color: var(--color-fg);
   font-feature-settings: "ss01", "cv11";
+  position: relative;
+}
+
+/* Subtle film-grain overlay — fixed across viewport */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation: var(--animate-grain);
 }
 
 ::selection {
   background: var(--color-accent);
   color: var(--color-surface);
+}
+
+/* Keyframes */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollPulse {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  20% { transform: translate(-4%, 2%); }
+  30% { transform: translate(2%, -4%); }
+  40% { transform: translate(-2%, 5%); }
+  50% { transform: translate(-4%, 2%); }
+  60% { transform: translate(3%, 0); }
+  70% { transform: translate(0, 3%); }
+  80% { transform: translate(-3%, 1%); }
+  90% { transform: translate(2%, 4%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -64,5 +123,8 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  body::before {
+    animation: none !important;
   }
 }

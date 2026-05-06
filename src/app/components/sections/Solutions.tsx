@@ -148,8 +148,14 @@ export function Solutions() {
             <motion.article
               key={s.title}
               variants={staggerItem}
-              className="relative flex flex-col bg-surface p-8 sm:p-10"
+              className="group relative flex flex-col overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-10"
             >
+              {/* Hover accent rail */}
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-700 ease-out group-hover:scale-y-100"
+              />
+
               <div className="flex items-center justify-between gap-4">
                 <Eyebrow tone={s.featured ? "accent" : "muted"}>
                   {s.badge}
