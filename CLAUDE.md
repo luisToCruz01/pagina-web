@@ -80,7 +80,7 @@ font-sans                 (DM Sans)
 
 ## Cliente target — "Carlos"
 
-Fundador de agencia de marketing pequeña (3-10 personas) en MX/CO/AR. Factura $800K–$3M MXN/año. Quiere escalar sin contratar más gente. Estética old money, confianza tranquila, no guru.
+Fundador/dueño de empresa pequeña (3-10 personas) en MX/CO/AR — agencias de marketing son un caso clásico pero NO los únicos. Cualquier empresa con procesos manuales repetitivos cabe. Factura $800K–$3M MXN/año. Quiere escalar sin contratar más gente. Estética old money, confianza tranquila, no guru.
 
 **Copy:** español, sin guiones tipográficos, sin emojis, sin exclamaciones, sin promesas vacías. Tono directo y específico.
 
@@ -88,7 +88,7 @@ Fundador de agencia de marketing pequeña (3-10 personas) en MX/CO/AR. Factura $
 
 Aplican estas decisiones de Luis (2026-05-06):
 
-1. **Hero afilado a agencias.** Carlos es el target del hero. Los otros 3 perfiles (e-commerce, procesos repetitivos, emprendedores) viven en sección secundaria "¿Tu negocio está listo para automatizar?", no compiten por el headline.
+1. **Hero afilado a empresas.** "Empresas" es el término preferido por Luis porque cubre todo (incluye agencias de marketing, e-commerce, servicios, etc.) sin restringir el TAM. El target sigue siendo Carlos pero el copy no segmenta a un solo sector.
 2. **Precios:** mantener los **6 productos llave en mano con precio fijo** ($397–$997). Quitar los 3 tiers de retainer ($497/$997/custom) — no van con marca premium. El retainer se descubre en la conversación post-diagnóstico, no en pricing tiers tipo SaaS.
 3. **Testimoniales del sitio actual son placeholder.** En la V1 de la nueva landing **NO se reusan testimoniales fake**. Se reemplaza esa sección con:
    - "Por qué confiar en RDMD" — narrativa breve del fundador (Luis) y filosofía de trabajo

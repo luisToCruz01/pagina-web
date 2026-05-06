@@ -8,7 +8,7 @@ import { ease, wordContainer, wordItem } from "@/app/lib/motion";
 
 const HEADLINE_LINES: string[][] = [
   ["Recupera", "tu", "tiempo."],
-  ["Automatiza", "tu", "agencia."],
+  ["Automatiza", "tu", "empresa."],
   ["Crece", "sin", "contratar", "más."],
 ];
 
@@ -90,7 +90,7 @@ export function Hero() {
               className="block"
             >
               {line.map((word, wordIdx) => {
-                const isMutedLine = lineIdx === 1; // "Automatiza tu agencia" en muted
+                const isMutedLine = lineIdx === 1; // "Automatiza tu empresa" en muted
                 return (
                   <motion.span
                     key={`${lineIdx}-${wordIdx}`}
@@ -112,9 +112,9 @@ export function Hero() {
           transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
           className="mt-10 max-w-[52ch] font-sans text-lg leading-relaxed text-fg-muted sm:text-xl"
         >
-          Diseñamos flujos de automatización con IA para agencias de marketing
-          en LATAM que quieren operar más rápido, con menos errores y sin
-          depender de procesos manuales.
+          Diseñamos flujos de automatización con IA para empresas en LATAM
+          que quieren operar más rápido, con menos errores y sin depender de
+          procesos manuales.
         </motion.p>
 
         <motion.div

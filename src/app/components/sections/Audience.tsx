@@ -9,8 +9,8 @@ const PROFILES = [
   {
     primary: true,
     label: "Para quien construimos",
-    title: "Agencias que quieren escalar",
-    body: "Sin contratar más personal operativo. Agencias de 3 a 15 personas que ya facturan bien y quieren crecer sin que el equipo se rompa.",
+    title: "Empresas que quieren escalar",
+    body: "Sin contratar más personal operativo. Empresas de 3 a 15 personas que ya facturan bien y quieren crecer sin que el equipo se rompa.",
   },
   {
     primary: false,

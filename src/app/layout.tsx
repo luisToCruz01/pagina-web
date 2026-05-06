@@ -14,9 +14,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "RDMD & Co. — Automatización IA para agencias",
+  title: "RDMD & Co. — Automatización IA para empresas",
   description:
-    "Construimos sistemas de automatización con IA para agencias de marketing que quieren escalar sin contratar más gente.",
+    "Construimos sistemas de automatización con IA para empresas que quieren escalar sin contratar más gente.",
 };
 
 export default function RootLayout({
