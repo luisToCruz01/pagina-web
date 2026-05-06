@@ -65,7 +65,7 @@ export function Hero() {
         />
       )}
 
-      <Container className="relative pt-[clamp(6rem,12vw,9rem)] pb-[clamp(7rem,12vw,10rem)]">
+      <Container className="relative pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(7rem,12vw,10rem)]">
         <motion.h1
           initial="hidden"
           animate="visible"
