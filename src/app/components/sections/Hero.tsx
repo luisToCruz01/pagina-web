@@ -39,28 +39,78 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative overflow-hidden"
+      className="relative isolate overflow-hidden"
     >
-      {/* Ambient radial gradient — subtle gold light from top */}
+      {/* === Aurora — 3 slow drifting warm-light blobs === */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        {/* Top-left amber blob */}
+        <div
+          className="absolute top-0 left-0 h-[80vh] w-[70vw] rounded-full blur-[140px] will-change-transform"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(200, 151, 59, 0.55), transparent 65%)",
+            animation: "aurora1 24s ease-in-out infinite",
+          }}
+        />
+        {/* Right-side warm-bronze blob */}
+        <div
+          className="absolute top-1/4 right-0 h-[70vh] w-[60vw] rounded-full blur-[160px] will-change-transform"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(168, 122, 46, 0.40), transparent 70%)",
+            animation: "aurora2 30s ease-in-out infinite",
+          }}
+        />
+        {/* Bottom-left deep amber blob */}
+        <div
+          className="absolute bottom-0 left-1/4 h-[60vh] w-[55vw] rounded-full blur-[150px] will-change-transform"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(200, 151, 59, 0.30), transparent 70%)",
+            animation: "aurora3 26s ease-in-out infinite",
+          }}
+        />
+      </div>
+
+      {/* === Horizon line — thin glowing rule across mid-hero === */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-0 right-0 top-[68%] -z-10 flex justify-center"
+      >
+        <div
+          className="h-px w-[78%] origin-center will-change-transform"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(200, 151, 59, 0.45) 50%, transparent 100%)",
+            animation: "horizonGlow 6s ease-in-out infinite",
+            boxShadow: "0 0 24px 2px rgba(200, 151, 59, 0.18)",
+          }}
+        />
+      </div>
+
+      {/* === Vignette — darken corners for cinematic depth === */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 151, 59, 0.10), transparent 60%)",
+            "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(10, 10, 10, 0.65) 100%)",
         }}
       />
 
-      {/* Cursor follow light — desktop only, very subtle */}
+      {/* === Cursor follow light — bigger, warmer, smoother === */}
       {cursor && (
         <div
           aria-hidden
-          className="pointer-events-none absolute h-[480px] w-[480px] rounded-full opacity-60 blur-3xl transition-opacity duration-300"
+          className="pointer-events-none absolute -z-10 h-[640px] w-[640px] rounded-full opacity-100 blur-2xl transition-opacity duration-500"
           style={{
-            left: cursor.x - 240,
-            top: cursor.y - 240,
+            left: cursor.x - 320,
+            top: cursor.y - 320,
             background:
-              "radial-gradient(circle, rgba(200, 151, 59, 0.10), transparent 65%)",
+              "radial-gradient(circle, rgba(200, 151, 59, 0.18) 0%, rgba(200, 151, 59, 0.06) 35%, transparent 70%)",
           }}
         />
       )}
