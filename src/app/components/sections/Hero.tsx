@@ -1,7 +1,6 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { useEffect, useRef, useState } from "react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
@@ -14,33 +13,9 @@ const HEADLINE_LINES: string[][] = [
 ];
 
 export function Hero() {
-  const heroRef = useRef<HTMLElement | null>(null);
-  const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
-
-  useEffect(() => {
-    const el = heroRef.current;
-    if (!el) return;
-    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
-
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    };
-    const onLeave = () => setCursor(null);
-
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
   return (
-    <section
-      ref={heroRef}
-      className="relative isolate overflow-hidden"
-    >
+    <section className="relative isolate overflow-hidden">
+
       {/* === Aurora — 3 slow drifting warm-light blobs === */}
       <div
         aria-hidden
@@ -100,20 +75,6 @@ export function Hero() {
             "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(10, 10, 10, 0.65) 100%)",
         }}
       />
-
-      {/* === Cursor follow light — bigger, warmer, smoother === */}
-      {cursor && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -z-10 h-[640px] w-[640px] rounded-full opacity-100 blur-2xl transition-opacity duration-500"
-          style={{
-            left: cursor.x - 320,
-            top: cursor.y - 320,
-            background:
-              "radial-gradient(circle, rgba(200, 151, 59, 0.18) 0%, rgba(200, 151, 59, 0.06) 35%, transparent 70%)",
-          }}
-        />
-      )}
 
       <Container className="relative pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(7rem,12vw,10rem)]">
         <motion.h1
