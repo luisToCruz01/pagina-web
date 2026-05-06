@@ -4,9 +4,8 @@ import * as motion from "motion/react-client";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
-import { Eyebrow } from "@/app/components/ui/Eyebrow";
 import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
-import { ease, blurFadeUp, wordContainer, wordItem } from "@/app/lib/motion";
+import { ease, wordContainer, wordItem } from "@/app/lib/motion";
 
 const HEADLINE_LINES: string[][] = [
   ["Recupera", "tu", "tiempo."],
@@ -67,19 +66,11 @@ export function Hero() {
       )}
 
       <Container className="relative pt-[clamp(6rem,12vw,9rem)] pb-[clamp(7rem,12vw,10rem)]">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={blurFadeUp}
-        >
-          <Eyebrow>Para fundadores de agencias</Eyebrow>
-        </motion.div>
-
         <motion.h1
           initial="hidden"
           animate="visible"
           variants={wordContainer}
-          className="mt-10 max-w-[18ch] font-display font-light leading-[1.02] tracking-[-0.02em] text-fg"
+          className="max-w-[18ch] font-display font-light leading-[1.02] tracking-[-0.02em] text-fg"
           style={{ fontSize: "var(--text-display)" }}
         >
           {HEADLINE_LINES.map((line, lineIdx) => (
