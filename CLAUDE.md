@@ -115,3 +115,57 @@ Aplican estas decisiones de Luis (2026-05-06):
 3. Implementar con tokens, no valores hardcoded
 4. Verificar contraste WCAG AA mínimo
 5. Probar en breakpoints 375 / 768 / 1024 / 1440
+
+---
+
+## Sistema de versionado del proyecto (OBLIGATORIO)
+
+Cada modificación a la página web genera una nueva versión vía **git tags** dentro del repo `pagina-web/`. Esto permite que Luis pueda decir "vuelve a vX.Y" y restaurar ese estado exacto.
+
+### Convención de versiones
+
+- **vMAJOR.MINOR**, ejemplo: `v1.0`, `v1.1`, `v1.2`, `v2.0`
+- **MINOR (+0.1)** — ajustes, mejoras, fixes, copy, polish, nuevas micro-secciones. Default.
+- **MAJOR (+1.0)** — refactor estructural grande, reposicionamiento de marca, rediseño completo, cambio de stack. Confirmar con Luis antes.
+- **No se salta números.** Después de v1.3 viene v1.4, no v1.5.
+
+### Flujo OBLIGATORIO después de CADA modificación
+
+```bash
+cd "C:\Users\luisc\Downloads\Todo lo que hago en Claude Code\pagina-web"
+git add .
+git commit -m "vX.Y — descripción concisa del cambio"
+git tag -a vX.Y -m "vX.Y — descripción"
+```
+
+Después, en la última línea de la respuesta a Luis, terminar SIEMPRE con:
+
+```
+**Versión actual: vX.Y**
+```
+
+Sin excepciones. Si hago varios commits en una sola respuesta, agrupo en una sola versión final (no creo v1.1, v1.2, v1.3 en el mismo turno — sería v1.1 final).
+
+### Restaurar una versión anterior
+
+Cuando Luis diga "vuelve a vX.Y" o "restaura vX.Y":
+
+1. **Primero** crear tag de respaldo del estado actual: `git tag -a vCURRENT-backup-$(date +%Y%m%d-%H%M%S) -m "respaldo antes de restaurar a vX.Y"`. Esto evita pérdida de trabajo si Luis se arrepiente.
+2. **Después** preguntar a Luis qué quiere exactamente:
+   - **Reset duro:** `git reset --hard vX.Y` — borra todo lo posterior, deja main apuntando a vX.Y. Irreversible salvo por el tag de respaldo.
+   - **Branch desde vX.Y:** `git checkout -b experimento-desde-vX.Y vX.Y` — preserva todo, crea rama nueva para iterar desde ese punto.
+3. **No ejecutar reset --hard sin confirmación explícita** del usuario en el chat. Aplica la regla del CLAUDE.md global de Luis para acciones destructivas.
+
+### Listar versiones
+
+`git tag -l` muestra todas. `git log --oneline --decorate` muestra historia con tags inline.
+
+### Inspeccionar una versión sin restaurarla
+
+`git show vX.Y` para ver el commit. `git checkout vX.Y -- ruta/archivo.tsx` para extraer un archivo de esa versión sin afectar el resto.
+
+### Estado actual del repo
+
+- **Branch:** `main`
+- **Identidad git local:** luiscruz1029384756@gmail.com / Luis Cruz (configurada solo para este repo, no global)
+- **Tags activos:** `git tag -l` para verlos en cualquier momento
