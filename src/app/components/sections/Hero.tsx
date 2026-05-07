@@ -14,9 +14,9 @@ const HEADLINE_LINES: string[][] = [
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
 
-      {/* === Background video — clockwork macro === */}
+      {/* === Background video — fills the viewport === */}
       <video
         aria-hidden
         autoPlay
@@ -27,34 +27,14 @@ export function Hero() {
         poster="/hero/clockwork-poster.jpg"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
         style={{
-          objectPosition: "center 30%",
-          filter: "brightness(0.55) saturate(1.1) contrast(1.05)",
+          objectPosition: "center 35%",
+          filter: "brightness(0.65) saturate(1.1) contrast(1.05)",
         }}
       >
         <source src="/hero/clockwork.mp4" type="video/mp4" />
       </video>
 
-      {/* === Dark overlay — keeps the typography dominant === */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.40) 40%, rgba(10,10,10,0.65) 100%)",
-        }}
-      />
-
-      {/* === Vignette — darken corners for cinematic depth === */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 35%, rgba(10, 10, 10, 0.75) 100%)",
-        }}
-      />
-
-      {/* === Subtle warm tint to bind the video to brand palette === */}
+      {/* === Subtle warm tint to bind video to brand palette === */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 mix-blend-overlay"
@@ -64,7 +44,32 @@ export function Hero() {
         }}
       />
 
-      <Container className="relative pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(7rem,12vw,10rem)]">
+      {/* === Bottom blur mask — z-0 so it sits ABOVE the video and actually blurs it === */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backdropFilter: "blur(36px)",
+          WebkitBackdropFilter: "blur(36px)",
+          maskImage:
+            "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
+          WebkitMaskImage:
+            "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
+        }}
+      />
+
+      {/* === Subtle darken behind the text — keeps tipografía legible === */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[60%]"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.30) 45%, transparent 100%)",
+        }}
+      />
+
+      {/* === Hero content — pinned to bottom of viewport === */}
+      <Container className="relative z-10 flex flex-1 flex-col justify-end pb-[clamp(3rem,8vw,6rem)] pt-24">
         <motion.h1
           initial="hidden"
           animate="visible"
@@ -73,20 +78,17 @@ export function Hero() {
           style={{ fontSize: "var(--text-display)" }}
         >
           {HEADLINE_LINES.map((line, lineIdx) => (
-            <span
-              key={lineIdx}
-              className="block"
-            >
+            <span key={lineIdx} className="block">
               {line.map((word, wordIdx) => {
                 const isMutedLine = lineIdx === 1; // "Automatiza tu empresa" en muted
+                const notLast = wordIdx < line.length - 1;
                 return (
                   <motion.span
                     key={`${lineIdx}-${wordIdx}`}
                     variants={wordItem}
-                    className={`inline-block ${isMutedLine ? "text-fg-muted" : ""}`}
+                    className={`inline-block ${notLast ? "mr-[0.25em]" : ""} ${isMutedLine ? "text-fg-muted" : ""}`}
                   >
                     {word}
-                    {wordIdx < line.length - 1 && " "}
                   </motion.span>
                 );
               })}
@@ -98,7 +100,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
-          className="mt-10 max-w-[52ch] font-sans text-lg leading-relaxed text-fg-muted sm:text-xl"
+          className="mt-8 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
         >
           Diseñamos flujos de automatización con IA para empresas en LATAM
           que quieren operar más rápido, con menos errores y sin depender de
@@ -109,13 +111,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: ease.outCinematic, delay: 1.15 }}
-          className="mt-12 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+          className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
         >
-          <Button
-            href="https://cal.com/rdmdco/30min"
-            external
-            variant="primary"
-          >
+          <Button href="https://cal.com/rdmdco/30min" external variant="primary">
             Agenda tu diagnóstico
           </Button>
           <Button href="#soluciones" variant="secondary">
@@ -127,28 +125,22 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.4 }}
-          className="mt-16 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
+          className="mt-12 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
         >
           <span className="h-px w-8 bg-fg-faint" />
           México · Colombia · Argentina · República Dominicana
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.7 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <ScrollIndicator />
-        </motion.div>
       </Container>
 
-      {/* Bottom fade to surface — softens transition + hides any watermark */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-surface via-surface/85 to-transparent"
-      />
+      {/* === Scroll indicator pinned bottom-center === */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.7 }}
+        className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2"
+      >
+        <ScrollIndicator />
+      </motion.div>
     </section>
   );
 }
