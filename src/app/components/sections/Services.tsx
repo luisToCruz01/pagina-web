@@ -49,7 +49,7 @@ export function Services() {
           variants={fadeUp}
           className="max-w-2xl"
         >
-          <Eyebrow>Servicios</Eyebrow>
+          <Eyebrow sparkle>Servicios</Eyebrow>
           <h2
             className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
             style={{ fontSize: "var(--text-h1)" }}

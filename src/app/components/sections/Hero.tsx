@@ -1,6 +1,7 @@
 "use client";
 
-import * as motion from "motion/react-client";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
@@ -13,11 +14,30 @@ const HEADLINE_LINES: string[][] = [
 ];
 
 export function Hero() {
-  return (
-    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
+  const sectionRef = useRef<HTMLElement | null>(null);
 
-      {/* === Background video — fills the viewport === */}
-      <video
+  // Scroll-driven exit (lesanimals.digital pattern)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Hero content scales + fades + blurs as you scroll out of it
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.5, 0]);
+  const contentBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(8px)"]);
+  // Background video moves up faster (parallax) and dims slightly
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.6]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden"
+    >
+
+      {/* === Background video — fills the viewport, parallax === */}
+      <motion.video
         aria-hidden
         autoPlay
         muted
@@ -29,10 +49,12 @@ export function Hero() {
         style={{
           objectPosition: "center 35%",
           filter: "brightness(0.65) saturate(1.1) contrast(1.05)",
+          y: videoY,
+          opacity: videoOpacity,
         }}
       >
         <source src="/hero/clockwork.mp4" type="video/mp4" />
-      </video>
+      </motion.video>
 
       {/* === Subtle warm tint to bind video to brand palette === */}
       <div
@@ -44,7 +66,7 @@ export function Hero() {
         }}
       />
 
-      {/* === Bottom blur mask — z-0 so it sits ABOVE the video and actually blurs it === */}
+      {/* === Bottom blur mask === */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0"
@@ -58,7 +80,7 @@ export function Hero() {
         }}
       />
 
-      {/* === Subtle darken behind the text — keeps tipografía legible === */}
+      {/* === Subtle darken behind text for legibility === */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[60%]"
@@ -68,75 +90,85 @@ export function Hero() {
         }}
       />
 
-      {/* === Hero content — pinned to bottom of viewport === */}
-      <Container className="relative z-10 flex flex-1 flex-col justify-end pb-[clamp(3rem,8vw,6rem)] pt-24">
-        <motion.h1
-          initial="hidden"
-          animate="visible"
-          variants={wordContainer}
-          className="max-w-[18ch] font-display font-light leading-[1.02] tracking-[-0.02em] text-fg"
-          style={{ fontSize: "var(--text-display)" }}
-        >
-          {HEADLINE_LINES.map((line, lineIdx) => (
-            <span key={lineIdx} className="block">
-              {line.map((word, wordIdx) => {
-                const isMutedLine = lineIdx === 1; // "Automatiza tu empresa" en muted
-                const notLast = wordIdx < line.length - 1;
-                return (
-                  <motion.span
-                    key={`${lineIdx}-${wordIdx}`}
-                    variants={wordItem}
-                    className={`inline-block ${notLast ? "mr-[0.25em]" : ""} ${isMutedLine ? "text-fg-muted" : ""}`}
-                  >
-                    {word}
-                  </motion.span>
-                );
-              })}
-            </span>
-          ))}
-        </motion.h1>
+      {/* === Hero content with scroll-driven exit (scale + fade + blur) === */}
+      <motion.div
+        style={{
+          scale: contentScale,
+          opacity: contentOpacity,
+          filter: contentBlur,
+        }}
+        className="relative z-10 flex flex-1 flex-col"
+      >
+        <Container className="flex flex-1 flex-col justify-end pb-[clamp(3rem,8vw,6rem)] pt-24">
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={wordContainer}
+            className="max-w-[18ch] font-display font-light leading-[1.02] tracking-[-0.02em] text-fg"
+            style={{ fontSize: "var(--text-display)" }}
+          >
+            {HEADLINE_LINES.map((line, lineIdx) => (
+              <span key={lineIdx} className="block">
+                {line.map((word, wordIdx) => {
+                  const isMutedLine = lineIdx === 1;
+                  const notLast = wordIdx < line.length - 1;
+                  return (
+                    <motion.span
+                      key={`${lineIdx}-${wordIdx}`}
+                      variants={wordItem}
+                      className={`inline-block ${notLast ? "mr-[0.25em]" : ""} ${isMutedLine ? "text-fg-muted" : ""}`}
+                    >
+                      {word}
+                    </motion.span>
+                  );
+                })}
+              </span>
+            ))}
+          </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
-          className="mt-8 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
-        >
-          Diseñamos flujos de automatización con IA para empresas en LATAM
-          que quieren operar más rápido, con menos errores y sin depender de
-          procesos manuales.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
+            className="mt-8 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
+          >
+            Diseñamos flujos de automatización con IA para empresas en LATAM
+            que quieren operar más rápido, con menos errores y sin depender de
+            procesos manuales.
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: ease.outCinematic, delay: 1.15 }}
-          className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
-        >
-          <Button href="https://cal.com/rdmdco/30min" external variant="primary">
-            Agenda tu diagnóstico
-          </Button>
-          <Button href="#soluciones" variant="secondary">
-            Ver soluciones
-          </Button>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: ease.outCinematic, delay: 1.15 }}
+            className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+          >
+            <Button href="https://cal.com/rdmdco/30min" external variant="primary">
+              Agenda tu diagnóstico
+            </Button>
+            <Button href="#soluciones" variant="secondary">
+              Ver soluciones
+            </Button>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
-          className="mt-12 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
-        >
-          <span className="h-px w-8 bg-fg-faint" />
-          México · Colombia · Argentina · República Dominicana
-        </motion.div>
-      </Container>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.4 }}
+            className="mt-12 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
+          >
+            <span className="h-px w-8 bg-fg-faint" />
+            México · Colombia · Argentina · República Dominicana
+          </motion.div>
+        </Container>
+      </motion.div>
 
       {/* === Scroll indicator pinned bottom-center === */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.7 }}
+        style={{ opacity: contentOpacity }}
         className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2"
       >
         <ScrollIndicator />

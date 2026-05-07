@@ -64,7 +64,7 @@ export function Trust() {
           variants={fadeUp}
           className="max-w-3xl"
         >
-          <Eyebrow>Por qué RDMD</Eyebrow>
+          <Eyebrow sparkle>Por qué RDMD</Eyebrow>
           <h2
             className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
             style={{ fontSize: "var(--text-h1)" }}

@@ -115,8 +115,17 @@ const SOLUTIONS: Solution[] = [
 
 export function Solutions() {
   return (
-    <section id="soluciones" className="border-t border-rule">
-      <Container className="py-section">
+    <section id="soluciones" className="relative isolate overflow-hidden border-t border-rule">
+      {/* Subtle warm wash — narrative color shift (panicstudio.tv inspired) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 80% at 80% 0%, rgba(200, 151, 59, 0.06), transparent 70%)",
+        }}
+      />
+      <Container className="relative py-section">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -124,7 +133,7 @@ export function Solutions() {
           variants={fadeUp}
           className="max-w-3xl"
         >
-          <Eyebrow>Soluciones llave en mano</Eyebrow>
+          <Eyebrow sparkle>Soluciones llave en mano</Eyebrow>
           <h2
             className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
             style={{ fontSize: "var(--text-h1)" }}
