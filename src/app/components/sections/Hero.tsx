@@ -99,7 +99,7 @@ export function Hero() {
         }}
         className="relative z-10 flex flex-1 flex-col"
       >
-        <Container className="flex flex-1 flex-col justify-end pb-[clamp(2rem,5vw,4rem)] pt-20">
+        <Container className="flex flex-1 flex-col justify-end pb-[clamp(1.5rem,4vw,3rem)] pt-16">
           <motion.h1
             initial="hidden"
             animate="visible"
@@ -155,7 +155,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.4 }}
-            className="mt-8 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
+            className="mt-6 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
           >
             <span className="h-px w-8 bg-fg-faint" />
             México · Colombia · Argentina · República Dominicana

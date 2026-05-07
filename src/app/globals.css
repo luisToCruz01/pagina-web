@@ -17,7 +17,7 @@
   --font-sans: var(--font-dm-sans);
 
   /* Type — sizes */
-  --text-display: clamp(2.5rem, 5.5vw, 4.75rem);
+  --text-display: clamp(2.25rem, 4.5vw, 4rem);
   --text-h1: clamp(2.75rem, 5.5vw, 4.5rem);
   --text-h2: clamp(2rem, 3.5vw, 3rem);
   --text-h3: clamp(1.25rem, 2vw, 1.625rem);
