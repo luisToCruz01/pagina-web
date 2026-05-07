@@ -7,7 +7,7 @@ import { Eyebrow } from "@/app/components/ui/Eyebrow";
 import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
 
 const REVEAL_PARAGRAPH =
-  "RDMD & Co. nace en República Dominicana operando para empresas en LATAM. Pequeño por diseño, no por accidente: cada proyecto pasa por las mismas manos que lo cierran en la llamada.";
+  "RDMD & Co. nace en República Dominicana operando para empresas en LATAM, especializados en agencias de marketing. Pequeño por diseño, no por accidente: cada proyecto pasa por las mismas manos que lo cierran en la llamada.";
 
 const PRINCIPLES = [
   {
