@@ -99,7 +99,7 @@ export function Hero() {
         }}
         className="relative z-10 flex flex-1 flex-col"
       >
-        <Container className="flex flex-1 flex-col justify-end pb-[clamp(1.5rem,4vw,3rem)] pt-16">
+        <Container className="flex flex-1 flex-col justify-end pb-[clamp(3.5rem,7vw,5.5rem)] pt-16">
           <motion.h1
             initial="hidden"
             animate="visible"
