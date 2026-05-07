@@ -99,12 +99,12 @@ export function Hero() {
         }}
         className="relative z-10 flex flex-1 flex-col"
       >
-        <Container className="flex flex-1 flex-col justify-end pb-[clamp(3rem,8vw,6rem)] pt-24">
+        <Container className="flex flex-1 flex-col justify-end pb-[clamp(2rem,5vw,4rem)] pt-20">
           <motion.h1
             initial="hidden"
             animate="visible"
             variants={wordContainer}
-            className="max-w-[18ch] font-display font-light leading-[1.02] tracking-[-0.02em] text-fg"
+            className="max-w-[18ch] font-display font-light leading-[1] tracking-[-0.02em] text-fg"
             style={{ fontSize: "var(--text-display)" }}
           >
             {HEADLINE_LINES.map((line, lineIdx) => (
@@ -130,7 +130,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
-            className="mt-8 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
+            className="mt-6 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
           >
             Diseñamos flujos de automatización con IA para empresas en LATAM
             que quieren operar más rápido, con menos errores y sin depender de
@@ -141,7 +141,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: ease.outCinematic, delay: 1.15 }}
-            className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+            className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
           >
             <Button href="https://cal.com/rdmdco/30min" external variant="primary">
               Agenda tu diagnóstico
@@ -155,7 +155,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.4 }}
-            className="mt-12 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
+            className="mt-8 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
           >
             <span className="h-px w-8 bg-fg-faint" />
             México · Colombia · Argentina · República Dominicana
