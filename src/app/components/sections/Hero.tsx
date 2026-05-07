@@ -16,55 +16,33 @@ export function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
 
-      {/* === Aurora — 3 slow drifting warm-light blobs === */}
-      <div
+      {/* === Background video — clockwork macro === */}
+      <video
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/hero/clockwork-poster.jpg"
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
+        style={{
+          objectPosition: "center 30%",
+          filter: "brightness(0.55) saturate(1.1) contrast(1.05)",
+        }}
       >
-        {/* Top-left amber blob */}
-        <div
-          className="absolute top-0 left-0 h-[80vh] w-[70vw] rounded-full blur-[140px] will-change-transform"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(200, 151, 59, 0.55), transparent 65%)",
-            animation: "aurora1 24s ease-in-out infinite",
-          }}
-        />
-        {/* Right-side warm-bronze blob */}
-        <div
-          className="absolute top-1/4 right-0 h-[70vh] w-[60vw] rounded-full blur-[160px] will-change-transform"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(168, 122, 46, 0.40), transparent 70%)",
-            animation: "aurora2 30s ease-in-out infinite",
-          }}
-        />
-        {/* Bottom-left deep amber blob */}
-        <div
-          className="absolute bottom-0 left-1/4 h-[60vh] w-[55vw] rounded-full blur-[150px] will-change-transform"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(200, 151, 59, 0.30), transparent 70%)",
-            animation: "aurora3 26s ease-in-out infinite",
-          }}
-        />
-      </div>
+        <source src="/hero/clockwork.mp4" type="video/mp4" />
+      </video>
 
-      {/* === Horizon line — thin glowing rule across mid-hero === */}
+      {/* === Dark overlay — keeps the typography dominant === */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-0 right-0 top-[68%] -z-10 flex justify-center"
-      >
-        <div
-          className="h-px w-[78%] origin-center will-change-transform"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(200, 151, 59, 0.45) 50%, transparent 100%)",
-            animation: "horizonGlow 6s ease-in-out infinite",
-            boxShadow: "0 0 24px 2px rgba(200, 151, 59, 0.18)",
-          }}
-        />
-      </div>
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.40) 40%, rgba(10,10,10,0.65) 100%)",
+        }}
+      />
 
       {/* === Vignette — darken corners for cinematic depth === */}
       <div
@@ -72,7 +50,17 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 40%, rgba(10, 10, 10, 0.65) 100%)",
+            "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 35%, rgba(10, 10, 10, 0.75) 100%)",
+        }}
+      />
+
+      {/* === Subtle warm tint to bind the video to brand palette === */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 mix-blend-overlay"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 60% at 50% 50%, rgba(200, 151, 59, 0.18), transparent 70%)",
         }}
       />
 
@@ -156,10 +144,10 @@ export function Hero() {
         </motion.div>
       </Container>
 
-      {/* Bottom fade to surface — softens transition into Audience */}
+      {/* Bottom fade to surface — softens transition + hides any watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-surface to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-surface via-surface/85 to-transparent"
       />
     </section>
   );
