@@ -151,15 +151,6 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.4 }}
-            className="mt-6 flex items-center gap-3 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint"
-          >
-            <span className="h-px w-8 bg-fg-faint" />
-            México · Colombia · Argentina · República Dominicana
-          </motion.div>
         </Container>
       </motion.div>
 
