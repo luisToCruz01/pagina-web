@@ -44,7 +44,6 @@ export function Hero() {
         loop
         playsInline
         preload="auto"
-        poster="/hero/clockwork-poster.jpg"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
         style={{
           objectPosition: "center 35%",
@@ -53,7 +52,10 @@ export function Hero() {
           opacity: videoOpacity,
         }}
       >
-        <source src="/hero/clockwork.mp4" type="video/mp4" />
+        <source
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_230229_7c9bc431-46cf-489a-948d-e8144d8eb5d4.mp4"
+          type="video/mp4"
+        />
       </motion.video>
 
       {/* === Subtle warm tint to bind video to brand palette === */}
