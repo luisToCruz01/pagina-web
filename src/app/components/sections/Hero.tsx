@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
@@ -15,36 +15,6 @@ const HEADLINE_LINES: string[][] = [
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  // Ping-pong playback: forward → reverse → forward, infinito.
-  // Usa playbackRate negativo (Chrome/Edge/Firefox lo soportan) que mantiene
-  // la pipeline de paint del video — el seek manual vía rAF/setCurrentTime
-  // congela el render porque el browser desactiva el repaint al pause().
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-
-    const onEnded = () => {
-      v.playbackRate = -1;
-      v.play().catch(() => {});
-    };
-
-    const onTimeUpdate = () => {
-      if (v.playbackRate < 0 && v.currentTime <= 0.05) {
-        v.playbackRate = 1;
-        v.currentTime = 0;
-        v.play().catch(() => {});
-      }
-    };
-
-    v.addEventListener("ended", onEnded);
-    v.addEventListener("timeupdate", onTimeUpdate);
-    return () => {
-      v.removeEventListener("ended", onEnded);
-      v.removeEventListener("timeupdate", onTimeUpdate);
-    };
-  }, []);
 
   // Scroll-driven exit (lesanimals.digital pattern)
   const { scrollYProgress } = useScroll({
@@ -94,10 +64,10 @@ export function Hero() {
 
       {/* === Background video — fills the viewport, parallax === */}
       <motion.video
-        ref={videoRef}
         aria-hidden
         autoPlay
         muted
+        loop
         playsInline
         preload="auto"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
@@ -109,10 +79,7 @@ export function Hero() {
           opacity: videoOpacity,
         }}
       >
-        <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260511_230229_7c9bc431-46cf-489a-948d-e8144d8eb5d4.mp4"
-          type="video/mp4"
-        />
+        <source src="/hero/hero-pingpong.mp4" type="video/mp4" />
       </motion.video>
 
       {/* === Subtle warm tint to bind video to brand palette === */}
