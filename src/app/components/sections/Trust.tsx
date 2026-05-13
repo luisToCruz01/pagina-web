@@ -56,7 +56,7 @@ export function Trust() {
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "start 0.15"],
+    offset: ["start 0.9", "start 0.55"],
   });
 
   const words = REVEAL_PARAGRAPH.split(" ");
