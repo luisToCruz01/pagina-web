@@ -147,7 +147,7 @@ export function Hero() {
             transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
             className="mt-6 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
           >
-            Diseñamos flujos de automatización para empresas en LATAM
+            Diseñamos flujos de automatización para empresas en Latinoamérica
             que quieren operar más rápido, con menos errores y sin depender de
             procesos manuales.
           </motion.p>
