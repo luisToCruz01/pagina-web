@@ -18,40 +18,31 @@ export function Hero() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // Ping-pong playback: forward → reverse → forward, infinito.
-  // Forward usa playback nativo del browser; reverse usa rAF que seekea
-  // currentTime hacia atrás (negative playbackRate no es fiable cross-browser).
+  // Usa playbackRate negativo (Chrome/Edge/Firefox lo soportan) que mantiene
+  // la pipeline de paint del video — el seek manual vía rAF/setCurrentTime
+  // congela el render porque el browser desactiva el repaint al pause().
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
 
-    let rafId = 0;
-    let lastFrame = 0;
-
-    const tickReverse = (now: number) => {
-      if (!lastFrame) lastFrame = now;
-      const dt = (now - lastFrame) / 1000;
-      lastFrame = now;
-      const next = v.currentTime - dt;
-      if (next <= 0) {
-        v.currentTime = 0;
-        lastFrame = 0;
-        v.play().catch(() => {});
-        return;
-      }
-      v.currentTime = next;
-      rafId = requestAnimationFrame(tickReverse);
+    const onEnded = () => {
+      v.playbackRate = -1;
+      v.play().catch(() => {});
     };
 
-    const onEnded = () => {
-      v.pause();
-      lastFrame = 0;
-      rafId = requestAnimationFrame(tickReverse);
+    const onTimeUpdate = () => {
+      if (v.playbackRate < 0 && v.currentTime <= 0.05) {
+        v.playbackRate = 1;
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      }
     };
 
     v.addEventListener("ended", onEnded);
+    v.addEventListener("timeupdate", onTimeUpdate);
     return () => {
       v.removeEventListener("ended", onEnded);
-      if (rafId) cancelAnimationFrame(rafId);
+      v.removeEventListener("timeupdate", onTimeUpdate);
     };
   }, []);
 
