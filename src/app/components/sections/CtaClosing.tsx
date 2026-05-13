@@ -9,7 +9,7 @@ import { fadeUp, ease } from "@/app/lib/motion";
 export function CtaClosing() {
   return (
     <section id="contacto" className="border-t border-rule">
-      <Container className="py-[clamp(6rem,12vw,10rem)] text-center">
+      <Container className="pb-[clamp(6rem,12vw,10rem)] pt-[clamp(3rem,6vw,5rem)] text-center">
         <motion.div
           initial="hidden"
           whileInView="visible"
