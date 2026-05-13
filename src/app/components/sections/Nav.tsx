@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/app/lib/cn";
+import { ease } from "@/app/lib/motion";
 
 const NAV_LINKS = [
   { label: "Servicios", href: "#servicios" },
@@ -22,7 +24,10 @@ export function Nav() {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: ease.outCinematic, delay: 0.2 }}
       className={cn(
         "sticky top-0 z-50 w-full transition-[border-color,background-color,backdrop-filter] duration-500",
         scrolled
@@ -64,6 +69,6 @@ export function Nav() {
           Conversemos
         </Button>
       </Container>
-    </header>
+    </motion.header>
   );
 }

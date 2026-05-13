@@ -1,4 +1,8 @@
+"use client";
+
+import { motion } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
+import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
 
 const NAV = [
   { label: "Servicios", href: "#servicios" },
@@ -22,29 +26,41 @@ export function Footer() {
   return (
     <footer className="border-t border-rule">
       <Container className="py-16">
-        <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
-          <div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={stagger}
+          className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]"
+        >
+          <motion.div variants={staggerItem}>
             <p className="font-display text-2xl font-medium tracking-tight text-fg">
               RDMD <span className="text-accent">&amp;</span> Co.
             </p>
             <p className="mt-3 font-display text-base italic text-fg-faint">
               Automation. Redefined.
             </p>
-          </div>
+          </motion.div>
 
           <FooterColumn title="Navegación" links={NAV} />
           <FooterColumn title="Contacto" links={CONTACT} external />
           <FooterColumn title="Síguenos" links={SOCIAL} external />
-        </div>
+        </motion.div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-rule pt-8 sm:flex-row sm:items-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={fadeUp}
+          className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-rule pt-8 sm:flex-row sm:items-center"
+        >
           <p className="font-sans text-xs uppercase tracking-[0.2em] text-fg-faint">
             © {YEAR} RDMD &amp; Co. — Todos los derechos reservados.
           </p>
           <p className="font-sans text-xs uppercase tracking-[0.2em] text-fg-faint">
             Hecho en LATAM
           </p>
-        </div>
+        </motion.div>
       </Container>
     </footer>
   );
@@ -60,7 +76,7 @@ function FooterColumn({
   external?: boolean;
 }) {
   return (
-    <div>
+    <motion.div variants={staggerItem}>
       <h4 className="font-sans text-xs font-medium uppercase tracking-[0.28em] text-fg-faint">
         {title}
       </h4>
@@ -78,6 +94,6 @@ function FooterColumn({
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }
