@@ -47,7 +47,8 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
         style={{
           objectPosition: "center 35%",
-          filter: "brightness(0.65) saturate(1.1) contrast(1.05)",
+          filter:
+            "brightness(0.65) saturate(0.85) contrast(1.05) hue-rotate(15deg) sepia(0.18)",
           y: videoY,
           opacity: videoOpacity,
         }}
