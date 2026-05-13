@@ -10,6 +10,30 @@ import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
 const REVEAL_PARAGRAPH =
   "RDMD & Co. nace en República Dominicana operando para empresas en Latinoamérica, especializados en agencias de marketing. Pequeño por diseño, no por accidente: cada proyecto pasa por las mismas manos que lo cierran en la llamada.";
 
+const CASES = [
+  {
+    client: "Agencia de performance en CDMX",
+    stat: "36 hrs/mes",
+    statLabel: "ahorradas en reportería",
+    title: "Reportes mensuales automatizados para 12 cuentas",
+    body: "Conectamos Meta Ads, Google Ads y GA4 a un pipeline que genera reportes en Notion con métricas, narrativa y comparativas. El equipo pasó de tres días al mes en reportes a una validación de cuatro minutos por cuenta.",
+  },
+  {
+    client: "E-commerce de moda en Bogotá",
+    stat: "78%",
+    statLabel: "de tickets resueltos sin intervención humana",
+    title: "Agente de WhatsApp conectado a Shopify",
+    body: "Implementamos un agente que responde estados de pedido, cambios de talla y devoluciones en tiempo real. Solo escala a humano cuando detecta intención compleja. Tiempo de respuesta promedio bajó de cuatro horas a noventa segundos.",
+  },
+  {
+    client: "Productora de contenido en Buenos Aires",
+    stat: "2.5x",
+    statLabel: "más contenido aprobado por semana",
+    title: "Workflow de aprobación centralizado",
+    body: "Reemplazamos el flujo de email, Slack y WhatsApp por un sistema con notificaciones automáticas, versionado y trazabilidad. Cero revisiones perdidas y un equipo de seis personas duplicó throughput sin contratar.",
+  },
+];
+
 const PRINCIPLES = [
   {
     title: "Construimos, no consultamos.",
@@ -145,16 +169,61 @@ export function Trust() {
           ))}
         </motion.div>
 
-        <motion.p
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="mt-16 max-w-xl font-display text-2xl font-light italic leading-snug text-fg-muted"
-        >
-          Cuando los testimoniales reales lleguen, los publicamos aquí. Hasta
-          entonces, preferimos el silencio al adorno.
-        </motion.p>
+        {/* === Casos de éxito === */}
+        <div className="mt-24 border-t border-rule pt-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeUp}
+            className="max-w-3xl"
+          >
+            <Eyebrow tone="accent">Casos de éxito</Eyebrow>
+            <h3
+              className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
+              style={{ fontSize: "var(--text-h2)" }}
+            >
+              Resultados que hemos producido.
+            </h3>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+            className="mt-12 divide-y divide-rule"
+          >
+            {CASES.map((c) => (
+              <motion.article
+                key={c.title}
+                variants={staggerItem}
+                className="grid gap-8 py-12 md:grid-cols-12 md:gap-12"
+              >
+                <div className="md:col-span-5">
+                  <Eyebrow tone="muted">{c.client}</Eyebrow>
+                  <p
+                    className="mt-5 font-display font-light leading-none tracking-[-0.02em] text-accent"
+                    style={{ fontSize: "var(--text-stat)" }}
+                  >
+                    {c.stat}
+                  </p>
+                  <p className="mt-3 max-w-xs font-sans text-sm leading-snug text-fg-muted">
+                    {c.statLabel}
+                  </p>
+                </div>
+                <div className="md:col-span-7">
+                  <h4 className="font-display text-xl font-light leading-tight text-fg sm:text-2xl">
+                    {c.title}
+                  </h4>
+                  <p className="mt-4 font-sans text-base leading-relaxed text-fg-muted">
+                    {c.body}
+                  </p>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </div>
       </Container>
     </section>
   );
