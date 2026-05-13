@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import * as motion from "motion/react-client";
 import { Container } from "@/app/components/ui/Container";
 import { Eyebrow } from "@/app/components/ui/Eyebrow";
@@ -17,6 +18,8 @@ type Solution = {
   bullets: string[];
   delivery: string;
   ctaPath: string;
+  image: string;
+  imageAlt: string;
   featured?: boolean;
 };
 
@@ -35,6 +38,8 @@ const SOLUTIONS: Solution[] = [
     ],
     delivery: "Entrega estimada: 5–7 días hábiles",
     ctaPath: "Seguimiento%20de%20Leads",
+    image: "/solutions/01-leads.webp",
+    imageAlt: "Sistema de seguimiento de leads",
     featured: true,
   },
   {
@@ -51,6 +56,8 @@ const SOLUTIONS: Solution[] = [
     ],
     delivery: "Entrega estimada: 7–10 días hábiles",
     ctaPath: "Atenci%C3%B3n%20al%20Cliente%2024-7",
+    image: "/solutions/02-customer.webp",
+    imageAlt: "Agente de atención al cliente 24/7",
   },
   {
     badge: "Más fácil de entender",
@@ -65,6 +72,8 @@ const SOLUTIONS: Solution[] = [
     ],
     delivery: "Entrega estimada: 3–5 días hábiles",
     ctaPath: "Reportes%20Autom%C3%A1ticos",
+    image: "/solutions/03-reports.webp",
+    imageAlt: "Sistema de reportes automáticos",
   },
   {
     badge: "Para operaciones",
@@ -80,6 +89,8 @@ const SOLUTIONS: Solution[] = [
     ],
     delivery: "Entrega estimada: 5–7 días hábiles",
     ctaPath: "Procesamiento%20de%20Documentos",
+    image: "/solutions/04-documents.webp",
+    imageAlt: "Procesamiento automático de documentos",
   },
   {
     badge: "Cierra más ventas",
@@ -95,6 +106,8 @@ const SOLUTIONS: Solution[] = [
     ],
     delivery: "Entrega estimada: 5–7 días hábiles",
     ctaPath: "Secuencia%20de%20Seguimiento",
+    image: "/solutions/05-followup.webp",
+    imageAlt: "Secuencia de seguimiento y nutrición",
   },
   {
     badge: "ROI inmediato",
@@ -110,6 +123,8 @@ const SOLUTIONS: Solution[] = [
     ],
     delivery: "Entrega estimada: 7–10 días hábiles",
     ctaPath: "Reactivaci%C3%B3n%20de%20Base%20de%20Datos",
+    image: "/solutions/06-reactivation.webp",
+    imageAlt: "Reactivación de base de datos",
   },
 ];
 
@@ -153,18 +168,41 @@ export function Solutions() {
           variants={stagger}
           className="mt-20 grid gap-px bg-rule lg:grid-cols-2"
         >
-          {SOLUTIONS.map((s) => (
+          {SOLUTIONS.map((s, idx) => (
             <motion.article
               key={s.title}
               variants={staggerItem}
-              className="group relative flex flex-col overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-10"
+              className="group relative flex flex-col overflow-hidden bg-surface transition-colors duration-500 hover:bg-surface-raised"
             >
               {/* Hover accent rail */}
               <span
                 aria-hidden
-                className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-700 ease-out group-hover:scale-y-100"
+                className="absolute left-0 top-0 z-10 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-700 ease-out group-hover:scale-y-100"
               />
 
+              {/* Editorial image header */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface">
+                <Image
+                  src={s.image}
+                  alt={s.imageAlt}
+                  fill
+                  priority={idx < 2}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                  style={{ filter: "brightness(0.78) saturate(1.05) contrast(1.05)" }}
+                />
+                {/* Gradient bind to surface */}
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.55) 70%, var(--color-surface) 100%)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col p-8 sm:p-10">
               <div className="flex items-center justify-between gap-4">
                 <Eyebrow tone={s.featured ? "accent" : "muted"}>
                   {s.badge}
@@ -219,6 +257,7 @@ export function Solutions() {
                 >
                   Quiero esta solución
                 </Button>
+              </div>
               </div>
             </motion.article>
           ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Eyebrow } from "@/app/components/ui/Eyebrow";
@@ -13,14 +14,20 @@ const PRINCIPLES = [
   {
     title: "Construimos, no consultamos.",
     body: "No vendemos PowerPoints ni roadmaps. Entregamos sistemas funcionando, con código, con accesos, con documentación.",
+    image: "/editorial/philosophy.webp",
+    imageAlt: "Filosofía de construcción RDMD",
   },
   {
     title: "Transparente desde el diagnóstico.",
     body: "Cada propuesta lista alcance, entregables y tiempo. Si el problema no es para nosotros, lo decimos. Sin venta forzada.",
+    image: "/editorial/craft.webp",
+    imageAlt: "Oficio y transparencia",
   },
   {
     title: "Soporte post-entrega real.",
     body: "Acompañamos por 15 días después de cada entrega para ajustes y dudas. Después tú decides si continuamos juntos.",
+    image: "/editorial/capacity.webp",
+    imageAlt: "Capacidad de soporte continuo",
   },
 ];
 
@@ -95,25 +102,71 @@ export function Trust() {
           </p>
         </div>
 
+        {/* Founder editorial wide image */}
+        <motion.div
+          initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mt-16 aspect-[16/7] w-full overflow-hidden border-t border-rule"
+        >
+          <Image
+            src="/editorial/founder.webp"
+            alt="RDMD & Co. — fundador y filosofía"
+            fill
+            sizes="(min-width: 1024px) 1000px, 100vw"
+            className="object-cover object-center"
+            style={{ filter: "brightness(0.75) saturate(1.05) contrast(1.05)" }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.30) 60%, var(--color-surface) 100%)",
+            }}
+          />
+        </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="mt-20 grid gap-px bg-rule md:grid-cols-3"
+          className="mt-12 grid gap-px bg-rule md:grid-cols-3"
         >
           {PRINCIPLES.map((principle) => (
             <motion.article
               key={principle.title}
               variants={staggerItem}
-              className="bg-surface p-8 sm:p-10"
+              className="group flex flex-col overflow-hidden bg-surface"
             >
-              <h3 className="font-display text-2xl font-light leading-tight text-fg">
-                {principle.title}
-              </h3>
-              <p className="mt-4 font-sans text-base leading-relaxed text-fg-muted">
-                {principle.body}
-              </p>
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface">
+                <Image
+                  src={principle.image}
+                  alt={principle.imageAlt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                  style={{ filter: "brightness(0.78) saturate(1.05) contrast(1.05)" }}
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.55) 70%, var(--color-surface) 100%)",
+                  }}
+                />
+              </div>
+              <div className="p-8 sm:p-10">
+                <h3 className="font-display text-2xl font-light leading-tight text-fg">
+                  {principle.title}
+                </h3>
+                <p className="mt-4 font-sans text-base leading-relaxed text-fg-muted">
+                  {principle.body}
+                </p>
+              </div>
             </motion.article>
           ))}
         </motion.div>
