@@ -7,7 +7,7 @@ type Props = {
   pauseOnHover?: boolean;
 };
 
-export function MarqueeStrip({ items, className, pauseOnHover = true }: Props) {
+export function MarqueeStrip({ items, className, pauseOnHover = false }: Props) {
   // Duplicate items so we can translate -50% and feel infinite
   const doubled = [...items, ...items];
   return (
