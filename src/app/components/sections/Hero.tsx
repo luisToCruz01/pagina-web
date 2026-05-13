@@ -48,7 +48,7 @@ export function Hero() {
         style={{
           objectPosition: "center 35%",
           filter:
-            "brightness(0.65) saturate(0.85) contrast(1.05) hue-rotate(15deg) sepia(0.18)",
+            "brightness(0.78) saturate(1.25) contrast(1.12) hue-rotate(18deg)",
           y: videoY,
           opacity: videoOpacity,
         }}
