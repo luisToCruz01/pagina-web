@@ -102,32 +102,6 @@ export function Trust() {
           </p>
         </div>
 
-        {/* Founder editorial wide image */}
-        <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mt-16 aspect-[16/7] w-full overflow-hidden border-t border-rule"
-        >
-          <Image
-            src="/editorial/founder.webp"
-            alt="RDMD & Co. — fundador y filosofía"
-            fill
-            sizes="(min-width: 1024px) 1000px, 100vw"
-            className="object-cover object-center"
-            style={{ filter: "brightness(0.75) saturate(1.05) contrast(1.05)" }}
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.30) 60%, var(--color-surface) 100%)",
-            }}
-          />
-        </motion.div>
-
         <motion.div
           initial="hidden"
           whileInView="visible"
