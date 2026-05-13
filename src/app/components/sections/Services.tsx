@@ -40,8 +40,37 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section id="servicios" className="border-t border-rule">
-      <Container className="py-section">
+    <section
+      id="servicios"
+      className="relative isolate overflow-hidden border-t border-rule"
+    >
+      {/* === Background video === */}
+      <video
+        aria-hidden
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
+      >
+        <source
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* === Legibility overlay — darker at top where header lives === */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 35%, rgba(10,10,10,0.70) 100%)",
+        }}
+      />
+
+      <Container className="relative py-section">
         <motion.div
           initial="hidden"
           whileInView="visible"
