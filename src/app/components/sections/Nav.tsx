@@ -71,7 +71,7 @@ export function Nav() {
     <motion.header
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: hidden ? 0 : 1, y: hidden ? "-100%" : 0 }}
-      transition={{ duration: 0.55, ease: ease.outExpo }}
+      transition={{ duration: hidden ? 0.85 : 0.55, ease: ease.outExpo }}
       className={`sticky top-0 z-50 w-full transition-[background-color,backdrop-filter,border-color] duration-300 ${
         scrolled
           ? "border-b border-rule bg-surface/85 backdrop-blur-xl"
