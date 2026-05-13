@@ -36,6 +36,32 @@ export function Hero() {
       className="relative isolate flex min-h-[100svh] flex-col overflow-hidden"
     >
 
+      {/* === SVG color filter — vira naranja a gold y aplasta azul a gris oscuro === */}
+      <svg
+        aria-hidden
+        width="0"
+        height="0"
+        className="absolute"
+        style={{ pointerEvents: "none" }}
+      >
+        <defs>
+          <filter
+            id="hero-gold-grade"
+            colorInterpolationFilters="sRGB"
+          >
+            <feColorMatrix type="hueRotate" values="18" />
+            <feColorMatrix
+              type="matrix"
+              values="
+                1.10  0.05  0.05  0 0
+                0.05  1.05  0.00  0 0
+               -0.30 -0.15  0.25  0 0
+                0     0     0     1 0"
+            />
+          </filter>
+        </defs>
+      </svg>
+
       {/* === Background video — fills the viewport, parallax === */}
       <motion.video
         aria-hidden
@@ -48,7 +74,7 @@ export function Hero() {
         style={{
           objectPosition: "center 35%",
           filter:
-            "brightness(0.78) saturate(1.25) contrast(1.12) hue-rotate(18deg)",
+            "brightness(0.82) saturate(1.15) contrast(1.15) url(#hero-gold-grade)",
           y: videoY,
           opacity: videoOpacity,
         }}
