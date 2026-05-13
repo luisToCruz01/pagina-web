@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
@@ -15,6 +15,45 @@ const HEADLINE_LINES: string[][] = [
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Ping-pong playback: forward → reverse → forward, infinito.
+  // Forward usa playback nativo del browser; reverse usa rAF que seekea
+  // currentTime hacia atrás (negative playbackRate no es fiable cross-browser).
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    let rafId = 0;
+    let lastFrame = 0;
+
+    const tickReverse = (now: number) => {
+      if (!lastFrame) lastFrame = now;
+      const dt = (now - lastFrame) / 1000;
+      lastFrame = now;
+      const next = v.currentTime - dt;
+      if (next <= 0) {
+        v.currentTime = 0;
+        lastFrame = 0;
+        v.play().catch(() => {});
+        return;
+      }
+      v.currentTime = next;
+      rafId = requestAnimationFrame(tickReverse);
+    };
+
+    const onEnded = () => {
+      v.pause();
+      lastFrame = 0;
+      rafId = requestAnimationFrame(tickReverse);
+    };
+
+    v.addEventListener("ended", onEnded);
+    return () => {
+      v.removeEventListener("ended", onEnded);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   // Scroll-driven exit (lesanimals.digital pattern)
   const { scrollYProgress } = useScroll({
@@ -64,10 +103,10 @@ export function Hero() {
 
       {/* === Background video — fills the viewport, parallax === */}
       <motion.video
+        ref={videoRef}
         aria-hidden
         autoPlay
         muted
-        loop
         playsInline
         preload="auto"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
