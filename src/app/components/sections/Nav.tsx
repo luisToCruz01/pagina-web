@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ease } from "@/app/lib/motion";
 
@@ -24,13 +24,25 @@ function MenuIcon({ open }: { open: boolean }) {
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <motion.header
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: ease.outCinematic, delay: 0.2 }}
-      className="sticky top-0 z-50 w-full"
+      className={`sticky top-0 z-50 w-full transition-[background-color,backdrop-filter,border-color] duration-300 ${
+        scrolled
+          ? "border-b border-rule bg-surface/85 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+      }`}
     >
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-5 sm:px-8">
         {/* Logo — left */}
