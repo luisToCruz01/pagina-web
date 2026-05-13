@@ -8,7 +8,7 @@ import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
 const PROFILES = [
   {
     title: "Empresas que quieren escalar",
-    body: "Sin contratar más personal operativo. Empresas de 3 a 15 personas que ya facturan bien y quieren crecer sin que el equipo se rompa.",
+    body: "Sin contratar más personal operativo. Empresas de 3 a 15 personas que facturan entre $800K y $3M MXN al año y quieren crecer sin que el equipo se rompa.",
   },
   {
     title: "Negocios con procesos repetitivos",
