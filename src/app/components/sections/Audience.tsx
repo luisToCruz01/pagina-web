@@ -24,12 +24,6 @@ const PROFILES = [
     title: "E-commerce en crecimiento",
     body: "Que necesita automatizar atención, logística y seguimiento sin perder calidad.",
   },
-  {
-    primary: false,
-    label: "También",
-    title: "Emprendedores ambiciosos",
-    body: "Que quieren operar como una empresa grande antes de tener el equipo de una.",
-  },
 ];
 
 export function Audience() {
