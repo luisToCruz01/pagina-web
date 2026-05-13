@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ease } from "@/app/lib/motion";
 
@@ -25,9 +25,43 @@ function MenuIcon({ open }: { open: boolean }) {
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  const lastScrollY = useRef(0);
+  const menuOpenRef = useRef(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    menuOpenRef.current = menuOpen;
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      setScrolled(currentY > 32);
+
+      // Mientras el menú móvil esté abierto, nunca esconder
+      if (menuOpenRef.current) {
+        lastScrollY.current = currentY;
+        return;
+      }
+
+      // Ignorar micro-scrolls que harían parpadear
+      if (Math.abs(delta) < 4) return;
+
+      if (currentY < 32) {
+        setHidden(false);
+      } else {
+        const pastHero = currentY > window.innerHeight * 0.8;
+        const goingDown = delta > 0;
+        if (goingDown && pastHero) setHidden(true);
+        else if (!goingDown) setHidden(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -36,8 +70,8 @@ export function Nav() {
   return (
     <motion.header
       initial={{ opacity: 0, y: -12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: ease.outCinematic, delay: 0.2 }}
+      animate={{ opacity: 1, y: hidden ? "-100%" : 0 }}
+      transition={{ duration: 0.35, ease: ease.outCinematic }}
       className={`sticky top-0 z-50 w-full transition-[background-color,backdrop-filter,border-color] duration-300 ${
         scrolled
           ? "border-b border-rule bg-surface/85 backdrop-blur-xl"
