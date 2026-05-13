@@ -45,7 +45,7 @@ function Word({
   return (
     <motion.span
       style={{ opacity, filter }}
-      className="inline-block transition-[opacity,filter] will-change-[opacity,filter]"
+      className="will-change-[opacity,filter]"
     >
       {children}{" "}
     </motion.span>
