@@ -44,7 +44,7 @@ export function Nav() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-5 sm:px-8">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-3 sm:px-8">
         {/* Logo — left */}
         <a
           href="#"
@@ -54,12 +54,12 @@ export function Nav() {
         </a>
 
         {/* Centered pill — desktop only */}
-        <nav className="liquid-glass hidden items-center gap-1 rounded-xl px-2 py-2 md:flex">
+        <nav className="liquid-glass hidden items-center gap-1 rounded-xl px-1.5 py-1.5 md:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-1.5 text-sm text-fg-muted transition-colors duration-200 hover:text-fg"
+              className="rounded-md px-3 py-1 text-sm text-fg-muted transition-colors duration-200 hover:text-fg"
             >
               {link.label}
             </a>
@@ -71,7 +71,7 @@ export function Nav() {
           href="https://cal.com/rdmdco/30min"
           target="_blank"
           rel="noreferrer"
-          className="hidden justify-self-end rounded-full bg-fg px-4 py-2.5 text-sm font-medium text-surface transition-colors duration-200 hover:bg-fg/90 md:inline-flex"
+          className="hidden justify-self-end rounded-full bg-fg px-4 py-2 text-sm font-medium text-surface transition-colors duration-200 hover:bg-fg/90 md:inline-flex"
         >
           Conversemos
         </a>
@@ -96,7 +96,7 @@ export function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease: ease.outCinematic }}
-            className="liquid-glass absolute left-4 right-4 top-[72px] z-40 flex flex-col gap-1 rounded-2xl p-4 md:hidden"
+            className="liquid-glass absolute left-4 right-4 top-[60px] z-40 flex flex-col gap-1 rounded-2xl p-4 md:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a
