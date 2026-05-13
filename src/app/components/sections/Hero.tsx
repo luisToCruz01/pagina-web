@@ -68,20 +68,6 @@ export function Hero() {
         }}
       />
 
-      {/* === Bottom blur mask === */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backdropFilter: "blur(36px)",
-          WebkitBackdropFilter: "blur(36px)",
-          maskImage:
-            "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
-          WebkitMaskImage:
-            "linear-gradient(to top, black 0%, black 35%, transparent 65%)",
-        }}
-      />
-
       {/* === Subtle darken behind text for legibility === */}
       <div
         aria-hidden
