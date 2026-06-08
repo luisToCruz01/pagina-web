@@ -30,8 +30,8 @@ export default function Home() {
         <Audience />
         <MarqueeStrip items={MARQUEE_ITEMS} />
         <Services />
-        <Process />
         <Solutions />
+        <Process />
         <Sectors />
         <Trust />
         <CtaClosing />
