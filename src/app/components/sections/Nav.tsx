@@ -33,7 +33,14 @@ const NAV_ITEMS: NavItem[] = [
       { label: "E-commerce", href: "/sectores/ecommerce" },
     ],
   },
-  { label: "Blog", href: "/blog" },
+  {
+    label: "Aprende",
+    href: "/blog",
+    dropdown: [
+      { label: "Blog", href: "/blog" },
+      { label: "Casos de éxito", href: "/casos" },
+    ],
+  },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {

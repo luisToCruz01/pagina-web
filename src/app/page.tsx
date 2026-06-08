@@ -5,6 +5,7 @@ import { Services } from "./components/sections/Services";
 import { Process } from "./components/sections/Process";
 import { Sectors } from "./components/sections/Sectors";
 import { Trust } from "./components/sections/Trust";
+import { BlogPreview } from "./components/sections/BlogPreview";
 import { CtaClosing } from "./components/sections/CtaClosing";
 import { Footer } from "./components/sections/Footer";
 import { MarqueeStrip } from "./components/ui/MarqueeStrip";
@@ -32,6 +33,7 @@ export default function Home() {
         <Process />
         <Sectors />
         <Trust />
+        <BlogPreview />
         <CtaClosing />
       </main>
       <Footer />
