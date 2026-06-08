@@ -50,41 +50,59 @@ export default function ServicesIndexPage() {
         <section className="border-b border-rule">
           <Container className="py-section">
             <div className="grid gap-px bg-rule sm:grid-cols-2">
-              {SERVICES.map((service, i) => (
-                <Link
-                  key={service.slug}
-                  href={`/servicios/${service.slug}`}
-                  className="group relative flex flex-col justify-between overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-12"
-                >
-                  <span
-                    aria-hidden
-                    className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-y-100"
-                  />
-                  <div>
-                    <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
-                      {String(i + 1).padStart(2, "0")}
+              {SERVICES.map((service, i) => {
+                // Si el total es impar, la última card ocupa todo el ancho con
+                // layout horizontal, para no dejar una celda vacía en el grid.
+                const isLastOdd =
+                  i === SERVICES.length - 1 && SERVICES.length % 2 !== 0;
+                return (
+                  <Link
+                    key={service.slug}
+                    href={`/servicios/${service.slug}`}
+                    className={`group relative overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-12 ${
+                      isLastOdd
+                        ? "sm:col-span-2 sm:flex sm:items-center sm:justify-between sm:gap-16"
+                        : "flex flex-col justify-between"
+                    }`}
+                  >
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-y-100"
+                    />
+                    <div className={isLastOdd ? "sm:max-w-xl" : ""}>
+                      <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h2 className="mt-6 font-display text-2xl font-light leading-tight text-fg sm:text-3xl">
+                        {service.title}
+                      </h2>
+                      <p
+                        className={`mt-4 font-sans text-sm leading-relaxed text-fg-muted ${
+                          isLastOdd ? "max-w-xl" : "max-w-md"
+                        }`}
+                      >
+                        {service.subtitle}
+                      </p>
+                    </div>
+                    <span
+                      className={`inline-flex shrink-0 items-center gap-1.5 font-sans text-sm text-accent transition-transform duration-300 group-hover:translate-x-1 ${
+                        isLastOdd ? "mt-8 sm:mt-0" : "mt-8"
+                      }`}
+                    >
+                      Conocer el servicio
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M5 12h14M13 6l6 6-6 6"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </span>
-                    <h2 className="mt-6 font-display text-2xl font-light leading-tight text-fg sm:text-3xl">
-                      {service.title}
-                    </h2>
-                    <p className="mt-4 max-w-md font-sans text-sm leading-relaxed text-fg-muted">
-                      {service.subtitle}
-                    </p>
-                  </div>
-                  <span className="mt-8 inline-flex items-center gap-1.5 font-sans text-sm text-accent transition-transform duration-300 group-hover:translate-x-1">
-                    Conocer el servicio
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M5 12h14M13 6l6 6-6 6"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </Container>
         </section>
