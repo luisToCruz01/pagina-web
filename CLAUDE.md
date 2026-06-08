@@ -173,3 +173,31 @@ Cuando Luis diga "vuelve a vX.Y" o "restaura vX.Y":
 - **Branch:** `main`
 - **Identidad git local:** luiscruz1029384756@gmail.com / Luis Cruz (configurada solo para este repo, no global)
 - **Tags activos:** `git tag -l` para verlos en cualquier momento
+- **Remoto GitHub:** `https://github.com/luisToCruz01/pagina-web` (privado). `git push` para subir.
+
+---
+
+## Producción — DESPLEGADO Y LIVE (2026-05-21)
+
+**rdmdco.com sirve este sitio Next.js.** Reemplazó al sitio viejo de Cloudflare Pages.
+
+- **Hosting:** Vercel, proyecto `rdmd` (team `rdmd-projects`). Auto-deploy on push a `main`.
+- **URL temporal Vercel:** `https://rdmd-beta.vercel.app`
+- **Dominio producción:** `https://rdmdco.com` (apex) — HTTP 200, SSL Vercel automático.
+- **www:** `https://www.rdmdco.com` → redirect 307 → `rdmdco.com`.
+
+### DNS — OJO: el authoritative es CLOUDFLARE, no Namecheap
+
+`rdmdco.com` usa nameservers de Cloudflare (`jaime.ns.cloudflare.com` / `isabel.ns.cloudflare.com`).
+**Editar DNS SIEMPRE en Cloudflare**, NO en Namecheap (el panel de Namecheap deja "editar" pero esos cambios son invisibles para internet — eso costó 2 semanas de un dominio que no levantaba).
+
+- Cloudflare account: `Luiscruz1029384756@gmail.com`, account id `d95300cb7478d43acf868b09ac783c46`
+- Records relevantes (todos **DNS only**, gris, no proxied — Vercel maneja su propio SSL):
+  - `rdmdco.com` → A → `76.76.21.21`
+  - `www.rdmdco.com` → CNAME → `cname.vercel-dns.com` (Vercel hace el redirect 307 a apex)
+  - `app.rdmdco.com` → A → `76.76.21.21` (dashboard atención, ya existía)
+- El sitio viejo sigue existiendo en `rdmdco.pages.dev` (Cloudflare Pages) pero desconectado del dominio. Reversible.
+
+### Analytics — ELU instalado (2026-05-21)
+
+ELU Analytics SDK (https://elu.dev) embebido en `src/app/layout.tsx` (`<Script>` afterInteractive, key pública `elu_pk_live_D1ZYRDeC6K5iRcZNakMgMAowdx`). Graba sesiones, detecta fricción UX, y vía su MCP server (configurado en Claude Desktop/Cursor/Windsurf/VS Code) puede abrir PRs con fixes en el repo de GitHub. Internamente usa PostHog. Identity (`window.elu.identify`) NO cableado porque la landing no tiene auth.

@@ -1,0 +1,97 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Nav } from "@/app/components/sections/Nav";
+import { Footer } from "@/app/components/sections/Footer";
+import { CtaClosing } from "@/app/components/sections/CtaClosing";
+import { Container } from "@/app/components/ui/Container";
+import { Eyebrow } from "@/app/components/ui/Eyebrow";
+import { SERVICES } from "@/app/lib/services-data";
+
+export const metadata: Metadata = {
+  title: "Servicios — RDMD & Co.",
+  description:
+    "Servicios de automatización y software para empresas en Latinoamérica: gestión de procesos, desarrollo a medida, arquitectura, IA y pruebas de software.",
+};
+
+export default function ServicesIndexPage() {
+  return (
+    <>
+      <Nav />
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="relative isolate overflow-hidden border-b border-rule">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 60% at 75% 0%, rgba(200,151,59,0.10) 0%, transparent 65%)",
+            }}
+          />
+          <Container className="pb-[clamp(4rem,8vw,7rem)] pt-[clamp(7rem,12vw,10rem)]">
+            <div className="max-w-3xl">
+              <Eyebrow tone="accent">Servicios</Eyebrow>
+              <h1
+                className="mt-6 font-display font-light leading-[1.04] tracking-[-0.02em] text-fg"
+                style={{ fontSize: "var(--text-h1)" }}
+              >
+                Lo que construimos para tu empresa
+              </h1>
+              <p className="mt-7 max-w-2xl font-sans text-lg leading-relaxed text-fg-muted">
+                Cada servicio se diseña a medida de tu operación. No vendemos
+                plantillas. Diagnosticamos, diseñamos y construimos el sistema que
+                tu negocio necesita para operar al nivel siguiente.
+              </p>
+            </div>
+          </Container>
+        </section>
+
+        {/* Lista de servicios */}
+        <section className="border-b border-rule">
+          <Container className="py-section">
+            <div className="grid gap-px bg-rule sm:grid-cols-2">
+              {SERVICES.map((service, i) => (
+                <Link
+                  key={service.slug}
+                  href={`/servicios/${service.slug}`}
+                  className="group relative flex flex-col justify-between overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-12"
+                >
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-y-100"
+                  />
+                  <div>
+                    <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h2 className="mt-6 font-display text-2xl font-light leading-tight text-fg sm:text-3xl">
+                      {service.title}
+                    </h2>
+                    <p className="mt-4 max-w-md font-sans text-sm leading-relaxed text-fg-muted">
+                      {service.subtitle}
+                    </p>
+                  </div>
+                  <span className="mt-8 inline-flex items-center gap-1.5 font-sans text-sm text-accent transition-transform duration-300 group-hover:translate-x-1">
+                    Conocer el servicio
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M5 12h14M13 6l6 6-6 6"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        <CtaClosing />
+      </main>
+      <Footer />
+    </>
+  );
+}
