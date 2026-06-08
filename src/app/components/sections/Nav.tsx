@@ -33,6 +33,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: "E-commerce", href: "/sectores/ecommerce" },
     ],
   },
+  { label: "Blog", href: "/blog" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {
