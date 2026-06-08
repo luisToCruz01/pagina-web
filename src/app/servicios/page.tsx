@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Nav } from "@/app/components/sections/Nav";
 import { Footer } from "@/app/components/sections/Footer";
 import { CtaClosing } from "@/app/components/sections/CtaClosing";
+import { SolutionsGrid } from "@/app/components/sections/SolutionsGrid";
 import { Container } from "@/app/components/ui/Container";
 import { Eyebrow } from "@/app/components/ui/Eyebrow";
+import { Button } from "@/app/components/ui/Button";
 import { SERVICES } from "@/app/lib/services-data";
 
 export const metadata: Metadata = {
@@ -104,6 +106,53 @@ export default function ServicesIndexPage() {
                 );
               })}
             </div>
+          </Container>
+        </section>
+
+        {/* Soluciones llave en mano (productos con precio) */}
+        <section className="relative isolate overflow-hidden border-b border-rule">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 80% at 80% 0%, rgba(200, 151, 59, 0.06), transparent 70%)",
+            }}
+          />
+          <Container className="py-section">
+            <div className="max-w-3xl">
+              <Eyebrow sparkle>Soluciones llave en mano</Eyebrow>
+              <h2
+                className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
+                style={{ fontSize: "var(--text-h1)" }}
+              >
+                Resultados desde el día uno, con precio cerrado
+              </h2>
+              <p className="mt-6 font-sans text-lg leading-relaxed text-fg-muted">
+                Para empresas pequeñas que quieren un sistema funcionando rápido,
+                sin un proyecto de consultoría. Pago único, alcance definido,
+                entrega en días.
+              </p>
+            </div>
+
+            <div className="mt-16">
+              <SolutionsGrid />
+            </div>
+
+            <div className="mt-16 flex flex-col items-start gap-4 border-t border-rule pt-10 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-xl font-sans text-base text-fg-muted">
+                ¿Necesitas algo diferente a lo de arriba? Cuéntanos tu proceso y
+                lo construimos a medida.
+              </p>
+              <Button href="https://cal.com/rdmdco/30min" external variant="secondary">
+                Hablemos
+              </Button>
+            </div>
+
+            <p className="mt-10 font-sans text-xs uppercase tracking-[0.2em] text-fg-faint">
+              Todas las soluciones incluyen onboarding guiado y soporte
+              post-entrega de 15 días.
+            </p>
           </Container>
         </section>
 

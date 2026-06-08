@@ -3,7 +3,6 @@ import { Hero } from "./components/sections/Hero";
 import { Audience } from "./components/sections/Audience";
 import { Services } from "./components/sections/Services";
 import { Process } from "./components/sections/Process";
-import { Solutions } from "./components/sections/Solutions";
 import { Sectors } from "./components/sections/Sectors";
 import { Trust } from "./components/sections/Trust";
 import { CtaClosing } from "./components/sections/CtaClosing";
@@ -30,7 +29,6 @@ export default function Home() {
         <Audience />
         <MarqueeStrip items={MARQUEE_ITEMS} />
         <Services />
-        <Solutions />
         <Process />
         <Sectors />
         <Trust />
