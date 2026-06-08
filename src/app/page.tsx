@@ -4,6 +4,7 @@ import { Audience } from "./components/sections/Audience";
 import { Services } from "./components/sections/Services";
 import { Process } from "./components/sections/Process";
 import { Solutions } from "./components/sections/Solutions";
+import { Sectors } from "./components/sections/Sectors";
 import { Trust } from "./components/sections/Trust";
 import { CtaClosing } from "./components/sections/CtaClosing";
 import { Footer } from "./components/sections/Footer";
@@ -31,6 +32,7 @@ export default function Home() {
         <Services />
         <Process />
         <Solutions />
+        <Sectors />
         <Trust />
         <CtaClosing />
       </main>

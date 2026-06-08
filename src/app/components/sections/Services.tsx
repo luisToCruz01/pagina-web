@@ -1,42 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Container } from "@/app/components/ui/Container";
 import { Eyebrow } from "@/app/components/ui/Eyebrow";
 import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
-
-const SERVICES = [
-  {
-    n: "01",
-    title: "Agentes de IA personalizados",
-    body: "Asistentes inteligentes que atienden, responden y ejecutan tareas. Entrenados con tu catálogo, FAQ y voz de marca.",
-  },
-  {
-    n: "02",
-    title: "Pipelines de automatización",
-    body: "Conectamos tus herramientas para que la información fluya sin intervención manual. CRM, e-commerce, formularios, pagos.",
-  },
-  {
-    n: "03",
-    title: "Dashboards de rendimiento",
-    body: "Visualiza el impacto de la automatización con métricas claras y en tiempo real. Sin Looker Studio recargados.",
-  },
-  {
-    n: "04",
-    title: "Control de acceso inteligente",
-    body: "Gestiona permisos y seguridad en todos tus flujos automatizados. Quién hace qué, cuándo, con qué nivel.",
-  },
-  {
-    n: "05",
-    title: "Atención al cliente automatizada",
-    body: "Chatbots y flujos de respuesta que operan 24/7 sin perder la calidad ni la voz humana de tu marca.",
-  },
-  {
-    n: "06",
-    title: "Integraciones a medida",
-    body: "Conectamos cualquier plataforma que uses: CRM, e-commerce, contabilidad, herramientas internas, lo que sea.",
-  },
-];
+import { SERVICES } from "@/app/lib/services-data";
 
 export function Services() {
   return (
@@ -60,7 +29,7 @@ export function Services() {
         />
       </video>
 
-      {/* === Legibility overlay — darker at top where header lives === */}
+      {/* === Legibility overlay === */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -83,10 +52,11 @@ export function Services() {
             className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
             style={{ fontSize: "var(--text-h1)" }}
           >
-            ¿Qué automatizamos?
+            Lo que construimos para tu empresa
           </h2>
           <p className="mt-6 font-sans text-lg leading-relaxed text-fg-muted">
-            Soluciones diseñadas para liberar tu tiempo y escalar tu operación.
+            Cada servicio se diseña a medida de tu operación. Diagnosticamos,
+            diseñamos y construimos el sistema que necesitas.
           </p>
         </motion.div>
 
@@ -97,39 +67,67 @@ export function Services() {
           variants={stagger}
           className="mt-20 grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-3"
         >
-          {SERVICES.map((service) => (
-            <motion.article
-              key={service.n}
-              variants={staggerItem}
-              className="group relative overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-10"
-            >
-              {/* Hover accent line — slides in from left */}
-              <span
-                aria-hidden
-                className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-y-100"
-              />
-
-              <div className="flex items-start justify-between">
-                <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
-                  {service.n}
-                </span>
-                {/* + symbol that rotates on hover */}
+          {SERVICES.map((service, i) => (
+            <motion.div key={service.slug} variants={staggerItem}>
+              <Link
+                href={`/servicios/${service.slug}`}
+                className="group relative flex h-full flex-col justify-between overflow-hidden bg-surface p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-10"
+              >
                 <span
                   aria-hidden
-                  className="font-sans text-base font-light text-fg-faint transition-all duration-500 ease-out group-hover:rotate-90 group-hover:text-accent"
-                >
-                  +
+                  className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-y-100"
+                />
+                <div>
+                  <span className="font-sans text-xs font-medium tracking-[0.28em] text-fg-faint">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-6 font-display text-2xl font-light leading-tight text-fg sm:text-[1.625rem]">
+                    {service.title}
+                  </h3>
+                  <p className="mt-4 font-sans text-sm leading-relaxed text-fg-muted">
+                    {service.subtitle}
+                  </p>
+                </div>
+                <span className="mt-8 inline-flex items-center gap-1.5 font-sans text-sm text-accent transition-transform duration-300 group-hover:translate-x-1">
+                  Conocer el servicio
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 12h14M13 6l6 6-6 6"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </span>
-              </div>
-
-              <h3 className="mt-6 font-display text-2xl font-light leading-tight text-fg sm:text-[1.625rem]">
-                {service.title}
-              </h3>
-              <p className="mt-4 font-sans text-sm leading-relaxed text-fg-muted">
-                {service.body}
-              </p>
-            </motion.article>
+              </Link>
+            </motion.div>
           ))}
+
+          {/* Card-CTA que completa el grid (6ta celda) */}
+          <motion.div variants={staggerItem}>
+            <Link
+              href="/servicios"
+              className="group relative flex h-full flex-col justify-center overflow-hidden bg-surface-raised/40 p-8 transition-colors duration-500 hover:bg-surface-raised sm:p-10"
+            >
+              <Eyebrow tone="accent">Todos los servicios</Eyebrow>
+              <h3 className="mt-6 font-display text-2xl font-light leading-tight text-fg">
+                Mira el catálogo completo
+              </h3>
+              <span className="mt-8 inline-flex items-center gap-1.5 font-sans text-sm text-accent transition-transform duration-300 group-hover:translate-x-1">
+                Ver servicios
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </Link>
+          </motion.div>
         </motion.div>
       </Container>
     </section>
