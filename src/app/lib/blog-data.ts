@@ -34,6 +34,61 @@ export type Article = {
 
 export const ARTICLES: Article[] = [
   {
+    slug: "cuanto-cuesta-automatizar-un-proceso",
+    category: "Automatización",
+    title: "Cuánto cuesta automatizar un proceso y cómo calcular el retorno",
+    excerpt:
+      "El precio importa menos de lo que crees. Lo que decide si una automatización vale la pena es en cuánto tiempo se paga sola.",
+    author: "Editorial RDMD",
+    dateISO: "2026-06-08",
+    dateLabel: "8 de junio, 2026",
+    readingTime: "6 min de lectura",
+    image: "/blog/cuanto-cuesta-automatizar-un-proceso.webp",
+    imageAlt: "Calculadora mecánica de bronce y libro mayor de cuero sobre escritorio de nogal",
+    hook: "La primera pregunta siempre es cuánto cuesta. Es la pregunta equivocada. La buena es en cuánto tiempo se paga sola.",
+    blocks: [
+      { type: "p", text: "Cuando un fundador pide automatizar un proceso, lo primero que quiere saber es el precio. Es natural. Pero el precio aislado no dice nada. Mil dólares es caro para resolver un problema que te cuesta cien al mes, y barato para uno que te cuesta tres mil. El número que importa no es cuánto cuesta, sino cuánto te está costando hoy no tenerlo." },
+      { type: "p", text: "En este artículo te damos la forma concreta de calcularlo. Es la misma cuenta que hacemos contigo en el diagnóstico, antes de proponerte nada." },
+
+      { type: "h2", text: "Qué incluye de verdad el costo", id: "costo-real" },
+      { type: "p", text: "El precio de una automatización no es solo lo que pagas por construirla. Hay tres partes, y conviene verlas separadas para no llevarte sorpresas." },
+      { type: "list", items: [
+        "Construcción: el trabajo de diseñar, conectar tus herramientas y dejar el sistema funcionando. Es un pago único, y es la parte más visible.",
+        "Operación: lo que cuesta mantenerlo corriendo cada mes. Suele ser bajo y predecible: servidores, APIs, alguna licencia. En sistemas bien hechos, son decenas de dólares, no cientos.",
+        "Ajuste: el tiempo de afinar el sistema en las primeras semanas, cuando aparecen los casos que nadie había anticipado. Esto se concentra al principio y después casi desaparece.",
+      ]},
+      { type: "p", text: "Un sistema llave en mano honesto te dice las tres cifras desde el inicio. Si solo te dan el precio de construcción y el resto queda en la niebla, ahí es donde aparecen los costos que no esperabas." },
+
+      { type: "h2", text: "Cómo calcular lo que el proceso te cuesta hoy", id: "costo-actual" },
+      { type: "p", text: "Para saber si una automatización vale la pena, primero hay que ponerle número al estado actual. La cuenta es más simple de lo que parece." },
+      { type: "p", text: "Toma el proceso que quieres automatizar y responde tres cosas: cuántas horas al mes consume entre todas las personas que lo tocan, cuánto vale una hora de esas personas, y cuánto te cuesta cuando ese proceso falla. Multiplica las horas por el costo por hora, suma lo que pierdes en errores, y tienes el costo mensual real del proceso tal como está hoy." },
+      { type: "p", text: "La mayoría nunca hace esta cuenta y por eso el costo del trabajo manual se siente gratis. No lo es. Solo está repartido en sueldos que ya pagas, así que no lo ves como una línea aparte." },
+
+      { type: "h2", text: "El número que decide: el periodo de recuperación", id: "periodo-recuperacion" },
+      { type: "p", text: "Con las dos cifras en la mano, el cálculo del retorno es directo. Divide el costo de construcción entre lo que el proceso te cuesta cada mes. El resultado es en cuántos meses la automatización se paga sola. De ahí en adelante, lo que antes gastabas en ese proceso se queda en la empresa." },
+      { type: "p", text: "Un ejemplo redondo. Si construir el sistema cuesta lo mismo que el proceso te quema en tres meses, a partir del mes cuatro estás ahorrando. Cualquier cosa que se pague sola en menos de seis meses suele ser una decisión fácil. Entre seis y doce, hay que mirar más de cerca. Más de un año, conviene revisar si era el proceso correcto para empezar." },
+
+      { type: "callout", title: "Caso real", body: "Una agencia con ocho personas dedicaba unas 40 horas al mes a armar reportes de clientes a mano, copiando datos entre plataformas. A su costo por hora, eso eran cerca de 1.200 dólares mensuales en tiempo, sin contar los errores que obligaban a rehacer reportes. El sistema para automatizarlo costó lo equivalente a poco más de dos meses de ese gasto. Desde el tercer mes, esas 40 horas y ese dinero se quedaron en la agencia, mes tras mes." },
+
+      { type: "stat", value: "2 meses", label: "fue lo que tardó en pagarse sola la automatización de reportería en una agencia de ocho personas" },
+
+      { type: "h2", text: "El retorno que no aparece en la cuenta", id: "retorno-invisible" },
+      { type: "p", text: "El cálculo anterior solo mide horas y errores, porque son fáciles de poner en números. Pero hay un retorno que no entra en la hoja y que muchas veces pesa más que el ahorro directo." },
+      { type: "list", items: [
+        "Tiempo de respuesta: un lead que recibe respuesta en segundos en vez de horas se cierra más seguido. Eso es ingreso, no solo ahorro.",
+        "Capacidad sin contratar: el equipo que deja de hacer trabajo repetitivo puede tomar más clientes con la misma gente.",
+        "Consistencia: un proceso automatizado hace lo mismo siempre. La calidad deja de depender de quién tuvo un buen día.",
+      ]},
+      { type: "p", text: "No metemos estos números en el cálculo de recuperación porque son más difíciles de estimar y no queremos venderte con cifras infladas. Pero existen, y en la práctica suelen ser los que más cambian el negocio." },
+
+      { type: "h2", text: "Cuándo el número no da", id: "no-da" },
+      { type: "p", text: "A veces la cuenta sale en contra, y eso también es información útil. Si el proceso ocurre una vez al mes, toma poco tiempo y casi nunca falla, automatizarlo puede costar más de lo que ahorra. En ese caso lo honesto es decírtelo y no hacerlo. No todo proceso merece un sistema, y forzar uno donde no rinde es la forma más rápida de que la automatización tenga mala fama en tu empresa." },
+      { type: "p", text: "Por eso cada proyecto arranca con esta cuenta, no con una propuesta. Si quieres saber en cuánto tiempo se pagaría sola la automatización del proceso que más te pesa, hacemos el cálculo contigo. Si no da, te lo decimos, y no perdiste nada." },
+    ],
+    relatedSlugs: ["que-procesos-automatizar-primero", "tu-equipo-no-es-lento"],
+  },
+
+  {
     slug: "que-procesos-automatizar-primero",
     category: "Procesos",
     title: "Cómo saber qué procesos de tu empresa deberías automatizar primero",
