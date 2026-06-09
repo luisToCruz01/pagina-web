@@ -43,8 +43,8 @@ export const ARTICLES: Article[] = [
     dateISO: "2026-05-21",
     dateLabel: "21 de mayo, 2026",
     readingTime: "6 min de lectura",
-    image: "/editorial/philosophy.webp",
-    imageAlt: "Procesos de negocio sobre escritorio editorial",
+    image: "/blog/automatizar-primero.webp",
+    imageAlt: "Carpetas de cuero en hilera con una pluma, orden y prioridad",
     hook: "La pregunta no es si deberías automatizar. Es qué automatizar primero. Y la mayoría empieza por lo equivocado.",
     blocks: [
       { type: "p", text: "Cuando un negocio decide automatizar, casi siempre empieza por lo más visible o lo más molesto. Suena lógico, pero rara vez es lo más rentable. La primera automatización debería pagar las siguientes, y para eso hay que elegirla con criterio, no por intuición." },
@@ -91,8 +91,8 @@ export const ARTICLES: Article[] = [
     dateISO: "2026-05-21",
     dateLabel: "21 de mayo, 2026",
     readingTime: "5 min de lectura",
-    image: "/editorial/craft.webp",
-    imageAlt: "Oficio y proceso de trabajo editorial",
+    image: "/blog/proceso.webp",
+    imageAlt: "Engranajes mecánicos de bronce, las partes de un sistema",
     hook: "Contratas buena gente. Y aun así las cosas se pierden, llegan tarde, se hacen dos veces. El problema no es a quién contrataste.",
     blocks: [
       { type: "p", text: "Hay una conversación que se repite en casi todas las empresas pequeñas que crecen. Algo se cae, alguien pregunta de quién fue la culpa, y la respuesta termina siendo una persona. La próxima vez vuelve a pasar, con otra persona. Cambias gente y el problema sigue." },
@@ -136,8 +136,8 @@ export const ARTICLES: Article[] = [
     dateISO: "2026-05-21",
     dateLabel: "21 de mayo, 2026",
     readingTime: "7 min de lectura",
-    image: "/editorial/capacity.webp",
-    imageAlt: "Tecnología aplicada al negocio",
+    image: "/blog/agente-ia.webp",
+    imageAlt: "Orbe de luz cálida en una oficina oscura, inteligencia presente",
     hook: "Todos hablan de agentes de IA. Pocos explican qué son sin venderte algo. Aquí va la versión honesta para un negocio pequeño.",
     blocks: [
       { type: "p", text: "El término agente de IA se usa para todo y por eso ya no significa nada. Vamos a aterrizarlo en algo concreto y útil para una empresa que no tiene un departamento de tecnología." },
