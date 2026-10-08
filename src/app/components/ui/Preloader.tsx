@@ -85,15 +85,6 @@ export function Preloader() {
           >
             <Wordmark />
           </div>
-
-          <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3">
-            <div className="font-display text-2xl leading-none text-fg-faint [font-variant-numeric:lining-nums_tabular-nums]">
-              {Math.round(progress)}%
-            </div>
-            <div className="h-0.5 w-full bg-fg-faintest">
-              <div className="h-full bg-accent" style={{ width: `${progress}%` }} />
-            </div>
-          </div>
         </motion.div>
       )}
     </AnimatePresence>
