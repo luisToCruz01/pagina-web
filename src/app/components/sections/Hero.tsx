@@ -5,13 +5,25 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
+import { Sparkle } from "@/app/components/ui/Sparkle";
+import { cn } from "@/app/lib/cn";
 import { ease, wordContainer, wordItem } from "@/app/lib/motion";
 
-const HEADLINE_LINES: string[][] = [
-  ["Recupera", "tu", "tiempo."],
-  ["Automatiza", "tu", "empresa."],
-  ["Crece", "sin", "contratar", "más."],
+// Estructura tomada del hero de la referencia Xirex: cada renglon en su propio
+// recuadro, el renglon central con la frase destacada en dorado.
+type Word = { text: string; accent?: boolean };
+const HEADLINE_LINES: Word[][] = [
+  [{ text: "Soluciones" }],
+  [
+    { text: "prácticas", accent: true },
+    { text: "de", accent: true },
+    { text: "IA", accent: true },
+    { text: "para" },
+  ],
+  [{ text: "empresas" }],
 ];
+
+const TAGS = ["Simple.", "Práctico.", "Efectivo."];
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -111,58 +123,79 @@ export function Hero() {
         }}
         className="relative z-10 flex flex-1 flex-col"
       >
-        <Container className="flex flex-1 flex-col justify-end pb-[clamp(3.5rem,7vw,5.5rem)] pt-16">
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={wordContainer}
-            className="max-w-[18ch] font-display font-light leading-[1] tracking-[-0.02em] text-fg"
-            style={{ fontSize: "var(--text-display)" }}
-          >
-            {HEADLINE_LINES.map((line, lineIdx) => (
-              <span key={lineIdx} className="block">
-                {line.map((word, wordIdx) => {
-                  const isMutedLine = lineIdx === 1;
-                  const notLast = wordIdx < line.length - 1;
-                  return (
+        <Container className="flex flex-1 flex-col justify-end pb-28 pt-24 xl:pb-[clamp(3.5rem,7vw,5.5rem)]">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,28.5rem)]">
+            <motion.h1
+              initial="hidden"
+              animate="visible"
+              variants={wordContainer}
+              className="flex flex-col items-start font-display font-light leading-[0.95] tracking-[-0.02em] text-fg"
+              style={{ fontSize: "clamp(2.5rem, 5.6vw, 5.6rem)" }}
+            >
+              {HEADLINE_LINES.map((line, lineIdx) => (
+                <span
+                  key={lineIdx}
+                  className="relative -mt-px flex items-center border border-fg-faintest bg-surface/40 px-[0.12em] pb-[0.1em] backdrop-blur-[2px] first:mt-0"
+                >
+                  {lineIdx === HEADLINE_LINES.length - 1 && (
+                    <Sparkle size={22} className="mr-[0.18em] self-start mt-[0.2em]" />
+                  )}
+                  {line.map((word, wordIdx) => (
                     <motion.span
                       key={`${lineIdx}-${wordIdx}`}
                       variants={wordItem}
-                      className={`inline-block ${notLast ? "mr-[0.25em]" : ""} ${isMutedLine ? "text-fg-muted" : ""}`}
+                      className={cn(
+                        "inline-block",
+                        wordIdx < line.length - 1 && "mr-[0.22em]",
+                        word.accent && "italic text-accent",
+                      )}
                     >
-                      {word}
+                      {word.text}
                     </motion.span>
-                  );
-                })}
-              </span>
-            ))}
-          </motion.h1>
+                  ))}
+                </span>
+              ))}
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
-            className="mt-6 max-w-[52ch] font-sans text-base leading-relaxed text-fg-muted sm:text-lg"
-          >
-            Diseñamos flujos de automatización para empresas en Latinoamérica
-            que quieren operar más rápido, con menos errores y sin depender de
-            procesos manuales.
-          </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
+              className="flex flex-col items-start lg:pt-4"
+            >
+              <div aria-hidden className="flex gap-1.5">
+                {[0, 1, 2].map((i) => (
+                  <span key={i} className="h-1 w-1 bg-fg-faint" />
+                ))}
+              </div>
+              <p className="mt-6 font-sans text-xs uppercase tracking-[0.2em] text-accent">
+                {TAGS.map((tag) => (
+                  <span key={tag} className="mr-3 inline-block">
+                    / {tag}
+                  </span>
+                ))}
+              </p>
+              <p className="mt-4 font-sans text-base leading-relaxed text-fg-muted sm:text-lg">
+                Ayudamos a las empresas a agilizar su operación, automatizar el
+                trabajo repetitivo e implementar soluciones de IA que generan
+                valor medible y crecimiento.
+              </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: ease.outCinematic, delay: 1.15 }}
-            className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
-          >
-            <Button href="https://cal.com/rdmdco/30min" external variant="primary">
-              Agenda tu diagnóstico
-            </Button>
-            <Button href="#soluciones" variant="secondary">
-              Ver soluciones
-            </Button>
-          </motion.div>
-
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: ease.outCinematic, delay: 1.15 }}
+                className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center [&_a]:whitespace-nowrap"
+              >
+                <Button href="https://cal.com/rdmdco/30min" external variant="primary">
+                  Habla con un experto en IA
+                </Button>
+                <Button href="#nosotros" variant="secondary">
+                  Conoce RDMD
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
         </Container>
       </motion.div>
 

@@ -86,7 +86,7 @@ export function Trust() {
   const words = REVEAL_PARAGRAPH.split(" ");
 
   return (
-    <section className="border-t border-rule">
+    <section id="nosotros" className="border-t border-rule">
       <Container className="py-section">
         <motion.div
           initial="hidden"
