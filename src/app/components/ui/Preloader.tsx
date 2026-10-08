@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 // Pantalla de carga al entrar o refrescar. Vive en el root layout, asi que no
-// reaparece en navegaciones internas. Logica adaptada del "Logo Fill Preloader"
-// de la referencia Xirex (referencias-web/xirex).
+// reaparece en navegaciones internas. Logica de progreso adaptada del
+// "Logo Fill Preloader" de la referencia Xirex (referencias-web/xirex).
 const MIN_DURATION_MS = 2000;
 const EXIT_DELAY_MS = 250;
 // Tope: si un recurso externo retrasa el evento load, no bloquear el sitio.
@@ -76,18 +76,14 @@ export function Preloader() {
           aria-hidden
           exit={{ y: "100%" }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[9998] flex items-center justify-center bg-surface"
+          className="fixed inset-0 z-[9998] flex items-center justify-center bg-black"
         >
-          <div className="relative font-display text-5xl leading-none font-medium tracking-tight whitespace-nowrap sm:text-6xl">
-            <div className="text-fg opacity-25">
-              <Wordmark />
-            </div>
-            <div
-              className="absolute inset-0 text-fg"
-              style={{ clipPath: `inset(${100 - progress}% 0% 0% 0%)` }}
-            >
-              <Wordmark />
-            </div>
+          {/* El logo sale de la oscuridad: opacidad cuadratica, casi negro al inicio y nitido al 100% */}
+          <div
+            className="font-display text-5xl leading-none font-medium tracking-tight whitespace-nowrap text-fg sm:text-6xl"
+            style={{ opacity: (progress / 100) ** 2 }}
+          >
+            <Wordmark />
           </div>
 
           <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3">
