@@ -3,6 +3,7 @@ import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { CustomCursor } from "./components/ui/CustomCursor";
+import { Preloader } from "./components/ui/Preloader";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -33,6 +34,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-surface text-fg font-sans">
         <CustomCursor />
+        <Preloader />
         {children}
         {/* ELU Analytics: product analytics + session replay. Detecta dónde
             los usuarios se traban y permite que el coding agent reciba
