@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useInView } from "motion/react";
 import * as motion from "motion/react-client";
 import { Container } from "@/app/components/ui/Container";
 import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
@@ -50,19 +51,18 @@ function stairsScene(t: number): Item[] {
 }
 
 // Columna de 3 cubos: dos columnas iguales le pasan por los lados en sentidos
-// opuestos. Se mueven en profundidad (x + y) con un desplazamiento lateral fijo
-// (x - y = +-LANE), asi nunca se cruzan con la columna central en pantalla.
+// opuestos, en diagonal siguiendo las lineas de los cubos (eje x), una en el
+// carril de atras (y = -1) y otra en el de adelante (y = 1).
 function passScene(t: number): Item[] {
   const items: Item[] = [];
-  const travel = 2.6;
-  const lane = 2.3;
-  const fade = (s: number) => clamp01((travel - Math.abs(s)) / 1.2);
-  const sa = -travel + 2 * travel * t;
-  const sb = travel - 2 * travel * t;
+  const travel = 2.4;
+  const fade = (x: number) => clamp01((travel - Math.abs(x)) / 1.1);
+  const a = -travel + 2 * travel * t;
+  const b = travel - 2 * travel * t;
   for (let z = 0; z < 3; z++) {
     items.push({ c: [0, 0, z], o: 1, gold: 0 });
-    items.push({ c: [sa + lane / 2, sa - lane / 2, z], o: fade(sa), gold: 1 });
-    items.push({ c: [sb - lane / 2, sb + lane / 2, z], o: fade(sb), gold: 1 });
+    items.push({ c: [a, -1, z], o: fade(a), gold: 1 });
+    items.push({ c: [b, 1, z], o: fade(b), gold: 1 });
   }
   return items;
 }
@@ -104,14 +104,14 @@ function faces([x, y, z]: Cube) {
   ];
 }
 
-// Bucle que corre mientras hay hover. Al salir, termina el ciclo en curso y se
+// Bucle que corre mientras hay hover (o mientras se ve en pantalla en tactiles). Al salir, termina el ciclo en curso y se
 // detiene en la forma en reposo (t = 0).
 function useHoverLoop(cycleMs: number) {
   const [t, setT] = useState(0);
   const hovering = useRef(false);
   const frame = useRef(0);
 
-  const start = () => {
+  const start = useCallback(() => {
     hovering.current = true;
     if (frame.current) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -130,10 +130,10 @@ function useHoverLoop(cycleMs: number) {
       frame.current = requestAnimationFrame(tick);
     };
     frame.current = requestAnimationFrame(tick);
-  };
-  const stop = () => {
+  }, [cycleMs]);
+  const stop = useCallback(() => {
     hovering.current = false;
-  };
+  }, []);
   return { t, start, stop };
 }
 
@@ -202,9 +202,19 @@ function restCenter(scene: (t: number) => Item[]): [number, number] {
 function BenefitCard({ item, index }: { item: (typeof BENEFITS)[number]; index: number }) {
   const { t, start, stop } = useHoverLoop(item.cycleMs);
   const center = restCenter(item.scene);
+  const ref = useRef<HTMLElement | null>(null);
+  const inView = useInView(ref, { amount: 0.6 });
+
+  // En pantallas tactiles no hay hover: la animacion corre mientras la tarjeta esta en pantalla
+  useEffect(() => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+    if (inView) start();
+    else stop();
+  }, [inView, start, stop]);
 
   return (
     <motion.article
+      ref={ref}
       variants={staggerItem}
       onMouseEnter={start}
       onMouseLeave={stop}
