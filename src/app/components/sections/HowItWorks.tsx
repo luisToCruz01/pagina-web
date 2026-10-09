@@ -51,6 +51,7 @@ const C = {
   slab: "#D6CCBA",
   stroke: "#5E574C",
   dash: "#9A9080",
+  corner: "#C9BEAA", // equivalente al #CCC de Xirex
 };
 
 // ---------- Ilustracion isometrica: plataforma que se construye por capas ----------
@@ -136,6 +137,32 @@ function BuildIllustration({ progress }: { progress: MotionValue<number> }) {
   );
 }
 
+// Esquina copiada del codigo de Xirex: elemento de 20x20 desplazado 8px hacia afuera,
+// pintado con una mascara SVG (corchete de 1px con curva de radio 8 + triangulo de 6x6).
+const CORNER_MASK =
+  "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 0 L 0 6 L 6 0 Z' transform='translate(14 14)'/%3E%3Cpath d='M 20 0 L 20 0.995 L 8.995 0.995 C 4.577 0.995 0.995 4.577 0.995 8.995 L 0.995 20 L 0 20 L 0 0.099 L 0.099 0.099 L 0.099 0 Z'/%3E%3C/svg%3E\")";
+
+function SectionCorners({ color }: { color: string }) {
+  const corners = [
+    "-left-2 -top-2",
+    "-right-2 -top-2 rotate-90",
+    "-bottom-2 -right-2 rotate-180",
+    "-bottom-2 -left-2 -rotate-90",
+  ];
+  return (
+    <>
+      {corners.map((pos) => (
+        <span
+          key={pos}
+          aria-hidden
+          className={cn("pointer-events-none absolute z-10 h-5 w-5", pos)}
+          style={{ background: color, maskImage: CORNER_MASK, WebkitMaskImage: CORNER_MASK }}
+        />
+      ))}
+    </>
+  );
+}
+
 // ---------- Seccion ----------
 export function HowItWorks() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -172,13 +199,14 @@ export function HowItWorks() {
   );
 
   return (
-    <section id="como-trabajamos" className="border-t border-rule">
+    <section id="como-trabajamos" className="pt-[88px]">
       {/* Escritorio (>=1280px): fijo mientras avanza el scroll */}
       <div
         ref={ref}
         className="relative mx-8 hidden xl:block"
         style={{ height: "calc(100vh + 3000px)", background: C.bg }}
       >
+        <SectionCorners color={C.corner} />
         <div className="sticky top-0 h-screen overflow-hidden">
           <div
             className="absolute left-1/2 top-[50px] h-[696px] w-[min(1392px,calc(100vw-224px))] -translate-x-1/2 border"
@@ -248,7 +276,8 @@ export function HowItWorks() {
       </div>
 
       {/* Tablet y movil: pasos apilados */}
-      <div className="mx-4 py-16 sm:mx-8 xl:hidden" style={{ background: C.bg }}>
+      <div className="relative mx-4 py-16 sm:mx-8 xl:hidden" style={{ background: C.bg }}>
+        <SectionCorners color={C.corner} />
         <div className="px-6">{header}</div>
         <div className="mt-10 border-t" style={{ borderColor: C.rule }}>
           {STEPS.map((step, i) => {
