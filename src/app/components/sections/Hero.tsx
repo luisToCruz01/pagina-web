@@ -9,15 +9,13 @@ import { Sparkle } from "@/app/components/ui/Sparkle";
 import { cn } from "@/app/lib/cn";
 import { ease, wordContainer, wordItem } from "@/app/lib/motion";
 
-// Estructura tomada del hero de la referencia Xirex: cada renglon en su propio
-// recuadro, el renglon central con la frase destacada en dorado.
+// Estructura tomada del hero de la referencia Xirex: un renglon por linea,
+// el renglon central con la palabra destacada en dorado.
 type Word = { text: string; accent?: boolean };
 const HEADLINE_LINES: Word[][] = [
   [{ text: "Soluciones" }],
   [
     { text: "prácticas", accent: true },
-    { text: "de", accent: true },
-    { text: "IA", accent: true },
     { text: "para" },
   ],
   [{ text: "empresas" }],
@@ -135,7 +133,7 @@ export function Hero() {
               {HEADLINE_LINES.map((line, lineIdx) => (
                 <span
                   key={lineIdx}
-                  className="relative -mt-px flex items-center border border-fg-faintest bg-surface/40 px-[0.12em] pb-[0.1em] backdrop-blur-[2px] first:mt-0"
+                  className="flex items-center"
                 >
                   {lineIdx === HEADLINE_LINES.length - 1 && (
                     <Sparkle size={22} className="mr-[0.18em] self-start mt-[0.2em]" />
