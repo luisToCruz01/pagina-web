@@ -155,7 +155,7 @@ function Details({ index }: { index: number }) {
         <span aria-hidden className="font-sans text-sm leading-none">+</span>
         <span className="h-px flex-1 bg-fg-faintest" />
       </div>
-      <div className="grid gap-3 py-6 sm:grid-cols-[10rem_1fr]">
+      <div className="grid gap-3 py-[min(1.75rem,3vh)] sm:grid-cols-[11rem_1fr] xl:grid-cols-[13rem_1fr]">
         <span className="font-sans text-xs uppercase tracking-[0.18em] text-fg-faint">Cómo ayuda</span>
         <p className="font-sans text-base leading-relaxed text-fg-muted">{uc.help}</p>
       </div>
@@ -163,7 +163,7 @@ function Details({ index }: { index: number }) {
         <span aria-hidden className="font-sans text-sm leading-none">+</span>
         <span className="h-px flex-1 bg-fg-faintest" />
       </div>
-      <div className="grid gap-3 py-6 sm:grid-cols-[10rem_1fr]">
+      <div className="grid gap-3 py-[min(1.75rem,3vh)] sm:grid-cols-[11rem_1fr] xl:grid-cols-[13rem_1fr]">
         <span className="font-sans text-xs uppercase tracking-[0.18em] text-fg-faint">Qué recibes</span>
         <ul className="space-y-2.5">
           {uc.get.map((item) => (
@@ -211,9 +211,9 @@ export function UseCases() {
         style={{ height: `${100 + USE_CASES.length * 55}vh` }}
       >
         <div className="sticky top-0 h-screen overflow-hidden" style={glow}>
-          <Container className="grid h-full grid-cols-2 items-center gap-16 pt-16">
-            <div className="flex h-[78vh] flex-col">
-              <div className="h-44 w-44">
+          <Container className="grid h-full grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-16 pb-[7vh] pt-[12vh] xl:gap-24">
+            <div className="flex h-full flex-col">
+              <div className="h-[min(15rem,24vh)] w-[min(15rem,24vh)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
@@ -228,7 +228,7 @@ export function UseCases() {
                 </AnimatePresence>
               </div>
 
-              <div className="mt-auto">
+              <div className="mt-auto pt-8">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
@@ -240,7 +240,7 @@ export function UseCases() {
                     <Details index={active} />
                   </motion.div>
                 </AnimatePresence>
-                <div className="mt-10">
+                <div className="mt-[min(2.5rem,4vh)]">
                   <Button href={CTA_HREF} external variant="primary">
                     Habla con un experto
                   </Button>
@@ -248,9 +248,9 @@ export function UseCases() {
               </div>
             </div>
 
-            <div>
+            <div className="flex h-full flex-col justify-end">
               <Eyebrow sparkle>Casos de uso</Eyebrow>
-              <ul className="mt-8">
+              <ul className="mt-10">
                 {USE_CASES.map((uc, i) => (
                   <li key={uc.area}>
                     <button
@@ -258,15 +258,15 @@ export function UseCases() {
                       onClick={() => goTo(i)}
                       aria-current={i === active}
                       className={cn(
-                        "relative cursor-pointer text-left font-display font-light leading-[1.12] tracking-[-0.02em] transition-colors duration-300",
+                        "relative cursor-pointer whitespace-nowrap text-left font-display font-light leading-[1.06] tracking-[-0.02em] transition-colors duration-300",
                         i === active ? "text-accent" : "text-fg hover:text-fg-muted",
                       )}
-                      style={{ fontSize: "clamp(2.25rem, 4.2vw, 4.25rem)" }}
+                      style={{ fontSize: "min(clamp(2.25rem, 3.7vw, 4.25rem), 8.5vh)" }}
                     >
                       {uc.area}
                       <sup
                         className={cn(
-                          "absolute -right-7 top-[0.35em] font-sans text-xs tracking-[0.1em] text-accent transition-opacity duration-300",
+                          "absolute left-full top-[0.32em] ml-1.5 font-sans text-sm leading-none tracking-[0.1em] text-accent transition-opacity duration-300",
                           i === active ? "opacity-100" : "opacity-0",
                         )}
                       >
