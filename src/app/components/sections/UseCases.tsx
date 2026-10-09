@@ -122,7 +122,7 @@ function ShapeArt({ index, className }: { index: number; className?: string }) {
       aria-hidden
       viewBox="0 0 200 200"
       fill="none"
-      className={cn("text-accent motion-safe:animate-[shapeBreathe_5.5s_ease-in-out_infinite]", className)}
+      className={cn("text-accent motion-safe:animate-[shapeBreathe_5s_ease-in-out_infinite]", className)}
     >
       {SHAPES[index].map((s, i) =>
         s.kind === "ellipse" ? (
