@@ -6,7 +6,6 @@ import { AnimatePresence, motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/app/components/ui/Container";
 import { Sparkle } from "@/app/components/ui/Sparkle";
-import { Eyebrow } from "@/app/components/ui/Eyebrow";
 import { ease, fadeUp } from "@/app/lib/motion";
 
 // Seccion inspirada en "Services" de la referencia Xirex: pestanas que rotan
@@ -101,17 +100,12 @@ export function Expertise() {
           variants={fadeUp}
           className="mb-16 max-w-2xl"
         >
-          <Eyebrow sparkle>Servicios</Eyebrow>
           <h2
-            className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
+            className="font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
             style={{ fontSize: "var(--text-h1)" }}
           >
             Lo que construimos para tu empresa
           </h2>
-          <p className="mt-6 font-sans text-lg leading-relaxed text-fg-muted">
-            Cada servicio se diseña a medida de tu operación. Diagnosticamos,
-            diseñamos y construimos el sistema que necesitas.
-          </p>
         </motion.div>
 
         <div ref={ref}>
