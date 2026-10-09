@@ -111,18 +111,17 @@ const USE_CASES = [
 const CTA_HREF = "https://cal.com/rdmdco/30min";
 
 function ShapeArt({ index, className }: { index: number; className?: string }) {
-  const draw = {
-    initial: { pathLength: 0, opacity: 0 },
-    animate: { pathLength: 1, opacity: 1 },
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
-  };
   return (
-    <svg aria-hidden viewBox="0 0 200 200" fill="none" className={cn("text-accent", className)}>
+    <svg
+      aria-hidden
+      viewBox="0 0 200 200"
+      fill="none"
+      className={cn("text-accent motion-safe:animate-[shapeFlicker_1.8s_steps(1,end)_infinite]", className)}
+    >
       {SHAPES[index].map((s, i) =>
         s.kind === "ellipse" ? (
-          <motion.ellipse
+          <ellipse
             key={i}
-            {...draw}
             cx={s.cx}
             cy={s.cy}
             rx={s.rx}
@@ -132,9 +131,8 @@ function ShapeArt({ index, className }: { index: number; className?: string }) {
             strokeWidth={2}
           />
         ) : (
-          <motion.path
+          <path
             key={i}
-            {...draw}
             d={`M${s.pts.map((p) => p.join(" ")).join(" L")}${s.closed ? " Z" : ""}`}
             fill={s.fill ? "var(--color-surface)" : "none"}
             stroke="currentColor"
@@ -223,23 +221,25 @@ export function UseCases() {
         className="relative hidden border-t border-rule xl:block"
         style={{ height: `${100 + USE_CASES.length * 55}vh` }}
       >
-        <div className="sticky top-0 h-screen overflow-hidden" style={glow}>
+        <div className="sticky top-0 h-screen overflow-hidden">
+          {/* Fondo medido de Xirex: luz neutra abajo a la izquierda y luz de marca
+              (dorada) abajo a la derecha, desenfocadas al 50% */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-[-12%] top-[64%] h-[102%] w-[90%] opacity-50 blur-[10px]"
+            style={{ background: "radial-gradient(50% 50%, rgb(153, 153, 153) 0%, rgba(0, 0, 0, 0) 100%)" }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-[30%] top-[57%] h-[135%] w-[115%] opacity-50 blur-[10px]"
+            style={{ background: "radial-gradient(50% 50%, rgb(200, 151, 59) 0%, rgba(0, 0, 0, 0) 100%)" }}
+          />
           <div className="relative mx-auto h-full w-[min(1200px,calc(100%-160px))]">
             {/* Columna izquierda */}
             <div className="absolute inset-y-0 left-0 w-[calc(100%-580px)]">
               <div className="absolute left-0 top-[80px] h-[200px] w-[200px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active}
-                    initial={{ opacity: 0, rotate: -12, scale: 0.92 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotate: 10, scale: 1.04 }}
-                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className="h-full w-full"
-                  >
-                    <ShapeArt index={active} className="h-full w-full" />
-                  </motion.div>
-                </AnimatePresence>
+                {/* Cambio instantaneo, como en la referencia */}
+                <ShapeArt index={active} className="h-full w-full" />
               </div>
 
               <DividerRule top={350} />
