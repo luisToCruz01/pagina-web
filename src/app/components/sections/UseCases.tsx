@@ -147,6 +147,16 @@ function ShapeArt({ index, className }: { index: number; className?: string }) {
   );
 }
 
+// Divisor con "+" al inicio, como en la referencia (posicion absoluta en px)
+function DividerRule({ top }: { top: number }) {
+  return (
+    <div className="absolute left-0 right-0 flex items-center text-fg-faint" style={{ top: top - 6 }}>
+      <span aria-hidden className="w-5 font-sans text-xs leading-3">+</span>
+      <span className="h-px flex-1 bg-fg-faintest" />
+    </div>
+  );
+}
+
 function Details({ index }: { index: number }) {
   const uc = USE_CASES[index];
   return (
@@ -204,16 +214,20 @@ export function UseCases() {
 
   return (
     <div id="casos-de-uso">
-      {/* Escritorio: seccion fija que recorre las areas con el scroll */}
+      {/* Escritorio (>=1280px): medidas tomadas de la referencia Xirex.
+          Reticula de 1200px (80px de margen por lado si no cabe), columna derecha de 500px
+          separada 80px. Figura 200x200 a 80px del borde superior; divisores a 350px y 459px;
+          textos a 220px del borde con 400px de ancho; boton y ultima area a 80px del fondo. */}
       <section
         ref={ref}
-        className="relative hidden border-t border-rule lg:block"
+        className="relative hidden border-t border-rule xl:block"
         style={{ height: `${100 + USE_CASES.length * 55}vh` }}
       >
         <div className="sticky top-0 h-screen overflow-hidden" style={glow}>
-          <Container className="grid h-full grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-16 pb-[7vh] pt-[12vh] xl:gap-24">
-            <div className="flex h-full flex-col">
-              <div className="h-[min(15rem,24vh)] w-[min(15rem,24vh)]">
+          <div className="relative mx-auto h-full w-[min(1200px,calc(100%-160px))]">
+            {/* Columna izquierda */}
+            <div className="absolute inset-y-0 left-0 w-[calc(100%-580px)]">
+              <div className="absolute left-0 top-[80px] h-[200px] w-[200px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
@@ -228,29 +242,52 @@ export function UseCases() {
                 </AnimatePresence>
               </div>
 
-              <div className="mt-auto pt-8">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active}
-                    initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: -8, filter: "blur(6px)" }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Details index={active} />
-                  </motion.div>
-                </AnimatePresence>
-                <div className="mt-[min(2.5rem,4vh)]">
-                  <Button href={CTA_HREF} external variant="primary">
-                    Habla con un experto
-                  </Button>
-                </div>
+              <DividerRule top={350} />
+              <DividerRule top={459} />
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 8, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -6, filter: "blur(6px)" }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="absolute left-0 right-0 top-[372px] grid grid-cols-[minmax(0,1fr)_400px]">
+                    <span className="font-sans text-xs leading-[18px] uppercase tracking-[0.18em] text-fg-faint">
+                      Cómo ayuda
+                    </span>
+                    <p className="font-sans text-base leading-[20.8px] text-fg-muted">
+                      {USE_CASES[active].help}
+                    </p>
+                  </div>
+                  <div className="absolute left-0 right-0 top-[482px] grid grid-cols-[minmax(0,1fr)_400px]">
+                    <span className="font-sans text-xs leading-[18px] uppercase tracking-[0.18em] text-fg-faint">
+                      Qué recibes
+                    </span>
+                    <ul className="space-y-2">
+                      {USE_CASES[active].get.map((item) => (
+                        <li key={item} className="flex items-center gap-2.5 font-sans text-base leading-[20.8px] text-fg-muted">
+                          <Check size={16} strokeWidth={1.75} className="shrink-0 text-accent" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="absolute bottom-[80px] left-0">
+                <Button href={CTA_HREF} external variant="primary">
+                  Habla con un experto
+                </Button>
               </div>
             </div>
 
-            <div className="flex h-full flex-col justify-end">
+            {/* Columna derecha: 500px, pegada abajo */}
+            <div className="absolute bottom-[80px] right-0 w-[500px]">
               <Eyebrow sparkle>Casos de uso</Eyebrow>
-              <ul className="mt-10">
+              <ul className="mt-8 space-y-2">
                 {USE_CASES.map((uc, i) => (
                   <li key={uc.area}>
                     <button
@@ -258,31 +295,30 @@ export function UseCases() {
                       onClick={() => goTo(i)}
                       aria-current={i === active}
                       className={cn(
-                        "relative cursor-pointer whitespace-nowrap text-left font-display font-light leading-[1.06] tracking-[-0.02em] transition-colors duration-300",
+                        "relative cursor-pointer whitespace-nowrap text-left font-display text-[64px] font-light leading-[64px] tracking-[-0.02em] transition-colors duration-300",
                         i === active ? "text-accent" : "text-fg hover:text-fg-muted",
                       )}
-                      style={{ fontSize: "min(clamp(2.25rem, 3.7vw, 4.25rem), 8.5vh)" }}
                     >
                       {uc.area}
-                      <sup
+                      <span
                         className={cn(
-                          "absolute left-full top-[0.32em] ml-1.5 font-sans text-sm leading-none tracking-[0.1em] text-accent transition-opacity duration-300",
+                          "absolute left-full top-0 ml-0.5 font-sans text-base font-medium leading-[20.8px] tracking-normal text-accent transition-opacity duration-300",
                           i === active ? "opacity-100" : "opacity-0",
                         )}
                       >
                         {String(i + 1).padStart(2, "0")}
-                      </sup>
+                      </span>
                     </button>
                   </li>
                 ))}
               </ul>
             </div>
-          </Container>
+          </div>
         </div>
       </section>
 
       {/* Movil: las areas apiladas, sin seccion fija */}
-      <section className="border-t border-rule lg:hidden" style={glow}>
+      <section className="border-t border-rule xl:hidden" style={glow}>
         <Container className="py-section">
           <Eyebrow sparkle>Casos de uso</Eyebrow>
           <div className="mt-10 space-y-16">
