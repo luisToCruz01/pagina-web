@@ -5,19 +5,19 @@ import { useInView } from "motion/react";
 import * as motion from "motion/react-client";
 import { Container } from "@/app/components/ui/Container";
 import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
+import {
+  IsoScene,
+  clamp01,
+  easeInOut,
+  pulse,
+  sceneCenter,
+  type Item,
+} from "@/app/components/ui/IsoScene";
 
 // Seccion inspirada en "Benefits" de la referencia Xirex. Los cubos se dibujan
 // en codigo (proyeccion isometrica) y se animan en bucle mientras el mouse
 // esta encima de la tarjeta.
 
-type Cube = [x: number, y: number, z: number];
-// gold: intensidad del contorno dorado punteado (0 = solo gris)
-type Item = { c: Cube; o: number; gold: number };
-
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
-const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-// Sube y baja dentro del ciclo: 0 en reposo, 1 a mitad del movimiento, sin saltos en el bucle
-const pulse = (e: number) => Math.sin(Math.PI * e);
 
 // Cada escena recibe t en [0, 1). t = 0 y t = 1 dan la misma imagen (la forma
 // en reposo), asi el bucle no tiene saltos.
@@ -88,22 +88,6 @@ const BENEFITS = [
   },
 ];
 
-// Proyeccion isometrica: x baja a la derecha, y baja a la izquierda, z sube.
-const A = 26;
-const B = 15;
-const H = 30;
-const project = (x: number, y: number, z: number) => [(x - y) * A, (x + y) * B - z * H];
-
-function faces([x, y, z]: Cube) {
-  const pts = (corners: Cube[]) =>
-    corners.map((c) => project(...c).join(",")).join(" ");
-  return [
-    pts([[x, y, z + 1], [x + 1, y, z + 1], [x + 1, y + 1, z + 1], [x, y + 1, z + 1]]),
-    pts([[x, y + 1, z], [x + 1, y + 1, z], [x + 1, y + 1, z + 1], [x, y + 1, z + 1]]),
-    pts([[x + 1, y, z], [x + 1, y + 1, z], [x + 1, y + 1, z + 1], [x + 1, y, z + 1]]),
-  ];
-}
-
 // Bucle que corre mientras hay hover (o mientras se ve en pantalla en tactiles). Al salir, termina el ciclo en curso y se
 // detiene en la forma en reposo (t = 0).
 function useHoverLoop(cycleMs: number) {
@@ -140,68 +124,9 @@ function useHoverLoop(cycleMs: number) {
 const VIEW_W = 200;
 const VIEW_H = 220;
 
-function IsoScene({ items, center }: { items: Item[]; center: [number, number] }) {
-  // Pintar de atras hacia adelante para que los cubos de delante tapen a los de atras
-  const ordered = items
-    .filter((it) => it.o > 0.01)
-    .sort((a, b) => a.c[0] + a.c[1] + a.c[2] - (b.c[0] + b.c[1] + b.c[2]));
-
-  return (
-    <svg
-      aria-hidden
-      viewBox={`${center[0] - VIEW_W / 2} ${center[1] - VIEW_H / 2} ${VIEW_W} ${VIEW_H}`}
-      className="mx-auto h-auto w-[180px] overflow-visible"
-    >
-      {ordered.map((it, idx) => (
-        <g key={idx} opacity={it.o}>
-          {faces(it.c).map((p, i) => (
-            <polygon
-              key={i}
-              points={p}
-              fill="var(--color-surface-raised)"
-              stroke="rgba(245, 240, 232, 0.2)"
-              strokeWidth={0.7}
-              strokeLinejoin="bevel"
-            />
-          ))}
-          {it.gold > 0.01 &&
-            faces(it.c).map((p, i) => (
-              <polygon
-                key={`g${i}`}
-                points={p}
-                fill="none"
-                stroke="var(--color-accent)"
-                strokeWidth={1}
-                strokeDasharray="2 2"
-                strokeLinejoin="bevel"
-                opacity={it.gold}
-              />
-            ))}
-        </g>
-      ))}
-    </svg>
-  );
-}
-
-// Centro de la forma en reposo, para que cada escena quede centrada en su tarjeta.
-function restCenter(scene: (t: number) => Item[]): [number, number] {
-  const xs: number[] = [];
-  const ys: number[] = [];
-  for (const { c, o } of scene(0)) {
-    if (o < 0.5) continue;
-    const [x, y, z] = c;
-    for (const [dx, dy, dz] of [[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [1, 0, 1], [0, 1, 1], [1, 1, 1]]) {
-      const [px, py] = project(x + dx, y + dy, z + dz);
-      xs.push(px);
-      ys.push(py);
-    }
-  }
-  return [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2];
-}
-
 function BenefitCard({ item, index }: { item: (typeof BENEFITS)[number]; index: number }) {
   const { t, start, stop } = useHoverLoop(item.cycleMs);
-  const center = restCenter(item.scene);
+  const [cx, cy] = sceneCenter(item.scene(0));
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { amount: 0.6 });
 
@@ -224,7 +149,11 @@ function BenefitCard({ item, index }: { item: (typeof BENEFITS)[number]; index: 
         .{String(index + 1).padStart(2, "0")}.
       </p>
       <div className="mt-8">
-        <IsoScene items={item.scene(t)} center={center} />
+        <IsoScene
+          items={item.scene(t)}
+          viewBox={[cx - VIEW_W / 2, cy - VIEW_H / 2, VIEW_W, VIEW_H]}
+          className="mx-auto h-auto w-[180px] overflow-visible"
+        />
       </div>
       <h3 className="mt-10 font-sans text-lg font-medium text-fg">{item.title}</h3>
       <p className="mx-auto mt-3 max-w-[34ch] font-sans text-sm leading-relaxed text-fg-muted sm:text-base">

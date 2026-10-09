@@ -2,6 +2,7 @@ import { Nav } from "./components/sections/Nav";
 import { Hero } from "./components/sections/Hero";
 import { Benefits } from "./components/sections/Benefits";
 import { Audience } from "./components/sections/Audience";
+import { Expertise } from "./components/sections/Expertise";
 import { Services } from "./components/sections/Services";
 import { Process } from "./components/sections/Process";
 import { Sectors } from "./components/sections/Sectors";
@@ -9,18 +10,6 @@ import { Trust } from "./components/sections/Trust";
 import { BlogPreview } from "./components/sections/BlogPreview";
 import { CtaClosing } from "./components/sections/CtaClosing";
 import { Footer } from "./components/sections/Footer";
-import { MarqueeStrip } from "./components/ui/MarqueeStrip";
-
-const MARQUEE_ITEMS = [
-  "Operaciones",
-  "Reportes",
-  "Atención al cliente",
-  "Documentos",
-  "Reactivación",
-  "Seguimiento",
-  "Integraciones",
-  "Agentes IA",
-];
 
 export default function Home() {
   return (
@@ -30,7 +19,7 @@ export default function Home() {
         <Hero />
         <Benefits />
         <Audience />
-        <MarqueeStrip items={MARQUEE_ITEMS} />
+        <Expertise />
         <Services />
         <Process />
         <Sectors />
