@@ -129,20 +129,17 @@ body::before {
   }
 }
 
-/* Parpadeo tipo neon de las figuras de Casos de uso (referencia Xirex) */
-@keyframes shapeFlicker {
-  0% { opacity: 1; }
-  9% { opacity: 0.72; }
-  13% { opacity: 1; }
-  31% { opacity: 0.86; }
-  35% { opacity: 1; }
-  52% { opacity: 0.68; }
-  56% { opacity: 0.95; }
-  71% { opacity: 0.8; }
-  75% { opacity: 1; }
-  90% { opacity: 0.74; }
-  94% { opacity: 1; }
-  100% { opacity: 1; }
+/* Desenfoque que "respira" en las figuras de Casos de uso */
+@keyframes shapeBreathe {
+  0%,
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  50% {
+    filter: blur(2.2px);
+    opacity: 0.82;
+  }
 }
 
 @keyframes marquee {

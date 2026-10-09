@@ -111,17 +111,24 @@ const USE_CASES = [
 const CTA_HREF = "https://cal.com/rdmdco/30min";
 
 function ShapeArt({ index, className }: { index: number; className?: string }) {
+  // Trazado al aparecer; luego el desenfoque "respira" en bucle lento
+  const draw = {
+    initial: { pathLength: 0, opacity: 0 },
+    animate: { pathLength: 1, opacity: 1 },
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
+  };
   return (
     <svg
       aria-hidden
       viewBox="0 0 200 200"
       fill="none"
-      className={cn("text-accent motion-safe:animate-[shapeFlicker_1.8s_steps(1,end)_infinite]", className)}
+      className={cn("text-accent motion-safe:animate-[shapeBreathe_4s_ease-in-out_infinite]", className)}
     >
       {SHAPES[index].map((s, i) =>
         s.kind === "ellipse" ? (
-          <ellipse
+          <motion.ellipse
             key={i}
+            {...draw}
             cx={s.cx}
             cy={s.cy}
             rx={s.rx}
@@ -131,8 +138,9 @@ function ShapeArt({ index, className }: { index: number; className?: string }) {
             strokeWidth={2}
           />
         ) : (
-          <path
+          <motion.path
             key={i}
+            {...draw}
             d={`M${s.pts.map((p) => p.join(" ")).join(" L")}${s.closed ? " Z" : ""}`}
             fill={s.fill ? "var(--color-surface)" : "none"}
             stroke="currentColor"
@@ -238,8 +246,18 @@ export function UseCases() {
             {/* Columna izquierda */}
             <div className="absolute inset-y-0 left-0 w-[calc(100%-580px)]">
               <div className="absolute left-0 top-[80px] h-[200px] w-[200px]">
-                {/* Cambio instantaneo, como en la referencia */}
-                <ShapeArt index={active} className="h-full w-full" />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    initial={{ opacity: 0, rotate: -12, scale: 0.92 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 10, scale: 1.04 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="h-full w-full"
+                  >
+                    <ShapeArt index={active} className="h-full w-full" />
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               <DividerRule top={350} />
