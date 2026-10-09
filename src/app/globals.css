@@ -113,6 +113,22 @@ body::before {
 }
 
 /* Keyframes */
+/* Parpadeo por letra del boton de suscripcion (referencia Xirex) */
+@keyframes letterFlicker {
+  0% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 0.15;
+  }
+  65% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

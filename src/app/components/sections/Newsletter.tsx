@@ -10,6 +10,8 @@ import { fadeUp } from "@/app/lib/motion";
 // PENDIENTE antes de publicar: el formulario NO esta conectado a nada.
 // Decidir destino del correo (Airtable / herramienta de newsletter) y cablear onSubmit.
 
+const SUBMIT_LABEL = "Suscribirme";
+
 const FOOTNOTES = [
   "Blog RDMD",
   "Un artículo por semana",
@@ -88,12 +90,34 @@ export function Newsletter() {
                 />
                 <button
                   type="submit"
-                  className="group flex w-full cursor-pointer items-center justify-between border border-surface bg-fg p-2 pr-6 font-sans text-sm font-semibold uppercase tracking-[0.14em] text-surface transition-colors duration-300 hover:bg-surface hover:text-fg"
+                  className="group w-full cursor-pointer bg-surface p-[2px] text-left"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center bg-surface text-fg transition-colors duration-300 group-hover:bg-accent group-hover:text-surface">
-                    <ArrowUpRight size={16} strokeWidth={1.75} />
+                  {/* Hover como en la referencia Xirex: fondo un tono mas oscuro, cuadro del
+                      icono pasa a dorado y gira 90 grados, y el texto parpadea letra por letra */}
+                  <span className="flex items-center justify-between rounded-tl-lg bg-fg p-2 pr-6 transition-colors duration-300 group-hover:bg-[#e6dfd2]">
+                    <span className="flex h-8 w-8 items-center justify-center bg-surface text-fg transition-[background-color,transform] duration-300 ease-out group-hover:rotate-90 group-hover:bg-accent">
+                      <ArrowUpRight
+                        size={16}
+                        strokeWidth={1.75}
+                        className="transition-transform duration-300 ease-out group-hover:-rotate-90"
+                      />
+                    </span>
+                    <span
+                      aria-label={SUBMIT_LABEL}
+                      className="font-sans text-sm font-semibold uppercase tracking-[0.14em] text-surface transition-colors duration-300 group-hover:text-[#8a6420]"
+                    >
+                      {SUBMIT_LABEL.split("").map((ch, i) => (
+                        <span
+                          key={i}
+                          aria-hidden
+                          className="inline-block group-hover:animate-[letterFlicker_420ms_ease-out_both]"
+                          style={{ animationDelay: `${(i * 53) % 260}ms` }}
+                        >
+                          {ch === " " ? " " : ch}
+                        </span>
+                      ))}
+                    </span>
                   </span>
-                  Suscribirme
                 </button>
               </form>
             </div>
