@@ -6,7 +6,7 @@ import { Expertise } from "./components/sections/Expertise";
 import { Services } from "./components/sections/Services";
 import { Newsletter } from "./components/sections/Newsletter";
 import { UseCases } from "./components/sections/UseCases";
-import { Sectors } from "./components/sections/Sectors";
+import { HowItWorks } from "./components/sections/HowItWorks";
 import { Trust } from "./components/sections/Trust";
 import { BlogPreview } from "./components/sections/BlogPreview";
 import { CtaClosing } from "./components/sections/CtaClosing";
@@ -24,7 +24,7 @@ export default function Home() {
         <Services />
         <Newsletter />
         <UseCases />
-        <Sectors />
+        <HowItWorks />
         <Trust />
         <BlogPreview />
         <CtaClosing />
