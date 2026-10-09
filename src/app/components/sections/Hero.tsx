@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
-import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
 import { cn } from "@/app/lib/cn";
 import { ease, wordContainer, wordItem } from "@/app/lib/motion";
 
@@ -120,7 +119,7 @@ export function Hero() {
         }}
         className="relative z-10 flex flex-1 flex-col"
       >
-        <Container className="flex flex-1 flex-col justify-end pb-28 pt-24 xl:pb-[clamp(3.5rem,7vw,5.5rem)]">
+        <Container className="flex flex-1 flex-col justify-end pb-[clamp(3.5rem,7vw,5.5rem)] pt-24">
           <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,28.5rem)]">
             <motion.h1
               initial="hidden"
@@ -157,12 +156,7 @@ export function Hero() {
               transition={{ duration: 0.9, ease: ease.outCinematic, delay: 0.95 }}
               className="flex flex-col items-start lg:pt-4"
             >
-              <div aria-hidden className="flex gap-1.5">
-                {[0, 1, 2].map((i) => (
-                  <span key={i} className="h-1 w-1 bg-fg-faint" />
-                ))}
-              </div>
-              <p className="mt-6 font-sans text-xs uppercase tracking-[0.2em] text-accent">
+              <p className="font-sans text-xs uppercase tracking-[0.2em] text-accent">
                 {TAGS.map((tag) => (
                   <span key={tag} className="mr-3 inline-block">
                     / {tag}
@@ -182,7 +176,7 @@ export function Hero() {
                 className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center [&_a]:whitespace-nowrap"
               >
                 <Button href="https://cal.com/rdmdco/30min" external variant="primary">
-                  Habla con un experto en IA
+                  Habla con un experto
                 </Button>
                 <Button href="#nosotros" variant="secondary">
                   Conoce RDMD
@@ -191,17 +185,6 @@ export function Hero() {
             </motion.div>
           </div>
         </Container>
-      </motion.div>
-
-      {/* === Scroll indicator pinned bottom-center === */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.7 }}
-        style={{ opacity: contentOpacity }}
-        className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2"
-      >
-        <ScrollIndicator />
       </motion.div>
     </section>
   );
