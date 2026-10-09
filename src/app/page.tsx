@@ -1,5 +1,6 @@
 import { Nav } from "./components/sections/Nav";
 import { Hero } from "./components/sections/Hero";
+import { Benefits } from "./components/sections/Benefits";
 import { Audience } from "./components/sections/Audience";
 import { Services } from "./components/sections/Services";
 import { Process } from "./components/sections/Process";
@@ -27,6 +28,7 @@ export default function Home() {
       <Nav />
       <main className="flex-1">
         <Hero />
+        <Benefits />
         <Audience />
         <MarqueeStrip items={MARQUEE_ITEMS} />
         <Services />
