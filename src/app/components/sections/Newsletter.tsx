@@ -50,12 +50,11 @@ export function Newsletter() {
             </div>
 
             <h2
-              className="relative flex flex-col items-start font-display font-light leading-[1] tracking-[-0.02em]"
+              className="relative font-display font-light leading-[1] tracking-[-0.02em]"
               style={{ fontSize: "var(--text-h1)" }}
             >
-              {/* Recuadros negros por renglon, como en la referencia */}
-              <span className="bg-surface px-[0.15em] pb-[0.12em] pt-[0.04em] text-fg">Mantente un paso</span>
-              <span className="bg-surface px-[0.15em] pb-[0.14em] italic text-accent">adelante</span>
+              <span className="block">Mantente un paso</span>
+              <span className="block italic">adelante</span>
             </h2>
 
             <div className="relative mt-16 grid gap-10 lg:mt-32 lg:grid-cols-2 lg:items-end lg:gap-16">
