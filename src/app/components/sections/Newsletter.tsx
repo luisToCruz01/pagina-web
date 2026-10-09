@@ -44,17 +44,18 @@ export function Newsletter() {
           variants={fadeUp}
         >
           <div className="relative bg-accent p-8 text-surface sm:p-10">
-            <div aria-hidden className="pointer-events-none absolute inset-2 border border-dashed border-surface/30" />
+            <div aria-hidden className="pointer-events-none absolute inset-2 border border-dashed border-surface" />
             <div className="absolute right-6 top-6 hidden sm:block">
               <DotCross />
             </div>
 
             <h2
-              className="relative font-display font-light leading-[1] tracking-[-0.02em]"
+              className="relative flex flex-col items-start font-display font-light leading-[1] tracking-[-0.02em]"
               style={{ fontSize: "var(--text-h1)" }}
             >
-              <span className="block">Mantente un paso</span>
-              <span className="block italic">adelante</span>
+              {/* Recuadros negros por renglon, como en la referencia */}
+              <span className="bg-surface px-[0.15em] pb-[0.12em] pt-[0.04em] text-fg">Mantente un paso</span>
+              <span className="bg-surface px-[0.15em] pb-[0.14em] italic text-accent">adelante</span>
             </h2>
 
             <div className="relative mt-16 grid gap-10 lg:mt-32 lg:grid-cols-2 lg:items-end lg:gap-16">
