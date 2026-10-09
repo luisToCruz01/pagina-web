@@ -11,7 +11,7 @@ import { cn } from "@/app/lib/cn";
 // iconos y esquinas como mascaras SVG; ilustracion de 5 capas PNG (358x233) que bajan 400px cada
 // una durante 540px de scroll, en secuencia, con un recorrido fijo total de 2900px.
 // Cambios RDMD: crema en lugar de blanco, dorado en lugar de rojo, Cormorant/DM Sans, capas
-// recoloreadas (public/como-funciona) y el logo de RDMD sobre la capa superior.
+// recoloreadas (public/como-funciona), el logo de RDMD sobre la capa superior y textos propios.
 
 const TRAVEL = 2900; // px de scroll con la seccion fija
 const LAYER_SCROLL = 540; // px de scroll que tarda cada capa en bajar
@@ -45,10 +45,29 @@ const ICONS = [
 const svgMask = (inner: string, view = "0 0 24 24") =>
   `url("data:image/svg+xml,${encodeURIComponent(`<svg viewBox='${view}' xmlns='http://www.w3.org/2000/svg'>${inner}</svg>`)}")`;
 
-// Texto de Xirex traducido. En la plantilla los 5 pasos repiten la misma descripcion.
-const DESC =
-  "Juntos definimos una estrategia de implementación práctica, el alcance del proyecto y las métricas de éxito.";
-const STEPS = ["Descubrir", "Planear", "Construir", "Lanzar", "Optimizar"].map((title) => ({ title, body: DESC }));
+// Textos propios de RDMD (basados en la antigua seccion Proceso)
+const STEPS = [
+  {
+    title: "Descubrir",
+    body: "En un diagnóstico gratuito de 30 minutos analizamos tu operación y detectamos dónde se va el tiempo de tu equipo.",
+  },
+  {
+    title: "Planear",
+    body: "Definimos juntos el alcance, los entregables y los tiempos de un plan hecho a la medida de tus procesos.",
+  },
+  {
+    title: "Construir",
+    body: "Construimos e integramos los flujos con las herramientas que ya usas. Tú apruebas cada avance.",
+  },
+  {
+    title: "Lanzar",
+    body: "Ponemos el sistema en marcha con tu equipo y acompañamos los primeros días de operación.",
+  },
+  {
+    title: "Optimizar",
+    body: "Medimos resultados, ajustamos y escalamos el sistema cuando tu operación lo necesita.",
+  },
+];
 
 function StepIcon({ index, color }: { index: number; color: string }) {
   const ic = ICONS[index];
@@ -192,13 +211,13 @@ export function HowItWorks() {
         className="px-1 font-sans text-xs uppercase leading-[18px] tracking-[0.16em]"
         style={{ background: C.panel, color: C.eyebrow }}
       >
-        Cómo funciona
+        Cómo trabajamos
       </span>
       <h2
         className="mt-4 max-w-[560px] font-display text-[34px] font-normal leading-[38px] tracking-[-0.02em] sm:text-[48px] sm:leading-[52.8px]"
         style={{ color: C.ink }}
       >
-        Un marco práctico para adoptar la IA
+        Un método práctico para automatizar tu empresa
       </h2>
     </div>
   );
