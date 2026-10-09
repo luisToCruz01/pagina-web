@@ -4,6 +4,7 @@ import { Benefits } from "./components/sections/Benefits";
 import { Audience } from "./components/sections/Audience";
 import { Expertise } from "./components/sections/Expertise";
 import { Services } from "./components/sections/Services";
+import { Newsletter } from "./components/sections/Newsletter";
 import { Process } from "./components/sections/Process";
 import { Sectors } from "./components/sections/Sectors";
 import { Trust } from "./components/sections/Trust";
@@ -21,6 +22,7 @@ export default function Home() {
         <Audience />
         <Expertise />
         <Services />
+        <Newsletter />
         <Process />
         <Sectors />
         <Trust />
