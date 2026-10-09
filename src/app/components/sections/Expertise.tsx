@@ -6,7 +6,8 @@ import { AnimatePresence, motion, useInView } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/app/components/ui/Container";
 import { Sparkle } from "@/app/components/ui/Sparkle";
-import { ease } from "@/app/lib/motion";
+import { Eyebrow } from "@/app/components/ui/Eyebrow";
+import { ease, fadeUp } from "@/app/lib/motion";
 
 // Seccion inspirada en "Services" de la referencia Xirex: pestanas que rotan
 // solas con barra de progreso, ilustracion isometrica animada y dos cifras.
@@ -93,6 +94,26 @@ export function Expertise() {
   return (
     <section className="border-t border-rule">
       <Container className="py-section">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+          className="mb-16 max-w-2xl"
+        >
+          <Eyebrow sparkle>Servicios</Eyebrow>
+          <h2
+            className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
+            style={{ fontSize: "var(--text-h1)" }}
+          >
+            Lo que construimos para tu empresa
+          </h2>
+          <p className="mt-6 font-sans text-lg leading-relaxed text-fg-muted">
+            Cada servicio se diseña a medida de tu operación. Diagnosticamos,
+            diseñamos y construimos el sistema que necesitas.
+          </p>
+        </motion.div>
+
         <div ref={ref}>
           <div className="grid border border-fg-faintest lg:grid-cols-2">
             <div className="relative flex flex-col bg-surface-raised p-8 sm:p-10 lg:min-h-[600px]">

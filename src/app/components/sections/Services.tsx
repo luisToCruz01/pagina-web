@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 import { Container } from "@/app/components/ui/Container";
 import { Eyebrow } from "@/app/components/ui/Eyebrow";
-import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
+import { stagger, staggerItem } from "@/app/lib/motion";
 import { SERVICES } from "@/app/lib/services-data";
 
 export function Services() {
@@ -44,28 +44,8 @@ export function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeUp}
-          className="max-w-2xl"
-        >
-          <Eyebrow sparkle>Servicios</Eyebrow>
-          <h2
-            className="mt-6 font-display font-light leading-[1.05] tracking-[-0.02em] text-fg"
-            style={{ fontSize: "var(--text-h1)" }}
-          >
-            Lo que construimos para tu empresa
-          </h2>
-          <p className="mt-6 font-sans text-lg leading-relaxed text-fg-muted">
-            Cada servicio se diseña a medida de tu operación. Diagnosticamos,
-            diseñamos y construimos el sistema que necesitas.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="mt-20 grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-3"
         >
           {SERVICES.map((service, i) => (
             <motion.div key={service.slug} variants={staggerItem}>
