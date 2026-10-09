@@ -136,6 +136,7 @@ function ShapeArt({ index, className }: { index: number; className?: string }) {
             transform={`rotate(${s.rot} ${s.cx} ${s.cy})`}
             stroke="currentColor"
             strokeWidth={2}
+            strokeLinecap="round"
           />
         ) : (
           <motion.path
@@ -145,6 +146,7 @@ function ShapeArt({ index, className }: { index: number; className?: string }) {
             fill={s.fill ? "var(--color-surface)" : "none"}
             stroke="currentColor"
             strokeWidth={2}
+            strokeLinecap="round"
             strokeLinejoin="round"
           />
         ),
