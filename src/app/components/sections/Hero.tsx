@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { ScrollIndicator } from "@/app/components/ui/ScrollIndicator";
-import { Sparkle } from "@/app/components/ui/Sparkle";
 import { cn } from "@/app/lib/cn";
 import { ease, wordContainer, wordItem } from "@/app/lib/motion";
 
@@ -135,9 +134,6 @@ export function Hero() {
                   key={lineIdx}
                   className="flex items-center"
                 >
-                  {lineIdx === HEADLINE_LINES.length - 1 && (
-                    <Sparkle size={22} className="mr-[0.18em] self-start mt-[0.2em]" />
-                  )}
                   {line.map((word, wordIdx) => (
                     <motion.span
                       key={`${lineIdx}-${wordIdx}`}
