@@ -43,7 +43,7 @@ const TABS = [
     title: ["Consultoría", "y estrategia"],
     tag: "Diagnóstico de automatización",
     body: "Identificamos oportunidades concretas y armamos una hoja de ruta clara para automatizar con éxito.",
-    href: "#proceso",
+    href: "https://cal.com/rdmdco/30min",
     video: "/expertise/estrategia.mp4",
     stats: [
       { value: "30 min", label: "Diagnóstico gratuito" },

@@ -6,7 +6,7 @@ import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
 
 const NAV = [
   { label: "Servicios", href: "#servicios" },
-  { label: "Proceso", href: "#proceso" },
+  { label: "Casos de uso", href: "/#casos-de-uso" },
   { label: "Soluciones", href: "#soluciones" },
   { label: "Contacto", href: "#contacto" },
 ];
