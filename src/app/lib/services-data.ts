@@ -86,7 +86,7 @@ export const SERVICES: Service[] = [
     eyebrow: "Software",
     title: "Desarrollo de software a medida",
     subtitle:
-      "Código estable, seguro y escalable. Aplicaciones, integraciones y sistemas internos diseñados para tu operación específica, no plantillas genéricas.",
+      "Código estable, seguro y escalable. Aplicaciones, integraciones y sistemas internos diseñados para tu operación específica.",
     metaDescription:
       "Desarrollo de software a medida: aplicaciones web, integraciones, dashboards y sistemas internos para empresas en Latinoamérica.",
     subServices: [
@@ -121,9 +121,9 @@ export const SERVICES: Service[] = [
   {
     slug: "arquitectura",
     eyebrow: "Arquitectura",
-    title: "Arquitectura tecnológica que escala",
+    title: "Servicios de arquitectura tecnológica",
     subtitle:
-      "Diseñamos el sistema que conecta tus herramientas y soporta el crecimiento, sin que se rompa cuando la operación se multiplica.",
+      "Integra servicios y microservicios para tus sistemas TI obteniendo la eficiencia y cumplimiento de los objetivos de negocio.",
     metaDescription:
       "Arquitectura tecnológica para empresas en Latinoamérica: diseño de sistemas, integración, infraestructura cloud y seguridad que escala.",
     subServices: [
@@ -194,9 +194,9 @@ export const SERVICES: Service[] = [
   {
     slug: "pruebas-qa",
     eyebrow: "Calidad",
-    title: "Pruebas de software que evitan errores costosos",
+    title: "Pruebas de software",
     subtitle:
-      "Validamos que tu software funcione, sea seguro y aguante carga antes de que llegue a producción. Porque un error en vivo cuesta más que prevenirlo.",
+      "Validamos que tu software funcione, sea seguro y soporte cargas antes de que llegue a producción.",
     metaDescription:
       "Pruebas de software (QA): funcionales, carga, seguridad y usabilidad para empresas en Latinoamérica. Software validado antes de salir a producción.",
     subServices: [
