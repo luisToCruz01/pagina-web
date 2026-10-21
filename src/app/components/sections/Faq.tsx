@@ -9,7 +9,7 @@ import { cn } from "@/app/lib/cn";
 // space-between): titulo de 2 lineas a 64px arriba; abajo descripcion de 440px (16/20.8, 60%) y
 // boton "talk to our team" (padding 12/16, gap 8, subrayado de 1px, linea de acento que crece y
 // flecha doble que se desliza). Derecha: preguntas con padding 20/16, linea inferior #1f1f1f;
-// la activa lleva borde #3d3d3d, numero en acento e icono "+" rotado 45 grados en acento;
+// la activa lleva numero en acento (RDMD quito el borde y el icono rotado de Xirex en la abierta);
 // respuesta de 440px (14/18.2, 60%) con 40px de espacio arriba. La primera viene abierta.
 // Cambios RDMD: textos y respuestas propias, dorado, Cormorant/DM Sans, boton a Cal.com.
 
@@ -107,7 +107,7 @@ export function Faq() {
                   className={cn(
                     "pointer-events-none absolute -inset-px border transition-[opacity,border-color]",
                     EASE,
-                    active ? "border-[#3d3d3d] opacity-100" : "border-fg/60 opacity-0 group-hover:opacity-100",
+                    active ? "opacity-0" : "border-fg/60 opacity-0 group-hover:opacity-100",
                   )}
                 />
                 <button
@@ -124,7 +124,7 @@ export function Faq() {
                   </span>
                   <span
                     aria-hidden
-                    className={cn("mt-0 h-5 w-5 shrink-0 transition-[transform,background-color]", EASE, active ? "rotate-45 bg-accent" : "bg-fg/60")}
+                    className={cn("mt-0 h-5 w-5 shrink-0 transition-[transform,background-color]", EASE, active ? "scale-75 bg-accent opacity-0" : "bg-fg/60")}
                     style={maskStyle(PLUS_MASK)}
                   />
                 </button>
