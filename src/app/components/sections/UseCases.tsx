@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { Check } from "lucide-react";
 import { Container } from "@/app/components/ui/Container";
@@ -78,37 +78,53 @@ const SHAPES: Shape[][] = [
 const USE_CASES = [
   {
     area: "Ventas",
+    slug: "ventas",
     help: "Ayudamos a los equipos de ventas a atender leads más rápido, dar seguimiento a tiempo y ordenar la información de cada cliente.",
     get: ["Seguimiento de leads con IA", "Reactivación de base de datos", "CRM conectado"],
   },
   {
     area: "Marketing",
+    slug: "marketing",
     help: "Ayudamos a los equipos de marketing a producir contenido más rápido, ejecutar campañas y entender mejor a sus clientes.",
     get: ["Secuencias de nutrición", "Reportes automáticos de campañas", "Asistente de contenido con IA"],
   },
   {
     area: "Finanzas",
+    slug: "finanzas",
     help: "Reducimos el trabajo manual en reportes, procesamiento de documentos y operación financiera.",
     get: ["Procesamiento de documentos", "Reportes automáticos", "Asistente financiero con IA"],
   },
   {
     area: "Operaciones",
+    slug: "operaciones",
     help: "Agilizamos la operación diaria con flujos automáticos, respuestas más rápidas y procesos conectados.",
     get: ["Automatización de flujos", "Integración de sistemas", "Tableros de operación"],
   },
   {
     area: "Recursos humanos",
+    slug: "recursos-humanos",
     help: "Simplificamos los procesos de personas con atención rápida al equipo, onboarding ordenado e información centralizada.",
     get: ["Asistente interno con IA", "Onboarding automatizado", "Base de conocimiento"],
   },
   {
     area: "Atención al cliente",
+    slug: "atencion-al-cliente",
     help: "Ayudamos a tu equipo de soporte a responder más rápido, resolver con eficiencia y dar una experiencia consistente.",
     get: ["Agente de atención 24/7", "Escalamiento a humano", "Base de conocimiento"],
   },
 ];
 
+// Enlaces del menu "Casos de uso": /#uso-<slug> lleva directo al area
+export const USE_CASE_LINKS = USE_CASES.map((uc) => ({ label: uc.area, href: `/#uso-${uc.slug}` }));
+
 const CTA_HREF = "https://cal.com/rdmdco/30min";
+
+// Baja hasta el tramo de scroll de la seccion fija que activa el area i
+function scrollToCase(el: HTMLElement, i: number) {
+  const top = el.getBoundingClientRect().top + window.scrollY;
+  const travel = el.offsetHeight - window.innerHeight;
+  window.scrollTo({ top: top + ((i + 0.5) / USE_CASES.length) * travel, behavior: "smooth" });
+}
 
 function ShapeArt({ index, className }: { index: number; className?: string }) {
   // Trazado al aparecer; luego el desenfoque "respira" en bucle lento
@@ -208,12 +224,29 @@ export function UseCases() {
 
   // Clic en un area: baja hasta el tramo de scroll que la activa
   const goTo = (i: number) => {
-    const el = ref.current;
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY;
-    const travel = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + ((i + 0.5) / USE_CASES.length) * travel, behavior: "smooth" });
+    if (ref.current) scrollToCase(ref.current, i);
   };
+
+  // Enlace #uso-<slug> (desde el menu o al llegar desde otra pagina): ir directo a esa area
+  useEffect(() => {
+    const handle = () => {
+      const { hash } = window.location;
+      if (!hash.startsWith("#uso-")) return;
+      const i = USE_CASES.findIndex((uc) => `#uso-${uc.slug}` === hash);
+      if (i < 0) return;
+      if (window.matchMedia("(min-width: 1280px)").matches) {
+        if (ref.current) scrollToCase(ref.current, i);
+      } else {
+        document.getElementById(`uso-${USE_CASES[i].slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    const t = setTimeout(handle, 300);
+    window.addEventListener("hashchange", handle);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("hashchange", handle);
+    };
+  }, []);
 
   const glow = {
     background:
@@ -345,6 +378,8 @@ export function UseCases() {
             {USE_CASES.map((uc, i) => (
               <motion.div
                 key={uc.area}
+                id={`uso-${uc.slug}`}
+                className="scroll-mt-24"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}

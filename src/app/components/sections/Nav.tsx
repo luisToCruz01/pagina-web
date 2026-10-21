@@ -7,9 +7,18 @@ import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/app/lib/cn";
 import { ease } from "@/app/lib/motion";
+import { USE_CASE_LINKS } from "@/app/components/sections/UseCases";
 
 type DropdownItem = { label: string; href: string };
 type NavItem = { label: string; href: string; dropdown?: DropdownItem[] };
+
+// En el home, /#uso-<area> no recarga: actualiza el hash y avisa a UseCases para que baje al area
+function onUseCaseClick(e: React.MouseEvent, href: string) {
+  if (!href.startsWith("/#uso-") || window.location.pathname !== "/") return;
+  e.preventDefault();
+  window.history.pushState(null, "", href.slice(1));
+  window.dispatchEvent(new HashChangeEvent("hashchange"));
+}
 
 const NAV_ITEMS: NavItem[] = [
   {
@@ -25,13 +34,9 @@ const NAV_ITEMS: NavItem[] = [
   },
   { label: "Sistemas", href: "/sistemas" },
   {
-    label: "Sectores",
-    href: "/sectores",
-    dropdown: [
-      { label: "Agencias de marketing", href: "/sectores/agencias-marketing" },
-      { label: "Servicios profesionales", href: "/sectores/servicios-profesionales" },
-      { label: "E-commerce", href: "/sectores/ecommerce" },
-    ],
+    label: "Casos de uso",
+    href: "/#casos-de-uso",
+    dropdown: USE_CASE_LINKS,
   },
   {
     label: "Aprende",
@@ -177,6 +182,10 @@ export function Nav() {
                         <Link
                           key={sub.href}
                           href={sub.href}
+                          onClick={(e) => {
+                            onUseCaseClick(e, sub.href);
+                            setOpenDropdown(null);
+                          }}
                           className="block rounded-lg px-3 py-2.5 text-sm text-fg-muted transition-colors duration-200 hover:bg-fg/5 hover:text-fg"
                         >
                           {sub.label}
@@ -268,7 +277,10 @@ export function Nav() {
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={(e) => {
+                              onUseCaseClick(e, sub.href);
+                              setMenuOpen(false);
+                            }}
                             className="block py-2.5 text-sm text-fg-faint transition-colors duration-200 hover:text-fg"
                           >
                             {sub.label}
