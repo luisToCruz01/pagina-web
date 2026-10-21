@@ -9,7 +9,7 @@ import { cn } from "@/app/lib/cn";
 // space-between): titulo de 2 lineas a 64px arriba; abajo descripcion de 440px (16/20.8, 60%) y
 // boton "talk to our team" (padding 12/16, gap 8, subrayado de 1px, linea de acento que crece y
 // flecha doble que se desliza). Derecha: preguntas con padding 20/16, linea inferior #1f1f1f;
-// la activa lleva numero en acento (RDMD quito el borde y el icono rotado de Xirex en la abierta);
+// la activa lleva numero en acento (RDMD quito el borde de la abierta y el icono "+");
 // respuesta de 440px (14/18.2, 60%) con 40px de espacio arriba. La primera viene abierta.
 // Cambios RDMD: textos y respuestas propias, dorado, Cormorant/DM Sans, boton a Cal.com.
 
@@ -36,9 +36,6 @@ const FAQS = [
   },
 ];
 
-// "+" de Xirex: cuatro segmentos de 1.667px con hueco en el centro (viewBox 20x20)
-const PLUS_MASK =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='white'%3E%3Crect x='9.167' y='0' width='1.667' height='6.667'/%3E%3Crect x='9.167' y='13.333' width='1.667' height='6.667'/%3E%3Crect x='0' y='9.167' width='6.667' height='1.667'/%3E%3Crect x='13.333' y='9.167' width='6.667' height='1.667'/%3E%3C/g%3E%3C/svg%3E\")";
 // Flecha de Xirex (viewBox 24x24)
 const ARROW_MASK =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath transform='translate(3.97 4)' fill='white' d='M 14.78 0 L 5.53 0 L 5.53 1.5 L 13.47 1.5 L 0 14.97 L 1.06 16.03 L 14.53 2.56 L 14.53 10.5 L 16.03 10.5 L 16.03 1.25 C 16.03 0.56 15.47 0 14.78 0 Z'/%3E%3C/svg%3E\")";
@@ -122,11 +119,6 @@ export function Faq() {
                     </span>
                     <span className="font-display text-[22px] font-normal leading-[26px] tracking-[-0.01em] text-fg">{f.q}</span>
                   </span>
-                  <span
-                    aria-hidden
-                    className={cn("mt-0 h-5 w-5 shrink-0 transition-[transform,background-color,opacity]", EASE, active ? "scale-75 bg-accent opacity-0" : "bg-fg/60")}
-                    style={maskStyle(PLUS_MASK)}
-                  />
                 </button>
                 <AnimatePresence initial={false}>
                   {active && (
@@ -134,7 +126,7 @@ export function Faq() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ height: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }, opacity: { duration: 0.45, ease: "easeOut" } }}
                       className="overflow-hidden"
                     >
                       <p className="max-w-[440px] px-4 pb-5 pt-5 font-sans text-sm leading-[18.2px] text-fg/60">{f.a}</p>
