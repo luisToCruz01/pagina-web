@@ -13,13 +13,13 @@ import { cn } from "@/app/lib/cn";
 // Cambios RDMD: textos en español, años 2021-2026 + Hoy, dorado en lugar de rojo, Cormorant/DM Sans.
 
 const STEPS = [
-  { year: "2021", title: "Fundación", text: "Empezamos con una idea simple: \"la IA debe resolver problemas reales del negocio, no crear más complejidad\". Ese principio se volvió la base de todo." },
+  { year: "2021", title: "Fundación", text: "Empezamos con una idea simple: \"las automatizaciones empresariales deben resolver problemas reales del negocio, no crear más complejidad\". Ese principio se volvió la base de todo." },
   { year: "2022", title: "Exploración", text: "Trabajamos con los primeros equipos para explorar automatización, datos y nuevas herramientas de IA, y aprender dónde la tecnología cambiaba de verdad la operación." },
-  { year: "2023", title: "Reposicionamiento", text: "Creemos que la IA que funciona no se define solo por la tecnología. Se construye con criterio práctico, una implementación cuidadosa y valor real para el negocio a largo plazo." },
-  { year: "2024", title: "Implementación", text: "Pasamos de las recomendaciones a construir sistemas de IA conectados directamente con los procesos, herramientas y equipos que nuestros clientes ya usaban." },
+  { year: "2023", title: "Reposicionamiento", text: "Creemos que las automatizaciones que funcionan no se definen solo por la tecnología. Se construyen con criterio práctico, una implementación cuidadosa y valor real para el negocio a largo plazo." },
+  { year: "2024", title: "Implementación", text: "Pasamos de las recomendaciones a construir sistemas conectados directamente con los procesos, herramientas y equipos que nuestros clientes ya usaban." },
   { year: "2025", title: "Expansión", text: "Nuestro trabajo creció hacia estrategia, automatización, soluciones de IA a la medida e integración de sistemas, con un solo camino práctico de la oportunidad a la implementación." },
-  { year: "2026", title: "Impacto a escala", text: "Ayudamos a empresas a pasar de pilotos aislados de IA a capacidades que se repiten, con mejor adopción, reglas más claras y resultados medibles en el negocio." },
-  { year: "Hoy", title: "Listos para lo que viene", text: "Hoy, RDMD ayuda a empresas con ambición a encontrar las oportunidades correctas, implementar IA con confianza y mejorar de forma continua cómo generan valor en toda la organización." },
+  { year: "2026", title: "Impacto a escala", text: "Ayudamos a empresas a pasar de pilotos aislados a capacidades que se repiten, con mejor adopción, reglas más claras y resultados medibles en el negocio." },
+  { year: "Hoy", title: "Listos para lo que viene", text: "Hoy, RDMD ayuda a empresas con ambición a encontrar las oportunidades correctas, implementar automatizaciones con confianza y mejorar de forma continua cómo generan valor en toda la organización." },
 ];
 
 // Icono de Xirex (cruz de puntos 72x72), usado como mascara sobre el color de acento
