@@ -148,8 +148,8 @@ export const ARTICLES: Article[] = [
     dateISO: "2026-05-21",
     dateLabel: "21 de mayo, 2026",
     readingTime: "5 min de lectura",
-    image: "/blog/proceso.webp",
-    imageAlt: "Engranajes mecánicos de bronce, las partes de un sistema",
+    image: "/blog/preparar-datos.webp",
+    imageAlt: "Manos escribiendo con pluma fuente sobre una hoja en un escritorio de madera",
     hook: "Contratas buena gente. Y aun así las cosas se pierden, llegan tarde, se hacen dos veces. El problema no es a quién contrataste.",
     blocks: [
       { type: "p", text: "Hay una conversación que se repite en casi todas las empresas pequeñas que crecen. Algo se cae, alguien pregunta de quién fue la culpa, y la respuesta termina siendo una persona. La próxima vez vuelve a pasar, con otra persona. Cambias gente y el problema sigue." },
@@ -298,8 +298,8 @@ export const ARTICLES: Article[] = [
     dateISO: "2026-07-18",
     dateLabel: "18 de julio, 2026",
     readingTime: "5 min de lectura",
-    image: "/blog/preparar-datos.webp",
-    imageAlt: "Manos escribiendo con pluma fuente sobre una hoja en un escritorio de madera",
+    image: "/blog/proceso.webp",
+    imageAlt: "Engranajes mecánicos de bronce, las partes de un sistema",
     hook: "Una automatización hace exactamente lo que le dicen los datos. Si los datos están desordenados, automatizas el desorden más rápido.",
     hideFromHome: true,
     blocks: [
