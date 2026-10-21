@@ -15,7 +15,7 @@ const PROFILES = [
     body: "Operaciones que consumen horas valiosas cada día y que se pueden delegar a un sistema.",
   },
   {
-    title: "E-commerce en crecimiento",
+    title: "Empresas en crecimiento",
     body: "Que necesita automatizar atención, logística y seguimiento sin perder calidad.",
   },
 ];
