@@ -81,8 +81,8 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
         style={{
           objectPosition: "center 35%",
-          filter:
-            "brightness(0.82) saturate(1.15) contrast(1.15) url(#hero-gold-grade)",
+          // Prueba sin filtro dorado (antes: brightness(0.82) saturate(1.15) contrast(1.15) url(#hero-gold-grade))
+          filter: "brightness(0.82)",
           y: videoY,
           opacity: videoOpacity,
         }}
@@ -91,8 +91,9 @@ export function Hero() {
         <source src="/hero/hero-mercer.mp4" type="video/mp4" />
       </motion.video>
 
-      {/* === Subtle warm tint to bind video to brand palette === */}
+      {/* === Subtle warm tint to bind video to brand palette === (oculto en la prueba sin filtro dorado) */}
       <div
+        hidden
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 mix-blend-overlay"
         style={{
