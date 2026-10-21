@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import * as motion from "motion/react-client";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/app/components/ui/Container";
@@ -7,8 +8,7 @@ import { Sparkle } from "@/app/components/ui/Sparkle";
 import { fadeUp } from "@/app/lib/motion";
 
 // Seccion inspirada en "Newsletter" de la referencia Xirex.
-// PENDIENTE antes de publicar: el formulario NO esta conectado a nada.
-// Decidir destino del correo (Airtable / herramienta de newsletter) y cablear onSubmit.
+// El formulario envia el correo a /api/newsletter, que lo guarda en Airtable (RDMD CRM, tabla Newsletter).
 
 const SUBMIT_LABEL = "Suscribirme";
 
@@ -35,7 +35,27 @@ function DotCross() {
   );
 }
 
+type Status = "idle" | "sending" | "done" | "error";
+
 export function Newsletter() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.get("email"), company: data.get("company"), page: window.location.pathname }),
+      });
+      setStatus(res.ok ? "done" : "error");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section className="border-t border-rule">
       <Container className="py-section">
@@ -71,18 +91,20 @@ export function Newsletter() {
                 </p>
               </div>
 
-              <form
-                onSubmit={(e) => {
-                  // Sin conectar todavia: no se envia nada.
-                  e.preventDefault();
-                }}
-                className="flex flex-col gap-5"
-              >
+              {status === "done" ? (
+                <p role="status" className="font-sans text-base leading-relaxed text-surface">
+                  Listo. Te llegará el próximo artículo a tu correo.
+                </p>
+              ) : (
+              <form onSubmit={onSubmit} className="flex flex-col gap-5">
+                {/* Campo trampa para bots: oculto para las personas */}
+                <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
                 <label htmlFor="newsletter-email" className="sr-only">
                   Tu correo
                 </label>
                 <input
                   id="newsletter-email"
+                  name="email"
                   type="email"
                   required
                   placeholder="Tu correo"
@@ -90,7 +112,8 @@ export function Newsletter() {
                 />
                 <button
                   type="submit"
-                  className="group w-full cursor-pointer bg-surface p-[2px] text-left"
+                  disabled={status === "sending"}
+                  className="group w-full cursor-pointer bg-surface p-[2px] text-left disabled:cursor-wait disabled:opacity-70"
                 >
                   {/* Hover como en la referencia Xirex: fondo un tono mas oscuro, cuadro del
                       icono pasa a dorado y gira 90 grados, y el texto parpadea letra por letra */}
@@ -119,7 +142,13 @@ export function Newsletter() {
                     </span>
                   </span>
                 </button>
+                {status === "error" && (
+                  <p role="alert" className="font-sans text-sm text-surface">
+                    No pudimos guardar tu correo. Inténtalo de nuevo en un momento.
+                  </p>
+                )}
               </form>
+              )}
             </div>
           </div>
 
