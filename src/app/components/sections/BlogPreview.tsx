@@ -9,7 +9,7 @@ import { fadeUp, stagger, staggerItem } from "@/app/lib/motion";
 import { ARTICLES } from "@/app/lib/blog-data";
 
 export function BlogPreview() {
-  const latest = ARTICLES.slice(0, 3);
+  const latest = ARTICLES.filter((a) => !a.hideFromHome).slice(0, 3);
 
   return (
     <section className="border-t border-rule">

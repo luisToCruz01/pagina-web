@@ -30,6 +30,8 @@ export type Article = {
   hook: string;
   blocks: Block[];
   relatedSlugs: string[];
+  /** true: el artículo solo aparece en /blog, no en la sección del home */
+  hideFromHome?: boolean;
 };
 
 export const ARTICLES: Article[] = [
@@ -228,6 +230,161 @@ export const ARTICLES: Article[] = [
       { type: "p", text: "Lo importante es no instalar IA para decir que tienes IA. Se aplica a un problema concreto que hoy te cuesta tiempo o dinero, y se mide el resultado. Si quieres ver qué tarea de tu negocio tiene sentido resolver así, conversemos." },
     ],
     relatedSlugs: ["que-procesos-automatizar-primero", "tu-equipo-no-es-lento"],
+  },
+  // Artículos basados en los temas del blog de Xirex. Solo aparecen en /blog (hideFromHome).
+  {
+    slug: "del-prototipo-a-produccion",
+    category: "Estrategia",
+    title: "Del prototipo a producción: cómo escalar una automatización",
+    excerpt:
+      "Los pasos para llevar una automatización de la prueba a la operación diaria, medir cómo rinde y hacerla crecer con confianza.",
+    author: "Editorial RDMD",
+    dateISO: "2026-08-11",
+    dateLabel: "11 de agosto, 2026",
+    readingTime: "6 min de lectura",
+    image: "/blog/del-prototipo-a-produccion.webp",
+    imageAlt: "Tres monitores encendidos y una lámpara de escritorio en una oficina en penumbra",
+    hook: "Que una automatización funcione en una prueba es la parte fácil. Lo que separa un experimento de un sistema es que siga funcionando el mes doce.",
+    hideFromHome: true,
+    blocks: [
+      { type: "p", text: "Casi todas las automatizaciones empiezan igual: alguien arma una prueba, la corre con tres casos y funciona. El equipo se entusiasma. Dos meses después la prueba sigue siendo prueba, o se rompió la primera semana que entró un caso distinto y nadie volvió a confiar en ella." },
+      { type: "p", text: "Pasar a producción no es apretar un botón. Es un trabajo con pasos claros, y cuando se respetan, la automatización se vuelve parte de cómo opera la empresa." },
+
+      { type: "h2", text: "Qué cambia entre una prueba y producción", id: "prueba-vs-produccion" },
+      { type: "p", text: "Una prueba responde una sola pregunta: se puede hacer. Producción responde otras cuatro, y todas importan más." },
+      { type: "list", items: [
+        "Volumen: la prueba procesa diez casos. Producción procesa cientos al mes, en horarios que nadie vigila.",
+        "Variedad: en la prueba los datos vienen limpios. En la operación real llegan incompletos, duplicados o en otro formato.",
+        "Fallas: la prueba se corre con alguien mirando. En producción, cuando algo falla, el sistema tiene que avisar solo.",
+        "Dueño: la prueba es de quien la armó. En producción tiene que haber una persona responsable de que siga funcionando.",
+      ]},
+
+      { type: "h2", text: "Los pasos para llevarla a operación", id: "pasos" },
+      { type: "p", text: "Este es el orden que seguimos en cada proyecto. Saltarse uno casi siempre se paga después." },
+      { type: "list", items: [
+        "Definir el éxito con un número antes de construir: horas ahorradas, tiempo de respuesta, errores por mes. Sin ese número no hay forma de saber si funciona.",
+        "Correr en paralelo: durante dos o tres semanas el proceso manual y el automático conviven, y se comparan los resultados caso por caso.",
+        "Diseñar el camino de error: qué pasa cuando la automatización no puede resolver algo. Tiene que pasarlo a una persona con todo el contexto, nunca quedarse callada.",
+        "Encender por partes: primero un cliente, un tipo de solicitud o un equipo. Cuando eso corre estable, se amplía.",
+        "Documentar y entregar: quién la revisa, qué alertas existen y qué hacer cuando suenan.",
+      ]},
+
+      { type: "callout", title: "Caso real", body: "Una agencia de performance en CDMX automatizó los reportes mensuales de sus 12 cuentas. Antes de apagar el proceso manual, los dos sistemas corrieron juntos un ciclo completo y se compararon cuenta por cuenta. Hoy el equipo valida cada reporte en unos cuatro minutos y recuperó 36 horas al mes que antes se iban en armar reportes." },
+
+      { type: "h2", text: "Cómo medir que está rindiendo", id: "medir" },
+      { type: "p", text: "Una automatización en producción necesita tres señales a la vista, revisadas cada semana al inicio y cada mes cuando ya está estable." },
+      { type: "list", items: [
+        "Cuántos casos procesó y cuántos terminó sin ayuda.",
+        "Cuántos pasó a una persona y por qué. Si un motivo se repite, es la siguiente mejora.",
+        "El número de éxito que se definió al principio, comparado contra el punto de partida.",
+      ]},
+
+      { type: "stat", value: "36 hrs", label: "recuperadas cada mes en reportería por una agencia de 12 cuentas" },
+
+      { type: "h2", text: "Escalar con confianza", id: "escalar" },
+      { type: "p", text: "Cuando una automatización lleva un par de meses estable, con fallas bien manejadas y números medidos, se gana el derecho a crecer: más volumen, más clientes, un segundo proceso conectado al primero. Escalar algo que todavía no es confiable solo multiplica el problema." },
+      { type: "p", text: "Si tienes una prueba que funcionó y no sabes cómo convertirla en algo que el equipo use todos los días, ese es exactamente el trabajo que hacemos. Conversemos." },
+    ],
+    relatedSlugs: ["como-preparar-tus-datos-para-automatizar", "cuanto-cuesta-automatizar-un-proceso"],
+  },
+
+  {
+    slug: "como-preparar-tus-datos-para-automatizar",
+    category: "Datos",
+    title: "Cómo preparar tus datos para adoptar la automatización con éxito",
+    excerpt:
+      "Por qué tener datos limpios, ordenados y accesibles es la base de una automatización confiable y de mejores resultados en el negocio.",
+    author: "Editorial RDMD",
+    dateISO: "2026-07-18",
+    dateLabel: "18 de julio, 2026",
+    readingTime: "5 min de lectura",
+    image: "/blog/preparar-datos.webp",
+    imageAlt: "Manos escribiendo con pluma fuente sobre una hoja en un escritorio de madera",
+    hook: "Una automatización hace exactamente lo que le dicen los datos. Si los datos están desordenados, automatizas el desorden más rápido.",
+    hideFromHome: true,
+    blocks: [
+      { type: "p", text: "Cuando una automatización falla, la causa casi nunca es la herramienta. Es que el cliente aparece tres veces con nombres distintos, que la fecha viene en dos formatos o que la información vive en el correo de una sola persona. Antes de construir, conviene mirar los datos." },
+      { type: "p", text: "La buena noticia: no necesitas un proyecto de datos de seis meses. Necesitas ordenar lo justo para el proceso que vas a automatizar." },
+
+      { type: "h2", text: "Qué significa tener datos listos", id: "datos-listos" },
+      { type: "p", text: "Para una empresa pequeña o mediana, datos listos significa tres cosas concretas." },
+      { type: "list", items: [
+        "Limpios: sin duplicados, sin campos vacíos en lo importante y con un solo formato para fechas, teléfonos y montos.",
+        "Ordenados: cada dato tiene un lugar fijo. El estado de un pedido siempre está en la misma columna, no a veces en una nota.",
+        "Accesibles: el sistema puede leerlos sin que alguien los copie a mano. Están en una herramienta con conexión, no en un archivo en el escritorio de alguien.",
+      ]},
+
+      { type: "h2", text: "Por dónde empezar", id: "empezar" },
+      { type: "p", text: "No hace falta ordenar toda la empresa. Toma el proceso que quieres automatizar y sigue este orden." },
+      { type: "list", items: [
+        "Lista los datos que el proceso usa de verdad. Suelen ser menos de los que se cree.",
+        "Encuentra dónde vive cada uno hoy: CRM, hojas de cálculo, correo, WhatsApp, la memoria de alguien.",
+        "Elige una sola fuente para cada dato. Si el teléfono del cliente está en tres lugares, decide cuál manda.",
+        "Limpia una vez lo que ya existe y define una regla para que lo nuevo entre bien desde el inicio.",
+      ]},
+
+      { type: "callout", title: "Caso real", body: "Un e-commerce de moda en Bogotá quería que un agente respondiera por WhatsApp el estado de los pedidos. Antes de conectarlo, se unificó la información de pedidos, cambios y devoluciones en la tienda como única fuente. Con eso en orden, el agente resuelve el 78 por ciento de las consultas sin intervención humana." },
+
+      { type: "stat", value: "78%", label: "de las consultas resueltas sin intervención humana cuando el agente lee una sola fuente de datos ordenada" },
+
+      { type: "h2", text: "Las señales de que todavía no está listo", id: "senales" },
+      { type: "list", items: [
+        "Para responder una pregunta simple hay que revisar dos o tres sistemas.",
+        "Hay hojas de cálculo con versiones como final, final dos o la buena.",
+        "Solo una persona sabe dónde está cierta información.",
+        "Los reportes de un mismo periodo dan números distintos según quién los arme.",
+      ]},
+      { type: "p", text: "Si reconoces alguna, no es un problema grave. Es el primer paso del proyecto. En el diagnóstico revisamos los datos del proceso contigo y te decimos qué ordenar antes de automatizar, para que el sistema funcione desde el primer día." },
+    ],
+    relatedSlugs: ["del-prototipo-a-produccion", "como-los-agentes-de-ia-cambian-el-trabajo"],
+  },
+
+  {
+    slug: "como-los-agentes-de-ia-cambian-el-trabajo",
+    category: "IA aplicada",
+    title: "Cómo los agentes de IA están cambiando el trabajo diario",
+    excerpt:
+      "Cómo los agentes de IA se encargan de tareas repetitivas, ordenan la operación y suben la productividad de los equipos.",
+    author: "Editorial RDMD",
+    dateISO: "2026-06-02",
+    dateLabel: "2 de junio, 2026",
+    readingTime: "6 min de lectura",
+    image: "/blog/agentes-trabajo.webp",
+    imageAlt: "Oficina con sillones de cuero y grandes ventanales con luz de atardecer",
+    hook: "El cambio no es que un agente haga el trabajo de una persona. Es que la persona deja de hacer la parte del trabajo que nunca debió ser suya.",
+    hideFromHome: true,
+    blocks: [
+      { type: "p", text: "En la mayoría de los equipos hay tareas que nadie eligió hacer: copiar datos entre sistemas, responder la misma pregunta veinte veces al día, perseguir aprobaciones por tres canales distintos. Son necesarias, pero se comen las horas que el equipo podría dedicar a clientes, ventas o calidad." },
+      { type: "p", text: "Ahí es donde los agentes de IA están cambiando el día a día. Toman esas tareas, las hacen siempre igual y devuelven a una persona solo lo que necesita criterio." },
+
+      { type: "h2", text: "Qué hace un agente dentro de un proceso", id: "que-hace" },
+      { type: "p", text: "Un agente entiende una solicitud escrita en lenguaje normal, decide el siguiente paso y lo ejecuta en tus herramientas. En un proceso real eso se ve así:" },
+      { type: "list", items: [
+        "Recibe una solicitud por WhatsApp, correo o formulario y entiende qué se pide aunque venga escrita de mil formas.",
+        "Busca la información en tus sistemas: pedidos, agenda, catálogo, historial del cliente.",
+        "Hace la acción: responde, agenda, actualiza el CRM o avisa a la persona correcta.",
+        "Deja registro de lo que hizo, para que cualquiera pueda revisarlo después.",
+      ]},
+
+      { type: "h2", text: "Dónde se nota primero", id: "donde-se-nota" },
+      { type: "list", items: [
+        "Atención al cliente: las preguntas repetitivas se responden en segundos, a cualquier hora.",
+        "Ventas: cada lead recibe respuesta inmediata y queda clasificado antes de que alguien lo toque.",
+        "Operación interna: aprobaciones, recordatorios y seguimientos dejan de depender de que alguien se acuerde.",
+      ]},
+
+      { type: "callout", title: "Caso real", body: "Una productora de contenido en Buenos Aires coordinaba las aprobaciones de piezas entre correo, Slack y WhatsApp. Se reemplazó por un sistema con notificaciones automáticas y versionado. El equipo de seis personas hoy aprueba 2.5 veces más contenido por semana, sin contratar a nadie." },
+
+      { type: "stat", value: "2.5x", label: "más contenido aprobado por semana con el mismo equipo de seis personas" },
+
+      { type: "h2", text: "Lo que no cambia", id: "lo-que-no-cambia" },
+      { type: "p", text: "Un agente bien diseñado tiene límites claros. Las decisiones delicadas, las negociaciones y las quejas complejas siguen en manos de personas. La diferencia es que esas personas llegan con el contexto completo y con tiempo para atenderlas bien." },
+      { type: "p", text: "Por eso el cambio se siente en el equipo antes que en los números: menos interrupciones, menos tareas pendientes al final del día y más tiempo para el trabajo que de verdad mueve la empresa." },
+
+      { type: "h2", text: "Cómo empezar", id: "empezar" },
+      { type: "p", text: "Elige una tarea repetitiva, con reglas claras y volumen suficiente para notar la diferencia. Se empieza acotado, se mide y se amplía. Si quieres saber qué tarea de tu empresa tiene más sentido darle a un agente, conversemos." },
+    ],
+    relatedSlugs: ["que-es-un-agente-de-ia", "del-prototipo-a-produccion"],
   },
 ];
 
