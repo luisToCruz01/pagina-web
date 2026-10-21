@@ -214,3 +214,28 @@ body::before {
     animation: none !important;
   }
 }
+
+/* Casos de exito: foto con zoom lento + estela horizontal, marcas animadas */
+@keyframes photoZoom {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.12) translateX(-1.5%); }
+}
+@keyframes photoTrail {
+  0%, 100% { transform: translateX(-4%) scale(1.06); opacity: 0.25; }
+  50% { transform: translateX(5%) scale(1.06); opacity: 0.55; }
+}
+@keyframes brandBars {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+@keyframes brandPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+@keyframes brandSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes brandBeat {
+  0%, 100% { transform: scale(0.9); }
+  50% { transform: scale(1.06); }
+}
