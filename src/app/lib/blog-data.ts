@@ -148,9 +148,10 @@ export const ARTICLES: Article[] = [
     dateISO: "2026-05-21",
     dateLabel: "21 de mayo, 2026",
     readingTime: "5 min de lectura",
-    image: "/blog/preparar-datos.webp",
-    imageAlt: "Manos escribiendo con pluma fuente sobre una hoja en un escritorio de madera",
+    image: "/blog/proceso.webp",
+    imageAlt: "Engranajes mecánicos de bronce, las partes de un sistema",
     hook: "Contratas buena gente. Y aun así las cosas se pierden, llegan tarde, se hacen dos veces. El problema no es a quién contrataste.",
+    hideFromHome: true,
     blocks: [
       { type: "p", text: "Hay una conversación que se repite en casi todas las empresas pequeñas que crecen. Algo se cae, alguien pregunta de quién fue la culpa, y la respuesta termina siendo una persona. La próxima vez vuelve a pasar, con otra persona. Cambias gente y el problema sigue." },
       { type: "p", text: "Cuando el mismo error ocurre con personas distintas, el error no está en las personas. Está en el proceso que las rodea." },
@@ -181,6 +182,56 @@ export const ARTICLES: Article[] = [
       { type: "p", text: "Mapear y rediseñar procesos para que sea difícil equivocarse es la base de lo que hacemos. Si quieres ver dónde se está cayendo el tuyo, empecemos por un diagnóstico." },
     ],
     relatedSlugs: ["que-procesos-automatizar-primero", "que-es-un-agente-de-ia"],
+  },
+
+  {
+    slug: "como-preparar-tus-datos-para-automatizar",
+    category: "Datos",
+    title: "Cómo preparar tus datos para adoptar la automatización con éxito",
+    excerpt:
+      "Por qué tener datos limpios, ordenados y accesibles es la base de una automatización confiable y de mejores resultados en el negocio.",
+    author: "Editorial RDMD",
+    dateISO: "2026-07-18",
+    dateLabel: "18 de julio, 2026",
+    readingTime: "5 min de lectura",
+    image: "/blog/preparar-datos.webp",
+    imageAlt: "Manos escribiendo con pluma fuente sobre una hoja en un escritorio de madera",
+    hook: "Una automatización hace exactamente lo que le dicen los datos. Si los datos están desordenados, automatizas el desorden más rápido.",
+    blocks: [
+      { type: "p", text: "Cuando una automatización falla, la causa casi nunca es la herramienta. Es que el cliente aparece tres veces con nombres distintos, que la fecha viene en dos formatos o que la información vive en el correo de una sola persona. Antes de construir, conviene mirar los datos." },
+      { type: "p", text: "La buena noticia: no necesitas un proyecto de datos de seis meses. Necesitas ordenar lo justo para el proceso que vas a automatizar." },
+
+      { type: "h2", text: "Qué significa tener datos listos", id: "datos-listos" },
+      { type: "p", text: "Para una empresa pequeña o mediana, datos listos significa tres cosas concretas." },
+      { type: "list", items: [
+        "Limpios: sin duplicados, sin campos vacíos en lo importante y con un solo formato para fechas, teléfonos y montos.",
+        "Ordenados: cada dato tiene un lugar fijo. El estado de un pedido siempre está en la misma columna, no a veces en una nota.",
+        "Accesibles: el sistema puede leerlos sin que alguien los copie a mano. Están en una herramienta con conexión, no en un archivo en el escritorio de alguien.",
+      ]},
+
+      { type: "h2", text: "Por dónde empezar", id: "empezar" },
+      { type: "p", text: "No hace falta ordenar toda la empresa. Toma el proceso que quieres automatizar y sigue este orden." },
+      { type: "list", items: [
+        "Lista los datos que el proceso usa de verdad. Suelen ser menos de los que se cree.",
+        "Encuentra dónde vive cada uno hoy: CRM, hojas de cálculo, correo, WhatsApp, la memoria de alguien.",
+        "Elige una sola fuente para cada dato. Si el teléfono del cliente está en tres lugares, decide cuál manda.",
+        "Limpia una vez lo que ya existe y define una regla para que lo nuevo entre bien desde el inicio.",
+      ]},
+
+      { type: "callout", title: "Caso real", body: "Un e-commerce de moda en Bogotá quería que un agente respondiera por WhatsApp el estado de los pedidos. Antes de conectarlo, se unificó la información de pedidos, cambios y devoluciones en la tienda como única fuente. Con eso en orden, el agente resuelve el 78 por ciento de las consultas sin intervención humana." },
+
+      { type: "stat", value: "78%", label: "de las consultas resueltas sin intervención humana cuando el agente lee una sola fuente de datos ordenada" },
+
+      { type: "h2", text: "Las señales de que todavía no está listo", id: "senales" },
+      { type: "list", items: [
+        "Para responder una pregunta simple hay que revisar dos o tres sistemas.",
+        "Hay hojas de cálculo con versiones como final, final dos o la buena.",
+        "Solo una persona sabe dónde está cierta información.",
+        "Los reportes de un mismo periodo dan números distintos según quién los arme.",
+      ]},
+      { type: "p", text: "Si reconoces alguna, no es un problema grave. Es el primer paso del proyecto. En el diagnóstico revisamos los datos del proceso contigo y te decimos qué ordenar antes de automatizar, para que el sistema funcione desde el primer día." },
+    ],
+    relatedSlugs: ["del-prototipo-a-produccion", "como-los-agentes-de-ia-cambian-el-trabajo"],
   },
 
   {
@@ -286,57 +337,6 @@ export const ARTICLES: Article[] = [
       { type: "p", text: "Si tienes una prueba que funcionó y no sabes cómo convertirla en algo que el equipo use todos los días, ese es exactamente el trabajo que hacemos. Conversemos." },
     ],
     relatedSlugs: ["como-preparar-tus-datos-para-automatizar", "cuanto-cuesta-automatizar-un-proceso"],
-  },
-
-  {
-    slug: "como-preparar-tus-datos-para-automatizar",
-    category: "Datos",
-    title: "Cómo preparar tus datos para adoptar la automatización con éxito",
-    excerpt:
-      "Por qué tener datos limpios, ordenados y accesibles es la base de una automatización confiable y de mejores resultados en el negocio.",
-    author: "Editorial RDMD",
-    dateISO: "2026-07-18",
-    dateLabel: "18 de julio, 2026",
-    readingTime: "5 min de lectura",
-    image: "/blog/proceso.webp",
-    imageAlt: "Engranajes mecánicos de bronce, las partes de un sistema",
-    hook: "Una automatización hace exactamente lo que le dicen los datos. Si los datos están desordenados, automatizas el desorden más rápido.",
-    hideFromHome: true,
-    blocks: [
-      { type: "p", text: "Cuando una automatización falla, la causa casi nunca es la herramienta. Es que el cliente aparece tres veces con nombres distintos, que la fecha viene en dos formatos o que la información vive en el correo de una sola persona. Antes de construir, conviene mirar los datos." },
-      { type: "p", text: "La buena noticia: no necesitas un proyecto de datos de seis meses. Necesitas ordenar lo justo para el proceso que vas a automatizar." },
-
-      { type: "h2", text: "Qué significa tener datos listos", id: "datos-listos" },
-      { type: "p", text: "Para una empresa pequeña o mediana, datos listos significa tres cosas concretas." },
-      { type: "list", items: [
-        "Limpios: sin duplicados, sin campos vacíos en lo importante y con un solo formato para fechas, teléfonos y montos.",
-        "Ordenados: cada dato tiene un lugar fijo. El estado de un pedido siempre está en la misma columna, no a veces en una nota.",
-        "Accesibles: el sistema puede leerlos sin que alguien los copie a mano. Están en una herramienta con conexión, no en un archivo en el escritorio de alguien.",
-      ]},
-
-      { type: "h2", text: "Por dónde empezar", id: "empezar" },
-      { type: "p", text: "No hace falta ordenar toda la empresa. Toma el proceso que quieres automatizar y sigue este orden." },
-      { type: "list", items: [
-        "Lista los datos que el proceso usa de verdad. Suelen ser menos de los que se cree.",
-        "Encuentra dónde vive cada uno hoy: CRM, hojas de cálculo, correo, WhatsApp, la memoria de alguien.",
-        "Elige una sola fuente para cada dato. Si el teléfono del cliente está en tres lugares, decide cuál manda.",
-        "Limpia una vez lo que ya existe y define una regla para que lo nuevo entre bien desde el inicio.",
-      ]},
-
-      { type: "callout", title: "Caso real", body: "Un e-commerce de moda en Bogotá quería que un agente respondiera por WhatsApp el estado de los pedidos. Antes de conectarlo, se unificó la información de pedidos, cambios y devoluciones en la tienda como única fuente. Con eso en orden, el agente resuelve el 78 por ciento de las consultas sin intervención humana." },
-
-      { type: "stat", value: "78%", label: "de las consultas resueltas sin intervención humana cuando el agente lee una sola fuente de datos ordenada" },
-
-      { type: "h2", text: "Las señales de que todavía no está listo", id: "senales" },
-      { type: "list", items: [
-        "Para responder una pregunta simple hay que revisar dos o tres sistemas.",
-        "Hay hojas de cálculo con versiones como final, final dos o la buena.",
-        "Solo una persona sabe dónde está cierta información.",
-        "Los reportes de un mismo periodo dan números distintos según quién los arme.",
-      ]},
-      { type: "p", text: "Si reconoces alguna, no es un problema grave. Es el primer paso del proyecto. En el diagnóstico revisamos los datos del proceso contigo y te decimos qué ordenar antes de automatizar, para que el sistema funcione desde el primer día." },
-    ],
-    relatedSlugs: ["del-prototipo-a-produccion", "como-los-agentes-de-ia-cambian-el-trabajo"],
   },
 
   {
