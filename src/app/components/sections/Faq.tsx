@@ -16,7 +16,7 @@ import { cn } from "@/app/lib/cn";
 const FAQS = [
   {
     q: "¿Con qué tipo de empresas trabajan?",
-    a: "Con empresas pequeñas y medianas, de 12 a 50 personas, donde el fundador ya carga con demasiada operación. Nos especializamos en agencias de marketing, pero cualquier negocio con procesos manuales y repetitivos puede aprovecharlo.",
+    a: "Con empresas pequeñas y medianas, de 12 a 50 personas, donde el fundador ya carga con demasiada operación. Nos especializamos en clínicas privadas, pero cualquier negocio con procesos manuales y repetitivos puede aprovecharlo.",
   },
   {
     q: "¿Necesitamos experiencia previa con automatización?",
@@ -28,11 +28,11 @@ const FAQS = [
   },
   {
     q: "¿Cuánto tarda un proyecto?",
-    a: "Los sistemas llave en mano se entregan entre 3 y 10 días según su alcance. Los proyectos a la medida toman más tiempo, y el plazo exacto queda definido en el diagnóstico antes de empezar.",
+    a: "Entre 3 y 15 días laborales, según el alcance. El plazo exacto queda definido en el diagnóstico antes de empezar.",
   },
   {
     q: "¿Qué servicios ofrecen?",
-    a: "Diagnóstico de procesos, sistemas llave en mano (seguimiento de leads, atención al cliente 24/7, reportes automáticos, procesamiento de documentos, secuencias de seguimiento y reactivación de base de datos) y proyectos a la medida con soporte después de la entrega.",
+    a: "Automatizaciones de procesos, soluciones a la medida, y consultoría y estrategia.",
   },
 ];
 
