@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { CustomCursor } from "./components/ui/CustomCursor";
 import { Preloader } from "./components/ui/Preloader";
@@ -43,6 +44,8 @@ export default function RootLayout({
           src="https://elu.dev/v1/elu_pk_live_D1ZYRDeC6K5iRcZNakMgMAowdx.js"
           strategy="afterInteractive"
         />
+        {/* Vercel Web Analytics: visitas, páginas vistas, países, dispositivos y referidos */}
+        <Analytics />
       </body>
     </html>
   );
