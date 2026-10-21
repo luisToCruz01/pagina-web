@@ -71,7 +71,7 @@ function MotionPhoto({ src }: { src: string }) {
       <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover motion-safe:animate-[photoZoom_18s_ease-in-out_infinite_alternate]" draggable={false} />
       {/* Estela: la misma foto desenfocada que se desliza en horizontal */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-screen blur-[14px] motion-safe:animate-[photoTrail_7s_ease-in-out_infinite]" draggable={false} />
+      <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-screen [filter:blur(14px)_saturate(0.15)] motion-safe:animate-[photoTrail_7s_ease-in-out_infinite]" draggable={false} />
     </div>
   );
 }

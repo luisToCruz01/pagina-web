@@ -221,8 +221,8 @@ body::before {
   to { transform: scale(1.12) translateX(-1.5%); }
 }
 @keyframes photoTrail {
-  0%, 100% { transform: translateX(-4%) scale(1.06); opacity: 0.25; }
-  50% { transform: translateX(5%) scale(1.06); opacity: 0.55; }
+  0%, 100% { transform: translateX(-4%) scale(1.06); opacity: 0.15; }
+  50% { transform: translateX(5%) scale(1.06); opacity: 0.35; }
 }
 @keyframes brandBars {
   0%, 100% { transform: scaleY(0.35); }
