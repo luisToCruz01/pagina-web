@@ -57,9 +57,6 @@ export function Footer() {
           <p className="font-sans text-xs uppercase tracking-[0.2em] text-fg-faint">
             © {YEAR} RDMD &amp; Co. — Todos los derechos reservados.
           </p>
-          <p className="font-sans text-xs uppercase tracking-[0.2em] text-fg-faint">
-            Hecho en Latinoamérica
-          </p>
         </motion.div>
       </Container>
     </footer>
