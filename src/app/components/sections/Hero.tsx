@@ -87,7 +87,8 @@ export function Hero() {
           opacity: videoOpacity,
         }}
       >
-        <source src="/hero/hero-pingpong.mp4" type="video/mp4" />
+        {/* Prueba: video del hero de la plantilla Mercer (antes /hero/hero-pingpong.mp4) */}
+        <source src="/hero/hero-mercer.mp4" type="video/mp4" />
       </motion.video>
 
       {/* === Subtle warm tint to bind video to brand palette === */}
