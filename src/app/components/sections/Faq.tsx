@@ -124,7 +124,7 @@ export function Faq() {
                   </span>
                   <span
                     aria-hidden
-                    className={cn("mt-0 h-5 w-5 shrink-0 transition-[transform,background-color]", EASE, active ? "scale-75 bg-accent opacity-0" : "bg-fg/60")}
+                    className={cn("mt-0 h-5 w-5 shrink-0 transition-[transform,background-color,opacity]", EASE, active ? "scale-75 bg-accent opacity-0" : "bg-fg/60")}
                     style={maskStyle(PLUS_MASK)}
                   />
                 </button>
