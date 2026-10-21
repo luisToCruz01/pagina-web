@@ -42,7 +42,9 @@ export function Button(props: Props) {
   const classes = cn(baseStyles, variantStyles[variant], className);
 
   if ("href" in props && props.href) {
-    const { href, external, ...rest } = props as ButtonAsLink;
+    // Sacar variant/className/children para que no pisen las clases calculadas al esparcir rest
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { href, external, variant: _v, className: _c, children: _ch, ...rest } = props as ButtonAsLink;
     if (external) {
       return (
         <a
@@ -63,7 +65,8 @@ export function Button(props: Props) {
     );
   }
 
-  const { ...rest } = props as ButtonAsButton;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { variant: _v, className: _c, children: _ch, ...rest } = props as ButtonAsButton;
   return (
     <button className={classes} {...rest}>
       {children}

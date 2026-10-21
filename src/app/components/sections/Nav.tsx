@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/app/components/ui/Container";
 import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/app/lib/cn";
@@ -200,14 +201,36 @@ export function Nav() {
         </nav>
 
         {/* CTA — desktop right */}
-        <Button
+        <a
           href="https://cal.com/rdmdco/30min"
-          external
-          variant="primary"
-          className="hidden h-10 px-6 text-[13px] md:inline-flex"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Conversemos"
+          className="group relative hidden items-center gap-2 self-center py-1 font-sans text-sm text-fg md:inline-flex"
         >
-          Conversemos
-        </Button>
+          <span className="flex transition-colors duration-300 group-hover:text-accent">
+            {"Conversemos".split("").map((ch, i) => (
+              <span
+                key={i}
+                aria-hidden
+                className="inline-block group-hover:animate-[letterFlicker_420ms_ease-out_both]"
+                style={{ animationDelay: `${(i * 53) % 260}ms` }}
+              >
+                {ch}
+              </span>
+            ))}
+          </span>
+          <ArrowUpRight
+            size={14}
+            strokeWidth={1.75}
+            aria-hidden
+            className="text-accent transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          />
+          <span
+            aria-hidden
+            className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+          />
+        </a>
 
         {/* Mobile toggle */}
         <button
