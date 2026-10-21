@@ -8,7 +8,7 @@ import { Newsletter } from "./components/sections/Newsletter";
 import { UseCases } from "./components/sections/UseCases";
 import { HowItWorks } from "./components/sections/HowItWorks";
 import { CaseStudies } from "./components/sections/CaseStudies";
-import { Trust } from "./components/sections/Trust";
+// import { Trust } from "./components/sections/Trust";
 import { BlogPreview } from "./components/sections/BlogPreview";
 import { CtaClosing } from "./components/sections/CtaClosing";
 import { Footer } from "./components/sections/Footer";
@@ -27,7 +27,8 @@ export default function Home() {
         <UseCases />
         <HowItWorks />
         <CaseStudies />
-        <Trust />
+        {/* Oculta (Por qué RDMD + casos viejos). Reactivar quitando el comentario */}
+        {/* <Trust /> */}
         <BlogPreview />
         <CtaClosing />
       </main>

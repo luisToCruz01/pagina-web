@@ -178,7 +178,7 @@ export function Hero() {
                 <Button href="https://cal.com/rdmdco/30min" external variant="primary">
                   Habla con un experto
                 </Button>
-                <Button href="#nosotros" variant="secondary">
+                <Button href="#casos" variant="secondary">
                   Conoce RDMD
                 </Button>
               </motion.div>
